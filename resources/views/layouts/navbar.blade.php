@@ -44,22 +44,12 @@
             <ul class="navbar-nav">
                 @auth
                     <li class="nav-item">
-                        <a href="#" class="nav-link px-2 d-flex align-items-center">
-                            <i class="fa fa-bell"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2 d-flex align-items-center" href="#">
-                            <i class="fas fa-shopping-cart"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link px-2" href="#">Username</a>
                     </li>
                     <li class="nav-item">
                         <form action="{{route('auth.signout.post')}}" method="post">
                             @csrf
-                            <button class="btn btn-dark text-muted" type="submit">Logout</button>
+                            <button class="btn btn-dark text-white border-danger boder me-4" type="submit">Logout</button>
                         </form>
                     </li>
                 @else

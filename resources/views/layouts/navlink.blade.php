@@ -82,40 +82,156 @@
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
             <!-- Nav Links -->
+        {{-- home--}}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+            <li class="nav-item">
+                <div class="dropdown">
+                    <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-home me-2"></i> Home
-                    </a>
-                </li>
+
+                    </button>
+                    <ul class="dropdown-menu rounded p-1">
+                        <li>
+                            <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                               href="{{ route('home') }}">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item bg-secondary-subtle rounded "
+                               href="#">
+                                Dashboard
+                            </a></li>
+                    </ul>
+                </div>
+            </li>
+
+            {{-- Messages--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
-                        <i class="fas fa-comment-dots me-2"></i> Messages
-                    </a>
+                    <div class="dropdown">
+                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-comment-dots me-2"></i> Messages
+
+                        </button>
+                        @auth
+                        <ul class="dropdown-menu  rounded p-1">
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                                   href="{{ route('profile.index') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded "
+                                   href="#">
+                                    Dashboard
+                                </a></li>
+                        </ul>
+                        @endauth
+                    </div>
                 </li>
+
+             {{-- wallets--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
-                        <i class="fas fa-wallet me-2"></i> Wallets
-                    </a>
+                    <div class="dropdown">
+                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-wallet me-2"></i> Wallets
+
+                        </button>
+                        @auth
+                        <ul class="dropdown-menu  rounded p-1">
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                                   href="{{ route('profile.index') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded "
+                                   href="#">
+                                    Dashboard
+                                </a></li>
+                        </ul>
+                        @endauth
+                    </div>
                 </li>
+
+                {{-- cart--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
-                        <i class="fas fa-shopping-cart me-2"></i> Cart
-                    </a>
+                    <div class="dropdown">
+                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart me-2"></i> Cart
+
+                        </button>
+                        @auth
+                        <ul class="dropdown-menu rounded p-1">
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                                   href="{{ route('profile.index') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded "
+                                   href="#">
+                                    Dashboard
+                                </a></li>
+                        </ul>
+                        @endauth
+                    </div>
                 </li>
+
+             {{--account--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
-                        <i class="fas fa-user me-2"></i> Account
-                    </a>
+                <div class="dropdown">
+                    <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2"></i> Account
+
+                    </button>
+                    @auth
+                    <ul class="dropdown-menu  rounded p-1">
+                        <li>
+                            <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                               href="{{ route('profile.index') }}">
+                                Profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item bg-secondary-subtle rounded "
+                               href="#">
+                                Dashboard
+                            </a></li>
+                    </ul>
+                    @endauth
+                </div>
                 </li>
+                {{-- Forum--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
-                        <i class="fas fa-comments me-2"></i> Forum
-                    </a>
+                    <div class="dropdown">
+                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-comments me-2"></i> Forum
+
+                        </button>
+                        @auth
+                        <ul class="dropdown-menu rounded p-1">
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
+                                   href="{{ route('profile.index') }}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item bg-secondary-subtle rounded "
+                                   href="#">
+                                    Dashboard
+                                </a></li>
+                        </ul>
+                        @endauth
+                    </div>
                 </li>
             </ul>
 
-            <!-- Dark Mode Toggle -->
+{{--            <!-- Dark Mode Toggle -->--}}
             <div class="form-check form-switch pe-4">
                 <input class="form-check-input" type="checkbox" id="darkModeSwitch">
                 <label class="form-check-label text-white" for="darkModeSwitch">
