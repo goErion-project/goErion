@@ -3,9 +3,9 @@
 @section('title','Mnemonic')
 
 @section('content')
-    <label for="mnemonic" class="form-label">{{ __('Mnemonic *') }}</label>
-    <div class="row mb-3">
-        <div class="col-md-12">
+    <div class="row mb-3 justify-content-center">
+        <div class="col-md-4">
+            <label for="mnemonic" class="form-label">{{ __('Mnemonic *') }}</label>
             <div class="form-floating">
                 <p>
                     This is your mnemonic key. It consists out of {{config('marketplace.mnemonic_length')}} words.
@@ -15,9 +15,15 @@
                     in case you lose password.
                 </p>
             </div>
-            <div class="form-floating">
-                <textarea class="form-control" id="" name="" rows="10" readonly>{{ $mnemonic }}</textarea>
-                <label for="mnemonic">Mnemonic</label>
+            <div class="form-floating mb-4">
+            <textarea
+                class="form-control py-3 mt-4"
+                id="mnemonic"
+                name="mnemonic"
+                style="height: 150px; font-size: 16px; line-height: 1.5;"
+                readonly
+            >{{ $mnemonic }}</textarea>
+                <label for="mnemonic" class="">Mnemonic</label>
             </div>
             <div class="form-floating">
                 <a href="{{ route('auth.signin') }}" class="btn btn-warning">Proceed to Sign In</a>

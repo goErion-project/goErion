@@ -56,9 +56,9 @@ class RegisterController extends Controller
     {
         if (!session()->has('mnemonic_key'))
             return redirect()->route('auth.signin');
-        return view('auth.mnemonic')->with([
+        return view('auth.mnemonic')->with(
             'mnemonic',
             session()->get('mnemonic_key')
-        ]);
+        );
     }
 }

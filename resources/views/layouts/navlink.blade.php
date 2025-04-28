@@ -1,60 +1,127 @@
 <!-- Navbar -->
-<nav id="mainNavbar" class="d-flex align-items-center rounded">
+<nav id="mainNavbar" class="navbar navbar-expand-lg rounded">
+    <div class="container-fluid p-0">
+        <!-- Categories Button -->
+        <div class="btn-group dropdown h-100">
+            <a class="nav-link d-flex align-items-center justify-content-center bg-warning text-black
+             px-4 px-lg-5 h-100 text-decoration-none border-0 rounded-start fs-5 fw-semibold"
+               href="#" role="button" data-bs-auto-close="outside" aria-expanded="false"
+               style="min-height: 64px; min-width: 350px;">
+                <i class="fas fa-list-ul me-4"></i> Categories <i class="fas fa-chevron-right ms-4 rotate-icon"></i>
+            </a>
 
-    <!-- Categories Button -->
-    <div class="btn-group dropdown">
-    <a class="nav-link dropdown-toggle d-flex align-items-center bg-warning text-black rounded-start px-5 py-4 text-decoration-none"
-       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-bars me-2"></i> Categories
-    </a>
-    <ul class="dropdown-menu list-group-flush rounded">
-        <li><a class="dropdown-item " href="#">Electronics</a></li>
-        <li><a class="dropdown-item" href="#">Clothing</a></li>
-        <li><a class="dropdown-item" href="#">Home & Kitchen</a></li>
-        <li><a class="dropdown-item" href="#">Books</a></li>
-        <li><a class="dropdown-item" href="#">Toys</a></li>
-    </ul>
-    </div>
 
-    <!-- Nav Links -->
-    <ul class="nav flex-grow-1">
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-home me-2"></i> Home
-            </a>
-        </li>
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-comment-dots me-2"></i> Messages
-            </a>
-        </li>
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-wallet me-2"></i> Wallets
-            </a>
-        </li>
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-shopping-cart me-2"></i> Cart
-            </a>
-        </li>
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-user me-2"></i> Account
-            </a>
-        </li>
-        <li class="nav-item me-4">
-            <a class="nav-link text-white d-flex align-items-center" href="#">
-                <i class="fas fa-comments me-2"></i> Forum
-            </a>
-        </li>
-    </ul>
+            <ul class="dropdown-menu list-group-flush rounded-bottom rounded mt-5"
+                style="min-width: 350px;">
+                <li class="dropdown-item-group">
+                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
+                        <span>Electronics</span>
+                        <i class="fas fa-chevron-right ms-2"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                        <li><a class="dropdown-item py-3" href="#">Computers</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Smartphones</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Cameras</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-item-group">
+                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
+                        <span>Clothing</span>
+                        <i class="fas fa-chevron-right ms-2"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                        <li><a class="dropdown-item py-3" href="#">Men's</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Women's</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Kids</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-item-group">
+                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
+                        <span>Home & Kitchen</span>
+                        <i class="fas fa-chevron-right ms-2"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                        <li><a class="dropdown-item py-3" href="#">Appliances</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Furniture</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Cookware</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-item-group">
+                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
+                        <span>Books</span>
+                        <i class="fas fa-chevron-right ms-2"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                        <li><a class="dropdown-item py-3" href="#">Fiction</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Non-Fiction</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Educational</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-item-group">
+                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
+                        <span>Toys</span>
+                        <i class="fas fa-chevron-right ms-2"></i>
+                    </div>
+                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                        <li><a class="dropdown-item py-3" href="#">Action Figures</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Board Games</a></li>
+                        <li><a class="dropdown-item py-3" href="#">Educational Toys</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
-    <!-- Dark Mode Toggle -->
-    <div class="form-check form-switch pe-4">
-        <input class="form-check-input" type="checkbox" id="darkModeSwitch">
-        <label class="form-check-label text-white" for="darkModeSwitch">
-            <i class="fas fa-moon"></i>
-        </label>
+
+        <!-- Mobile Toggle Button -->
+        <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars text-white"></i>
+        </button>
+
+        <!-- Collapsible Content -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Nav Links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-home me-2"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-comment-dots me-2"></i> Messages
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-wallet me-2"></i> Wallets
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-shopping-cart me-2"></i> Cart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-user me-2"></i> Account
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white d-flex align-items-center py-2" href="#">
+                        <i class="fas fa-comments me-2"></i> Forum
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Dark Mode Toggle -->
+            <div class="form-check form-switch pe-4">
+                <input class="form-check-input" type="checkbox" id="darkModeSwitch">
+                <label class="form-check-label text-white" for="darkModeSwitch">
+                    <i class="fas fa-moon"></i>
+                </label>
+            </div>
+        </div>
     </div>
 </nav>

@@ -48,13 +48,13 @@ return new class extends Migration
             $table->timestamp('last_seen')->nullable();
             $table->boolean('login_2fa')->default(false);
             $table->string('referral_code');
-            $table->uuid('referrer_by')->nullable();
+            $table->uuid('referred_by')->nullable();
             $table->text('bitmessage_address')->nullable();
             $table->text('pgp_key')->nullable();
             $table->longText('msg_public_key')->nullable();
             $table->longText('msg_private_key')->nullable();
             $table->timestamps();
-            $table->foreign('referrer_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('referred_by')->references('id')->on('users')->onDelete('set null');
         });
 
 

@@ -88,7 +88,7 @@ class SignUpRequest extends FormRequest
         $user ->referral_code = strtoupper(str::random(6));
         $user ->msg_public_key = encrypt($publicKey);
         $user ->msg_private_key = $encryptedPrivateKey;
-        $user ->referral_by = optional($referred_by)->id;
+        $user ->referred_by = optional($referred_by)->id;
         $user ->save();
 
         //generate vendor addresses

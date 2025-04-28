@@ -1,0 +1,207 @@
+@media (max-width: 991.98px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .navbar .input-group {
+        width: 100%;
+    }
+
+    .navbar-nav {
+        margin-top: 1rem;
+        align-items: center;
+    }
+
+    .nav-item {
+        margin: 0.5rem 0;
+    }
+
+    /* Center align buttons on mobile */
+    .nav-item.d-flex {
+        justify-content: center;
+        width: 100%;
+    }
+
+    /* Adjust spacing for auth buttons on mobile */
+    .nav-item.d-flex .btn {
+        margin: 0.25rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar .input-group {
+        max-width: 500px;
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 0.5rem;
+    }
+
+    /* Align nav items vertically on desktop */
+    .navbar-nav {
+        align-items: center;
+    }
+}
+
+/* Hover effects */
+.navbar .nav-link:hover {
+    color: var(--bs-primary);
+}
+
+/* Active state for nav items */
+.navbar .nav-item.active .nav-link {
+    color: var(--bs-primary);
+}
+
+/* Improve dropdown menu appearance */
+.navbar .dropdown-menu {
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Improve search button appearance */
+.navbar .btn-warning {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Improve input group appearance */
+.navbar .input-group {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+@media (max-width: 991.98px) {
+    .navbar .input-group {
+        width: 100%;
+    }
+
+    .navbar form {
+        margin: 1rem 0;
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar .input-group {
+        width: 100%;
+    }
+
+    .navbar form {
+        min-width: 400px;
+    }
+}
+
+/* Optional: Improve dropdown appearance */
+.navbar .dropdown-menu {
+    border-radius: 0.375rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Optional: Improve input group appearance */
+.navbar .input-group {
+    border-radius: 0.375rem;
+    overflow: hidden;
+}
+
+/* Optional: Button hover effects */
+.navbar .btn:hover {
+    transform: translateY(-1px);
+    transition: transform 0.2s ease;
+}
+.navbar-brand {
+    font-size: 1.75rem !important; /* Overrides Bootstrap's default */
+    transition: all 0.2s ease;
+}
+
+/* Optional: Larger size on desktop */
+@media (min-width: 992px) {
+    .navbar-brand {
+        font-size: 2rem !important;
+    }
+}
+
+/* Optional: Add hover effect */
+.navbar-brand:hover {
+    color: var(--bs-primary) !important;
+    transform: translateY(-1px);
+}
+
+/* Main dropdown styles */
+.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu {
+    margin-top: 0 !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover item styles */
+.hover-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.hover-item:hover {
+    background-color: #f8f9fa;
+    padding-left: 1.5rem !important;
+}
+
+/* Submenu styles */
+.dropdown-item-group {
+    position: relative;
+}
+
+.dropdown-submenu {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    min-width: 220px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item-group:hover > .dropdown-submenu {
+    display: block;
+}
+
+/* Animation for submenu */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.dropdown-submenu {
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+/* Main button styles */
+.nav-link.dropdown-toggle {
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.nav-link.dropdown-toggle:hover {
+    background-color: #ffc107 !important;
+}
+
+/* Remove dropdown toggle arrow */
+.dropdown-toggle::after {
+    display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .dropdown-submenu {
+        left: 0;
+        top: 100%;
+        width: 100%;
+    }
+
+    .nav-link.dropdown-toggle {
+        font-size: 1rem;
+    }
+}
+

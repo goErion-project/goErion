@@ -52,7 +52,7 @@
                         <div class="row mb-3">
                             <div class="d-grid gap-2">
                                 <a href="{{ route('auth.signup') }}" class="btn btn-outline-dark">
-                                    {{ __('Create your goErion account') }}
+                                    {{ __('Create your GoErion account') }}
                                 </a>
                             </div>
                         </div>

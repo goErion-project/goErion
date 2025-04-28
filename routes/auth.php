@@ -13,6 +13,9 @@ Route::middleware(['guest'])->group(function () {
         ->name('signup');
     Route::post('signup', [RegisterController::class,'signUpPost'])
         ->name('signup.post');
+
+    Route::get('mnemonic/show',[RegisterController::class,'showMnemonic'])
+        ->name('mnemonic');
 });
 
 Route::post('signout', [LoginController::class,'postSignout'])

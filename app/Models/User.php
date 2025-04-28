@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Uuids;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -17,11 +18,14 @@ use Illuminate\Notifications\Notifiable;
  * @property mixed|string $msg_public_key
  * @property mixed|string $msg_private_key
  * @property int|mixed|null $referral_by
+ * @property mixed|null $referred_by
+ * @method static where(string $string, string $username)
  */
 class User extends Authenticatable
 {
+    use Uuids;
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -43,6 +47,19 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    /**
+     * @throws \Exception
+     */
+    public static function findByUsername(string $username)
+    {
+        $user = self::where('username', $username)->first();
+        if ($user === null)
+        {
+            throw new \Exception('User not found');
+        }
+        return $user;
+    }
 
     /**
      * Get the attributes that should be cast.
