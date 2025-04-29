@@ -17,4 +17,14 @@ class ProfileController extends Controller
     {
         return view('profile.index');
     }
+
+    public function pgp(): View
+    {
+        return view('profile.pgp');
+    }
+
+    public function become(): View
+    {
+        return view('profile.become');
+    }
 }

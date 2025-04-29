@@ -2,6 +2,7 @@
   <dictionary name="project">
     <words>
       <w>endisroute</w>
+      <w>endvendor</w>
       <w>jswarning</w>
       <w>navlink</w>
       <w>offcanvas</w>
@@ -9,6 +10,7 @@
       <w>referredd</w>
       <w>signout</w>
       <w>topnavbar</w>
+      <w>vendorable</w>
     </words>
   </dictionary>
 </component>

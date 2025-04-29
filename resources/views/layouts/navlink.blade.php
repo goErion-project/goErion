@@ -1,5 +1,5 @@
 {{--<!-- Navbar -->--}}
-<nav id="mainNavbar" class="navbar navbar-expand-lg rounded-3">
+<nav id="mainNavbar" class="navbar navbar-expand-lg rounded-3 border border-gray-400 shadow-sm">
     <div class="container-fluid p-0">
 {{--        <!-- Categories Button -->--}}
         <div class="btn-group dropdown h-100">

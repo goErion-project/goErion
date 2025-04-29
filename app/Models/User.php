@@ -3,12 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Adminable;
 use App\Traits\Uuids;
+use App\Traits\Vendorable;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Carbon;
 
 /**
  * @property mixed $referredBy
@@ -19,11 +23,16 @@ use Illuminate\Notifications\Notifiable;
  * @property mixed|string $msg_private_key
  * @property int|mixed|null $referral_by
  * @property mixed|null $referred_by
+ * @property mixed $pgp_key
+ * @property Carbon|mixed|null $created_at
+ * @property int|mixed $id
  * @method static where(string $string, string $username)
  */
 class User extends Authenticatable
 {
     use Uuids;
+    use Vendorable;
+    use Adminable;
     /** @use HasFactory<UserFactory> */
 
 
@@ -61,6 +70,16 @@ class User extends Authenticatable
         return $user;
     }
 
+    public function hasPGP(): bool
+    {
+        return $this->pgp_key !== null;
+    }
+
+    public function pgpKeys(): HasMany
+    {
+        return $this->hasMany(PGPKey::class, 'user_id', 'id');
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -82,5 +101,15 @@ class User extends Authenticatable
     public function hasReferredBy(): bool
     {
         return $this->referredBy !== null;
+    }
+
+    public function memberSince(): string
+    {
+        return date_format($this->created_at, 'M/Y');
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

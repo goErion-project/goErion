@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg border border-gray-300 bg-gray-300 rounded-3 py-3 shadow mb-4">
+<nav class="navbar navbar-expand-lg border border-gray-400 bg-gray-300 rounded-3 py-3 shadow-sm mb-4">
     <div class="container-fluid">
         <!-- Brand -->
         <a class="navbar-brand fs-2 fw-extrabold text-brown-900 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
@@ -45,21 +45,22 @@
                 @auth
                    {{-- username: {{ auth()->user()->username }}--}}
                     <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
-                        <a class="nav-link px-2 d-flex align-items-center" href="{{ route('profile.index') }}">
-                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                        <a class="nav-link px-2 d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
+                            <div class="rounded-circle bg-brown-600 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
                                 @if(auth()->user()->avatar)
                                     <img src="{{ auth()->user()->avatar }}" alt="User Avatar" class="rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
                                 @else
-                                    <span class="text-gray-800 fw-bold" style="font-size: 14px;">{{ strtoupper(substr(auth()->user()->username, 0, 2)) }}</span>
+                                    <span class="text-white fw-bold" style="font-size: 16px;">{{ strtoupper(substr(auth()->user()->username, 0, 2)) }}</span>
                                 @endif
                             </div>
+                            <span>Logged in as <b>{{ auth()->user()->username }}</b></span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <form action="{{route('auth.signout.post')}}" method="post">
                             @csrf
-                            <button class="btn btn-dark text-white border-danger border me-4" type="submit">Logout</button>
+                            <button class="btn btn-dark text-white border-danger border ms-auto" type="submit">Logout</button>
                         </form>
                     </li>
                 @else
