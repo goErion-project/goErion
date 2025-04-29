@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
-            <div class="card shadow border-1 border-secondary bg-success">
+            <div class="card border border-gray-300 bg-gray-200 rounded-2 shadow-sm">
                 <h1 class="text-center m-4 fs-1 fw-bold">{{ __('Sign Up') }}</h1>
 
                 <div class="card-body">
@@ -15,7 +15,7 @@
                         <label for="username" class="form-label">{{ __('Username *') }}</label>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <input type="text" class="form-control bg-danger-subtle @if($errors->has('username')) is-invalid @endif" placeholder="Username" name="username" id="username">
+                                <input type="text" class="form-control bg-danger-subtle hover:bg-gray-100 @if($errors->has('username')) is-invalid @endif" placeholder="Username" name="username" id="username">
                                 @if($errors->has('username'))
                                     <p class="text-danger">{{$errors->first('username')}}</p>
                                 @endif
@@ -24,14 +24,14 @@
                         <label for="password" class="form-label">{{ __('Password *') }}</label>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <input type="password" class="form-control bg-danger-subtle @if($errors->has('password')) is-invalid @endif" placeholder="Password" name="password"
+                                <input type="password" class="form-control bg-danger-subtle hover:bg-gray-100 @if($errors->has('password')) is-invalid @endif" placeholder="Password" name="password"
                                        id="password">
                             </div>
                         </div>
                         <label for="password" class="form-label">{{ __('Confirm Password *') }}</label>
                         <div class="row mb-3">
                             <div class="col-md-12">
-                                <input type="password" class="form-control bg-danger-subtle @if($errors->has('password')) is-invalid @endif" placeholder="Confirm Password"
+                                <input type="password" class="form-control bg-danger-subtle hover:bg-gray-100 @if($errors->has('password')) is-invalid @endif" placeholder="Confirm Password"
                                        name="password_confirmation" id="password_confirm">
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <div class="input-group-prepend">
-                                    <input type="text" class="form-control bg-danger-subtle" placeholder="Referral Code" name="refid" value="{{ $refid }}"
+                                    <input type="text" class="form-control bg-danger-subtle hover:bg-gray-100" placeholder="Referral Code" name="refid" value="{{ $refid }}"
                                     @if($refid !== '') readonly @endif>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
 
                         <div class="row mb-3">
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-dark hover:bg-yellow-500">
                                     {{ __('Sign Up') }}
                                 </button>
                             </div>

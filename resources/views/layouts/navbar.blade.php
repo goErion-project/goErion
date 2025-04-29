@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-gray-600 rounded py-3 shadow mb-4">
+<nav class="navbar navbar-expand-lg border border-gray-300 bg-gray-300 rounded-3 py-3 shadow mb-4">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="navbar-brand fs-2 fw-extrabold text-gray-300 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
+        <a class="navbar-brand fs-2 fw-extrabold text-brown-900 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
            style="letter-spacing: 1px;">
             {{ config('app.name') }}
         </a>
@@ -64,8 +64,8 @@
                     </li>
                 @else
                     <li class="nav-item d-flex gap-2 pe-5">
-                        <a class="btn btn-outline-primary" href="{{route('auth.signin')}}">Sign In</a>
-                        <a class="btn btn-outline-primary" href="{{route('auth.signup')}}">Sign Up</a>
+                        <a class="btn btn-outline-dark" href="{{route('auth.signin')}}">Sign In</a>
+                        <a class="btn btn-outline-dark" href="{{route('auth.signup')}}">Sign Up</a>
                     </li>
                 @endauth
             </ul>

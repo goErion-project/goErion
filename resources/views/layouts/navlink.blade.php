@@ -1,7 +1,7 @@
-<!-- Navbar -->
-<nav id="mainNavbar" class="navbar navbar-expand-lg rounded">
+{{--<!-- Navbar -->--}}
+<nav id="mainNavbar" class="navbar navbar-expand-lg rounded-3">
     <div class="container-fluid p-0">
-        <!-- Categories Button -->
+{{--        <!-- Categories Button -->--}}
         <div class="btn-group dropdown h-100">
             <a class="nav-link d-flex align-items-center justify-content-center bg-warning text-black
              px-4 px-lg-5 h-100 text-decoration-none border-0 rounded-start fs-5 fw-extrabold"
@@ -51,7 +51,7 @@
                         <span>Books</span>
                         <i class="fas fa-chevron-right ms-2"></i>
                     </div>
-                    <ul class="dropdown-menu dropdown-submenu rounded-3">
+                    <ul class="dropdown-menu dropdown-submenu">
                         <li><a class="dropdown-item py-3" href="#">Fiction</a></li>
                         <li><a class="dropdown-item py-3" href="#">Non-Fiction</a></li>
                         <li><a class="dropdown-item py-3" href="#">Educational</a></li>
@@ -72,16 +72,16 @@
         </div>
 
 
-        <!-- Mobile Toggle Button -->
+{{--        <!-- Mobile Toggle Button -->--}}
         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent" aria-controls="navbarContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars text-white"></i>
         </button>
 
-        <!-- Collapsible Content -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Nav Links -->
+        {{-- Collapsible Content --}}
+        <div class="collapse navbar-collapse bg-gray-950 rounded-end-3" id="navbarContent">
+{{--            <!-- Nav Links -->--}}
         {{-- home--}}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -236,7 +236,7 @@
                 <button class="theme-toggle btn"
                         onclick="window.location.href = '{{ $theme === 'dark' ? route('theme.light') : route('theme.dark') }}'"
                         title="{{ $theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}">
-                    <i class="fas {{ $theme === 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
+                    <i class="fas text-gray-100 fs-3xl {{ $theme === 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
                 </button>
             </div>
 
