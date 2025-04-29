@@ -3,32 +3,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
-{{--    title--}}
     @hasSection('title')
-        <title> {{ config('app.name') }} - @yield('title')</title>
-        @else
-    <title> {{ config('app.name') }}</title>
-        @endif
+        <title>{{ config('app.name') }} - @yield('title')</title>
+    @else
+        <title>{{ config('app.name') }}</title>
+    @endif
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-<body class="bg-secondary m-3">
+<body class="m-3 font-sans {{ $theme === 'dark' ? 'dark-theme' : 'light-theme' }}">
 @include('layouts.navbar')
 @include('layouts.navlink')
 <div class="container-fluid">
     <div class="mt-4">
-    @yield('content')
+        @yield('content')
     </div>
 </div>
 </body>

@@ -4,10 +4,10 @@
         <!-- Categories Button -->
         <div class="btn-group dropdown h-100">
             <a class="nav-link d-flex align-items-center justify-content-center bg-warning text-black
-             px-4 px-lg-5 h-100 text-decoration-none border-0 rounded-start fs-5 fw-semibold"
+             px-4 px-lg-5 h-100 text-decoration-none border-0 rounded-start fs-5 fw-extrabold"
                href="#" role="button" data-bs-auto-close="outside" aria-expanded="false"
                style="min-height: 64px; min-width: 350px;">
-                <i class="fas fa-list-ul me-4"></i> Categories <i class="fas fa-chevron-right ms-4 rotate-icon"></i>
+                <i class="fas fa-list-ul me-4 icon-xl"></i> Categories <i class="fas fa-chevron-right ms-4 rotate-icon icon-xl"></i>
             </a>
 
 
@@ -16,7 +16,7 @@
                 <li class="dropdown-item-group">
                     <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
                         <span>Electronics</span>
-                        <i class="fas fa-chevron-right ms-2"></i>
+                        <i class="fas fa-chevron-right ms-2 "></i>
                     </div>
                     <ul class="dropdown-menu dropdown-submenu rounded-3">
                         <li><a class="dropdown-item py-3" href="#">Computers</a></li>
@@ -86,8 +86,8 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
                 <div class="dropdown">
-                    <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-home me-2"></i> Home
+                    <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-home me-2 icon-lg"></i> Home
 
                     </button>
                     <ul class="dropdown-menu rounded p-1">
@@ -109,8 +109,8 @@
             {{-- Messages--}}
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-comment-dots me-2"></i> Messages
+                        <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-comment-dots me-2 icon-lg"></i> Messages
 
                         </button>
                         @auth
@@ -134,8 +134,8 @@
              {{-- wallets--}}
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-wallet me-2"></i> Wallets
+                        <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-wallet me-2 icon-lg"></i> Wallets
 
                         </button>
                         @auth
@@ -159,8 +159,8 @@
                 {{-- cart--}}
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-shopping-cart me-2"></i> Cart
+                        <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-shopping-cart me-2 icon-lg"></i> Cart
 
                         </button>
                         @auth
@@ -184,8 +184,8 @@
              {{--account--}}
                 <li class="nav-item">
                 <div class="dropdown">
-                    <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-2"></i> Account
+                    <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user me-2 icon-lg"></i> Account
 
                     </button>
                     @auth
@@ -208,8 +208,8 @@
                 {{-- Forum--}}
                 <li class="nav-item">
                     <div class="dropdown">
-                        <button class="btn py-3 text-white px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-comments me-2"></i> Forum
+                        <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-comments me-2 icon-lg"></i> Forum
 
                         </button>
                         @auth
@@ -232,12 +232,17 @@
             </ul>
 
 {{--            <!-- Dark Mode Toggle -->--}}
-            <div class="form-check form-switch pe-4">
-                <input class="form-check-input" type="checkbox" id="darkModeSwitch">
-                <label class="form-check-label text-white" for="darkModeSwitch">
-                    <i class="fas fa-moon"></i>
-                </label>
+            <div class="pe-4 theme-switch">
+                <button class="theme-toggle btn"
+                        onclick="window.location.href = '{{ $theme === 'dark' ? route('theme.light') : route('theme.dark') }}'"
+                        title="{{ $theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode' }}">
+                    <i class="fas {{ $theme === 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
+                </button>
             </div>
+
+
+
+
         </div>
     </div>
 </nav>

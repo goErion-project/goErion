@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-dark-subtle rounded py-3 shadow mb-4">
+<nav class="navbar navbar-expand-lg bg-gray-600 rounded py-3 shadow mb-4">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="navbar-brand fs-2 fw-bold font-monospace ps-2 ps-lg-4" href="{{ route('home') }}"
+        <a class="navbar-brand fs-2 fw-extrabold text-gray-300 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
            style="letter-spacing: 1px;">
             {{ config('app.name') }}
         </a>
@@ -21,11 +21,11 @@
                 <form action="" method="" class="d-flex" role="search" style="max-width: 600px; width: 100%;">
                     @csrf
                     <div class="input-group">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button"
+                        <button class="btn btn-outline-dark bg-white hover:text-yellow-500 px-4" type="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                             All
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu bg-white">
                             <li><a class="dropdown-item" href="#">Action</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
@@ -43,13 +43,23 @@
             <!-- Navigation Items -->
             <ul class="navbar-nav">
                 @auth
-                    <li class="nav-item">
-                        <a class="nav-link px-2" href="#">Username</a>
+                   {{-- username: {{ auth()->user()->username }}--}}
+                    <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
+                        <a class="nav-link px-2 d-flex align-items-center" href="{{ route('profile.index') }}">
+                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                                @if(auth()->user()->avatar)
+                                    <img src="{{ auth()->user()->avatar }}" alt="User Avatar" class="rounded-circle" style="width: 45px; height: 45px; object-fit: cover;">
+                                @else
+                                    <span class="text-gray-800 fw-bold" style="font-size: 14px;">{{ strtoupper(substr(auth()->user()->username, 0, 2)) }}</span>
+                                @endif
+                            </div>
+                        </a>
                     </li>
+
                     <li class="nav-item">
                         <form action="{{route('auth.signout.post')}}" method="post">
                             @csrf
-                            <button class="btn btn-dark text-white border-danger boder me-4" type="submit">Logout</button>
+                            <button class="btn btn-dark text-white border-danger border me-4" type="submit">Logout</button>
                         </form>
                     </li>
                 @else

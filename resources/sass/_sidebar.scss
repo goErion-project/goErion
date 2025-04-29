@@ -1,14 +1,13 @@
-/* Remove any unwanted spacing */
+// Variables
+$navbar-height: 64px;
+$sidebar-width-mobile: 320px;
+$mobile-breakpoint: 991.98px;
+$small-breakpoint: 576px;
+
+// Container and layout styles
 .container-fluid {
     margin: 0 !important;
     padding: 0 !important;
-
-}
-
-
-/* Optional: Add some padding to the sidebar content */
-.col-md-3 {
-    min-height: calc(100vh - 64px); /* Adjust 64px according to your navbar height */
 }
 
 .row {
@@ -16,13 +15,24 @@
     width: 100% !important;
 }
 
-/* Sidebar styles */
-.col-lg-3 {
-    min-height: calc(100vh - 64px);
-    padding: 0 !important;
+// Sidebar styles
+.col {
+    &-md-3,
+    &-lg-3 {
+        min-height: calc(100vh - #{$navbar-height});
+    }
+
+    &-lg-3 {
+        padding: 0 !important;
+    }
+
+    &-lg-9 {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
 }
 
-/* Mobile Toggle Button */
+// Mobile Toggle Button
 .mobile-toggle {
     position: fixed;
     top: 1rem;
@@ -32,63 +42,7 @@
     font-size: 1.25rem;
 }
 
-/* Offcanvas sidebar specific styles */
-@media (max-width: 991.98px) { /* lg breakpoint */
-    #sidebar {
-        width: 320px; /* Increased width */
-    }
-
-    .offcanvas-lg {
-        background-color: var(--bs-dark);
-    }
-
-    .offcanvas-header {
-        color: white;
-        padding: 1rem 1.5rem; /* Increased padding */
-    }
-
-    .offcanvas-title {
-        font-size: 1.5rem; /* Larger title */
-    }
-
-    /* Ensure main content takes full width when sidebar is hidden */
-    .col-lg-9 {
-        width: 100%;
-        padding-right: 1rem !important;
-        padding-left: 1rem !important;
-    }
-
-    /* Increase text size in sidebar for mobile */
-    #sidebar .nav-link,
-    #sidebar .dropdown-item {
-        font-size: 1.1rem;
-        padding: 0.75rem 1.5rem;
-    }
-
-    /* Increase icon sizes in sidebar */
-    #sidebar .fas,
-    #sidebar .far,
-    #sidebar .fab {
-        font-size: 1.2rem;
-    }
-
-    /* Adjust dropdown items */
-    .dropdown-menu {
-        min-width: 280px !important;
-    }
-
-    .dropdown-item {
-        padding: 0.75rem 1.5rem !important;
-    }
-}
-
-/* Main content styles */
-.col-lg-9 {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-
-/* Dropdown menu styles */
+// Dropdown styles (not duplicated from previous)
 .dropdown-menu {
     position: absolute !important;
     z-index: 9999 !important;
@@ -101,46 +55,83 @@
     z-index: 9999 !important;
 }
 
-/* Mobile-specific dropdown styles */
-@media (max-width: 991.98px) {
-    .dropdown-submenu {
-        position: static !important;
-        left: 0 !important;
-        margin-left: 1.5rem !important;
-        box-shadow: none !important;
+// Media Queries
+@media (max-width: $mobile-breakpoint) {
+    #sidebar {
+        width: $sidebar-width-mobile;
+
+        .nav-link,
+        .dropdown-item {
+            font-size: 1.1rem;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .fas,
+        .far,
+        .fab {
+            font-size: 1.2rem;
+        }
     }
 
-    /* Increase touch targets */
-    .dropdown-item-group > div {
-        padding: 0.75rem 1.5rem !important;
+    .offcanvas-lg {
+        background-color: var(--bs-dark);
     }
 
-    /* Larger icons in dropdowns */
-    .dropdown-item-group .fas,
-    .dropdown-item .fas {
-        font-size: 1.2rem;
+    .offcanvas-header {
+        color: white;
+        padding: 1rem 1.5rem;
     }
 
-    /* Better spacing for nested items */
-    .dropdown-submenu .dropdown-item {
-        padding-left: 2rem !important;
+    .offcanvas-title {
+        font-size: 1.5rem;
     }
-}
 
-/* Categories button responsive styles */
-@media (max-width: 991.98px) {
+    .col-lg-9 {
+        width: 100%;
+        padding-right: 1rem !important;
+        padding-left: 1rem !important;
+    }
+
+    .dropdown {
+        &-menu {
+            min-width: 280px !important;
+        }
+
+        &-item {
+            padding: 0.75rem 1.5rem !important;
+        }
+
+        &-submenu {
+            position: static !important;
+            left: 0 !important;
+            margin-left: 1.5rem !important;
+            box-shadow: none !important;
+
+            .dropdown-item {
+                padding-left: 2rem !important;
+            }
+        }
+    }
+
+    .dropdown-item-group {
+        > div {
+            padding: 0.75rem 1.5rem !important;
+        }
+
+        .fas,
+        .dropdown-item .fas {
+            font-size: 1.2rem;
+        }
+    }
+
     .nav-link[role="button"] {
         font-size: 1.1rem !important;
         padding: 1rem 1.5rem !important;
         min-height: 60px !important;
     }
-
-    .dropdown-menu {
-        min-width: 300px !important;
-    }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $small-breakpoint) {
     .nav-link[role="button"] {
         min-width: 100% !important;
     }
@@ -151,17 +142,15 @@
     }
 }
 
-/* Touch-friendly hover effects */
+// Touch device specific styles
 @media (hover: hover) {
     .hover-item:hover {
         background-color: rgba(255, 255, 255, 0.1);
     }
 }
 
-/* Better tap highlights for mobile */
 @media (hover: none) {
     .hover-item:active {
         background-color: rgba(255, 255, 255, 0.1);
     }
 }
-

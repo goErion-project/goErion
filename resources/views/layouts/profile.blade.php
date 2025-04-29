@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3 px-0 card">
+        <div class="col-md-3 px-0 card bg-gray-500 rounded">
             @include('includes.profile.menu')
         </div>
         <div class="col-md-9 ps-4">

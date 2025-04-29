@@ -1,6 +1,8 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
 
+
+
 // Variables
 @import 'variables';
 
@@ -12,10 +14,480 @@
 
 //sidebar
 @import 'sidebar';
+
+
+
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+//theme
+@import 'theme';
 
 // FontAwesome import
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
+// Font Weight Scale
+$font-weights: (
+    'thin': 100,
+    'extralight': 200,
+    'light': 300,
+    'regular': 400,
+    'medium': 500,
+    'semibold': 600,
+    'bold': 700,
+    'extrabold': 800,
+    'black': 900
+);
+
+// Generate font-weight classes
+@each $weight-name, $weight-value in $font-weights {
+    .fw-#{$weight-name} {
+        font-weight: $weight-value !important;
+    }
+
+    // Hover variants
+    .hover\:fw-#{$weight-name} {
+        transition: font-weight 0.3s ease;
+
+        &:hover {
+            font-weight: $weight-value !important;
+        }
+    }
+}
+
+// Font Family variants
+$font-families: (
+    'sans': ('Arial', 'Helvetica', 'sans-serif'),
+    'serif': ('Georgia', 'Times New Roman', 'serif'),
+    'mono': ('Consolas', 'Monaco', 'monospace'),
+    'system': (-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif)
+);
+
+// Generate font-family classes
+@each $family-name, $family-stack in $font-families {
+    .font-#{$family-name} {
+        font-family: $family-stack !important;
+    }
+}
+
+// Common text utilities
+.text-bold {
+    font-weight: map-get($font-weights, 'bold') !important;
+}
+
+.text-normal {
+    font-weight: map-get($font-weights, 'regular') !important;
+}
+
+// Responsive font weights
+@media (min-width: 768px) {
+    @each $weight-name, $weight-value in $font-weights {
+        .md\:fw-#{$weight-name} {
+            font-weight: $weight-value !important;
+        }
+    }
+}
+
+// Combination utilities
+.text-emphasis {
+    font-weight: map-get($font-weights, 'bold');
+    letter-spacing: 0.5px;
+}
+
+// Font size utilities (if needed)
+$font-sizes: (
+    'xs': 0.75rem,    // 12px
+    'sm': 0.875rem,   // 14px
+    'base': 1rem,     // 16px
+    'lg': 1.125rem,   // 18px
+    'xl': 1.25rem,    // 20px
+    '2xl': 1.5rem,    // 24px
+    '3xl': 1.875rem,  // 30px
+    '4xl': 2.25rem    // 36px
+);
+
+// Generate font-size classes
+@each $size-name, $size-value in $font-sizes {
+    .fs-#{$size-name} {
+        font-size: $size-value !important;
+    }
+}
+
+// Text style combinations
+.text-heading {
+    font-weight: map-get($font-weights, 'bold');
+    font-family: map-get($font-families, 'sans');
+    letter-spacing: -0.025em;
+}
+
+.text-caption {
+    font-weight: map-get($font-weights, 'medium');
+    font-size: map-get($font-sizes, 'sm');
+    letter-spacing: 0.025em;
+}
+
+.text-display {
+    font-weight: map-get($font-weights, 'black');
+    font-size: map-get($font-sizes, '4xl');
+    letter-spacing: -0.05em;
+}
+
+// Stack icons
+.icon-stack {
+    position: relative;
+    display: inline-block;
+
+    .icon-stack-item {
+        position: absolute;
+        &:nth-child(2) {
+            transform: translate(25%, 25%);
+        }
+    }
+}
+
+// Animated icons
+.icon-pulse {
+    animation: icon-pulse 2s infinite;
+}
+
+@keyframes icon-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+// Icon groups
+.icon-group {
+    display: inline-flex;
+    align-items: center;
+
+    > * + * {
+        margin-left: 0.5rem;
+    }
+}
+// Icon size scale
+$icon-sizes: (
+    'xs': 0.75rem,    // 12px
+    'sm': 0.875rem,   // 14px
+    'base': 1rem,     // 16px
+    'lg': 1.25rem,    // 20px
+    'xl': 1.5rem,     // 24px
+    '2xl': 2rem,      // 32px
+    '3xl': 2.5rem,    // 40px
+    '4xl': 3rem,      // 48px
+    '5xl': 4rem,      // 64px
+    '6xl': 5rem       // 80px
+);
+
+// Generate icon size classes
+@each $size-name, $size-value in $icon-sizes {
+    .icon-#{$size-name} {
+        font-size: $size-value !important;
+
+        &.fa,
+        &.fas,
+        &.far,
+        &.fab {
+            font-size: $size-value !important;
+        }
+    }
+}
+
+// Icon spacing utilities
+$icon-spacings: (
+    '0': 0,
+    '1': 0.25rem,
+    '2': 0.5rem,
+    '3': 0.75rem,
+    '4': 1rem,
+    '5': 1.5rem,
+    '6': 2rem
+);
+
+// Generate icon spacing classes
+@each $space-name, $space-value in $icon-spacings {
+    // Margin
+    .icon-me-#{$space-name} {
+        margin-right: $space-value !important;
+    }
+
+    .icon-ms-#{$space-name} {
+        margin-left: $space-value !important;
+    }
+
+    .icon-mx-#{$space-name} {
+        margin-left: $space-value !important;
+        margin-right: $space-value !important;
+    }
+
+    .icon-my-#{$space-name} {
+        margin-top: $space-value !important;
+        margin-bottom: $space-value !important;
+    }
+}
+
+// Icon color variations with hover effects
+.icon-hover {
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+// Icon with background
+.icon-with-bg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 0.5rem;
+
+    &.icon-rounded {
+        border-radius: 0.5rem;
+    }
+}
+
+// Color palette
+$colors: (
+    'gray': (
+        100: #f8f9fa,
+        200: #e9ecef,
+        300: #dee2e6,
+        400: #ced4da,
+        500: #adb5bd,
+        600: #6c757d,
+        700: #495057,
+        800: #343a40,
+        900: #212529
+    ),
+    'blue': (
+        100: #cfe2ff,
+        200: #9ec5fe,
+        300: #6ea8fe,
+        400: #3d8bfd,
+        500: #0d6efd,
+        600: #0a58ca,
+        700: #084298,
+        800: #052c65,
+        900: #031633
+    ),
+    'red': (
+        100: #ffe2e2,
+        200: #ffbdbd,
+        300: #ff9b9b,
+        400: #ff7575,
+        500: #ff4c4c,
+        600: #cc3d3d,
+        700: #992e2e,
+        800: #661f1f,
+        900: #330f0f
+    ),
+    'green': (
+        100: #d1e7dd,
+        200: #a3cfbb,
+        300: #75b798,
+        400: #479f76,
+        500: #198754,
+        600: #146c43,
+        700: #0f5132,
+        800: #0a3622,
+        900: #051b11
+    ),
+    'yellow': (
+        100: #fff3cd,
+        200: #ffe69c,
+        300: #ffda6a,
+        400: #ffcd39,
+        500: #ffc107,
+        600: #cc9a06,
+        700: #997404,
+        800: #664d03,
+        900: #332701
+    ),
+    'purple': (
+        100: #e2d9f3,
+        200: #c5b3e6,
+        300: #a98eda,
+        400: #8c68cd,
+        500: #6f42c1,
+        600: #59359a,
+        700: #432874,
+        800: #2c1a4d,
+        900: #160d27
+    ),
+    'browns': (
+        100: #f5f5f4,
+        200: #e7e5e4,
+        300: #d6d3d1,
+        400: #a8a29e,
+        500: #78716c,
+        600: #57534e,
+        700: #44403c,
+        800: #292524,
+        900: #1c1917
+    )
+
+);
+
+// Transition variables
+$transition-duration: 0.3s;
+$transition-timing: ease;
+
+// Mixins
+@mixin transition($properties...) {
+    transition-property: $properties;
+    transition-duration: $transition-duration;
+    transition-timing-function: $transition-timing;
+}
+
+// Generate color classes
+@each $color-name, $shades in $colors {
+    // Background colors
+    @each $shade, $value in $shades {
+        // Static background
+        .bg-#{$color-name}-#{$shade} {
+            background-color: $value !important;
+        }
+
+        // Hover background
+        .hover\:bg-#{$color-name}-#{$shade} {
+            @include transition(background-color);
+
+            &:hover {
+                background-color: $value !important;
+            }
+        }
+
+        // Text colors
+        .text-#{$color-name}-#{$shade} {
+            color: $value !important;
+        }
+
+        // Hover text
+        .hover\:text-#{$color-name}-#{$shade} {
+            @include transition(color);
+
+            &:hover {
+                color: $value !important;
+            }
+        }
+
+        // Border colors
+        .border-#{$color-name}-#{$shade} {
+            border-color: $value !important;
+        }
+
+        // Hover border
+        .hover\:border-#{$color-name}-#{$shade} {
+            @include transition(border-color);
+
+            &:hover {
+                border-color: $value !important;
+            }
+        }
+    }
+}
+
+// Hover effects with opacity
+@each $color-name, $shades in $colors {
+    @each $shade, $value in $shades {
+        .hover\:bg-#{$color-name}-#{$shade}-soft {
+            @include transition(background-color);
+
+            &:hover {
+                background-color: rgba($value, 0.1) !important;
+            }
+        }
+    }
+}
+
+// Combined hover effects
+.hover-transform {
+    @include transition(transform, box-shadow);
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+}
+
+// Gradient hover effects
+@each $color-name, $shades in $colors {
+    .hover\:gradient-#{$color-name} {
+        background: linear-gradient(
+                45deg,
+                map-get($shades, 500),
+                map-get($shades, 700)
+        );
+        background-size: 200% 200%;
+        @include transition(background-position);
+
+        &:hover {
+            background-position: right center;
+        }
+    }
+}
+
+// Scale hover effect
+.hover-scale {
+    @include transition(transform);
+
+    &:hover {
+        transform: scale(1.05);
+    }
+}
+
+// Glow effect
+@each $color-name, $shades in $colors {
+    .hover\:glow-#{$color-name} {
+        @include transition(box-shadow);
+
+        &:hover {
+            box-shadow: 0 0 15px rgba(map-get($shades, 500), 0.5);
+        }
+    }
+}
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+
+    .theme-toggle {
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7);
+        background-color: transparent;
+        border: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+
+        &:hover, &:focus {
+            color: #fbbf24; // Yellow highlight on hover
+            transform: scale(1.1);
+            outline: none;
+        }
+
+        &:active {
+            transform: scale(0.95);
+        }
+
+        i {
+            font-size: 1.25rem;
+            vertical-align: middle;
+        }
+    }
+}
+
+// Apply theme-specific styles
+body:has(#theme-dark) .theme-switch .theme-toggle {
+    color: #ffffff; // Brighter in dark mode
+}

@@ -1,2 +1,2 @@
 # goErion
- Digital Currency  Marketplace
+ Digital Currency Marketplace

@@ -77,7 +77,7 @@ class SignInRequest extends FormRequest
         if (!$user->login_2fa)
         {
             return redirect()
-                ->route('profile.index')
+                ->route('home')
                 ->with('success','Logged in successfully');
         }
 

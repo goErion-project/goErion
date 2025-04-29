@@ -1,0 +1,60 @@
+// Theme colors
+$light-theme: (
+    bg-body: #f8fafc,
+    text-body: #111827,
+    bg-nav: #ffffff,
+    text-nav: #1a1a1a,
+    border-color: #e5e7eb,
+    card-bg: #ffffff,
+    card-border: #e5e7eb,
+    input-bg: #ffffff,
+    input-border: #d1d5db,
+    input-text: #111827,
+    btn-primary-bg: #3b82f6,
+    btn-primary-text: #ffffff
+);
+
+$dark-theme: (
+    bg-body: #111827,
+    text-body: #e5e7eb,
+    bg-nav: #1a1a1a,
+    text-nav: #ffffff,
+    border-color: #374151,
+    card-bg: #1f2937,
+    card-border: #374151,
+    input-bg: #374151,
+    input-border: #4b5563,
+    input-text: #e5e7eb,
+    btn-primary-bg: #3b82f6,
+    btn-primary-text: #ffffff
+);
+
+// Set default light theme
+:root {
+    @each $property, $value in $light-theme {
+        --#{$property}: #{$value};
+    }
+}
+
+// Light theme class (optional, for explicit light theme setting)
+.light-theme {
+    @each $property, $value in $light-theme {
+        --#{$property}: #{$value};
+    }
+}
+
+// Dark theme
+.dark-theme {
+    @each $property, $value in $dark-theme {
+        --#{$property}: #{$value};
+    }
+}
+
+// Base styles with !important to ensure they take precedence
+body {
+    background-color: var(--bg-body) !important;
+    color: var(--text-body) !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Rest of your theme styles...

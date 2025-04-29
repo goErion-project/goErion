@@ -3,16 +3,25 @@
 use App\Http\Controllers\IndexController;
 use Illuminate\Support\Facades\Route;
 
+// Theme routes
+Route::get('/theme/dark', function () {
+    return redirect()->back()->withCookie(cookie()->forever('theme', 'dark'));
+})->name('theme.dark');
+
+Route::get('/theme/light', function () {
+    return redirect()->back()->withCookie(cookie()->forever('theme', 'light'));
+})->name('theme.light');
+
+// Main routes
 Route::name('auth.')->group(function () {
     include 'auth.php';
 });
 
-//profile routes
-Route::middleware(['auth'])->group(function ()
-{
+// Profile routes
+Route::middleware(['auth'])->group(function () {
     include 'profile.php';
 });
 
-Route::get('/',[IndexController::class,'home'])
+// Home route
+Route::get('/', [IndexController::class, 'home'])
     ->name('home');
-
