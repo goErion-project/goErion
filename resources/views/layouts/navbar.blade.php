@@ -41,9 +41,27 @@
             </div>
 
             <!-- Navigation Items -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @admin
+                    <li class="nav-item @isroute('admin') active @endisroute">
+                        <a class="nav-link" href="{{ route('admin.index') }}">Admin Panel</a>
+                    </li>
+                    @endadmin
+{{--                    @moderator--}}
+                    <li class="nav-item @isroute('admin') active @endisroute">
+                        <a class="nav-link" href="{{ route('admin.index') }}">Moderator Panel</a>
+                    </li>
+{{--                    @endmoderator--}}
+                    @auth
+                        <li class="nav-item @isroute('profile.tickets') active @endisroute">
+                            <a class="nav-link" href="{{-- route('profile.tickets') --}}">Support</a>
+                        </li>
+                    @endauth
+                </ul>
             <ul class="navbar-nav">
                 @auth
-                   {{-- username: {{ auth()->user()->username }}--}}
+{{--                    username: {{ auth()->user()->username }}--}}
                     <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
                         <a class="nav-link px-2 d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
                             <div class="rounded-circle bg-brown-600 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
@@ -70,6 +88,7 @@
                     </li>
                 @endauth
             </ul>
+            </div>
         </div>
     </div>
 </nav>

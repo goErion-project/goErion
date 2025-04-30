@@ -17,6 +17,16 @@ Route::name('auth.')->group(function () {
     include 'auth.php';
 });
 
+//admin routes
+Route::prefix('admin')->group(function ()
+{
+    Route::middleware(['admin_panel_access'])->group(function ()
+    {
+        include 'admin.php';
+    });
+});
+
+
 // Profile routes
 Route::middleware(['auth'])->group(function () {
     include 'profile.php';

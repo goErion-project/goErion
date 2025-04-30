@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\HasAdminPanelAccess;
 use App\Http\Middleware\ThemeMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -14,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(ThemeMiddleware::class);
+        $middleware->alias([
+            HasAdminPanelAccess::class => 'admin_panel_access',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
