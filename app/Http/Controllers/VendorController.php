@@ -11,6 +11,7 @@ use App\Http\Requests\Product\NewOfferRequest;
 use App\Http\Requests\Product\NewProductRequest;
 use App\Http\Requests\Product\NewShippingOptionsRequest;
 use App\Http\Requests\Product\NewShippingRequest;
+use App\Http\Requests\Profile\UpdateVendorProfileRequest;
 use App\Models\Category;
 use App\Models\DigitalProduct;
 use App\Models\Image;
@@ -679,19 +680,19 @@ class VendorController extends Controller
 //        return redirect() -> route('profile.sales.single', $sale);
 //    }
 
-//    /**
-//     * Update profile description and background for vendor
-//     */
-//    public function updateVendorProfilePost(UpdateVendorProfileRequest $request): RedirectResponse
-//    {
-//
-//        try{
-//            $request->persist();
-//        } catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//        return redirect()->back();
-//    }
+    /**
+     * Update profile description and background for vendor
+     */
+    public function updateVendorProfilePost(UpdateVendorProfileRequest $request): RedirectResponse
+    {
+
+        try{
+            $request->persist();
+        } catch (RequestException $e){
+            $e -> flashError();
+        }
+        return redirect()->back();
+    }
 
 
 }

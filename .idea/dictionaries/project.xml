@@ -10,6 +10,7 @@
       <w>autodelivery</w>
       <w>categ</w>
       <w>confirmclone</w>
+      <w>confirmcode</w>
       <w>confirmdelete</w>
       <w>editprofile</w>
       <w>endhas</w>
@@ -20,13 +21,18 @@
       <w>jcubes</w>
       <w>jswarning</w>
       <w>manualy</w>
+      <w>markfeatured</w>
       <w>mesure</w>
       <w>navlink</w>
       <w>newimage</w>
+      <w>newmessage</w>
       <w>offcanvas</w>
+      <w>pofile</w>
       <w>randomword</w>
       <w>referredd</w>
       <w>seigaiha</w>
+      <w>sendcode</w>
+      <w>sendmessage</w>
       <w>shippings</w>
       <w>signout</w>
       <w>starrynight</w>

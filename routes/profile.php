@@ -1,14 +1,34 @@
 <?php
 
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\BitmessageController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VendorController;
 
+
+
+/**
+ * All routes related to user profile
+ * Grouped under the prefix "profile" and under auth middleware
+ */
 Route::prefix('profile')->group(function ()
 {
     Route::get('index',[ProfileController::class,'index'])
         ->name('profile.index');
+    Route::post('changepassword', [ProfileController::class,'changePassword'])
+        -> name('profile.password.change'); // change password route
+    Route::get('2fa/{turn}', [ProfileController::class,'change2fa'])
+        -> name('profile.2fa.change'); // change 2fa
+
+    // add or remove to whishlist
+    Route::get('add/wishlist/{product}', [ProfileController::class,'addRemoveWishlist'])
+        -> name('profile.wishlist.add');
+    Route::get('wishlist', [ProfileController::class,'wishlist'])
+        -> name('profile.wishlist');
 
     //PGP routes
     Route::get('pgp',[ProfileController::class,'pgp'])
@@ -92,6 +112,110 @@ Route::prefix('profile')->group(function ()
     // Edit Product
     Route::get('vendor/product/edit/{id}/section/{section?}', [VendorController::class,'editProduct'])
         -> name('profile.vendor.product.edit');
+
+    // Sales routes
+    Route::get('sales/{state?}', [VendorController::class,'sales'])
+        -> name('profile.sales');
+    Route::get('sale/{sale}', [VendorController::class,'sale'])
+        -> name('profile.sales.single');
+    Route::get('sales/{sale}/sent/confirm', [VendorController::class,'confirmSent'])
+        -> name('profile.sales.sent.confirm');
+    Route::get('sale/{sale}/sent', [VendorController::class,'markAsSent'])
+        -> name('profile.sales.sent');
+
+    // Cart routes
+    Route::get('cart', [ProfileController::class,'cart'])
+        -> name('profile.cart');
+    Route::post('cart/{product}/add', [ProfileController::class,'addToCart'])
+        -> name('profile.cart.add');
+    Route::get('cart/clear', [ProfileController::class,'clearCart'])
+        -> name('profile.cart.clear');
+    Route::get('cart/remove/{product}', [ProfileController::class,'removeProduct'])
+        -> name('profile.cart.remove');
+    Route::get('checkout', [ProfileController::class,'checkout'])
+        -> name('profile.cart.checkout');
+    Route::get('make/purchase', [ProfileController::class,'makePurchases'])
+        -> name('profile.cart.make.purchases');
+
+    // Purchases routes
+    Route::get('purchases/{state?}', [ProfileController::class,'purchases'])
+        -> name('profile.purchases');
+    Route::get('purchases/{purchase}/message', [ProfileController::class,'purchaseMessage'])
+        -> name('profile.purchases.message');
+    Route::get('purchase/{purchase}', [ProfileController::class,'purchase'])
+        -> name('profile.purchases.single');
+    Route::get('purchase/{purchase}/delivered/confirm', [ProfileController::class,'deliveredConfirm'])
+        -> name('profile.purchases.delivered.confirm');
+    Route::get('purchase/{purchase}/delivered', [ProfileController::class,'markAsDelivered'])
+        -> name('profile.purchases.delivered');
+
+    // canceled for both Vendor and Buyer
+    Route::get('purchase/{purchase}/canceled/confirm', [ProfileController::class,'confirmCanceled'])
+        -> name('profile.purchases.canceled.confirm');
+    Route::get('purchase/{purchase}/canceled', [ProfileController::class,'markAsCanceled'])
+        -> name('profile.purchases.canceled');
+
+    // Purchase - Disputes
+    Route::post('purchase/{purchase}/dispute', [ProfileController::class,'makeDispute'])
+        -> name('profile.purchases.dispute');
+    Route::post('purchase/dispute/{dispute}/new/message', [ProfileController::class,'newDisputeMessage'])
+        -> name('profile.purchases.disputes.message');
+    Route::post('purchase/{purchase}/dispute/resolve', [AdminController::class,'resolveDispute'])
+        -> name('profile.purchases.disputes.resolve');
+
+    // Purchase - Feedbacks
+    Route::post('purchase/{purchase}/feedback/new', [ProfileController::class,'leaveFeedback'])
+        -> name('profile.purchases.feedback.new');
+
+    /**
+     * Messages
+     */
+    Route::middleware(['can_read_messages'])->group(function () {
+        Route::get('messages/{conversation?}', [MessageController::class,'messages'])
+            -> name('profile.messages');
+        Route::post('messages/conversation/new', [MessageController::class,'startConversation'])
+            -> name('profile.messages.conversation.new');
+        Route::get('messages/conversations/list', [MessageController::class,'listConversations'])
+            -> name('profile.messages.conversations.list');
+        Route::post('messages/{conversation}/message/new', [MessageController::class,'newMessage'])
+            -> name('profile.messages.message.new');
+        Route::get('messages/{conversation}/sendmessage', [MessageController::class,'newMessage'])
+            -> name('profile.messages.send.message'); // get a request for redirecting from a new conversation
+    });
+    Route::get('messages/decrypt/key',[MessageController::class,'decryptKeyShow'])
+        ->name('profile.messages.decrypt.show');
+    Route::post('messages/decrypt/key',[MessageController::class,'decryptKeyPost'])
+        ->name('profile.messages.decrypt.post');
+
+    /**
+     * Notifications
+     */
+
+    Route::get('notifications',[NotificationController::class,'viewNotifications'])
+        ->name('profile.notifications');
+    Route::post('notifications/delete',[NotificationController::class,'deleteNotifications'])
+        ->name('profile.notifications.delete');
+
+    /**
+     * Bitmessage
+     */
+    Route::get('bitmessage',[BitmessageController::class,'show'])
+        ->name('profile.bitmessage');
+    Route::post('bitmessage/send/code',[BitmessageController::class,'sendConfirmation'])
+        ->name('profile.bitmessage.sendcode');
+    Route::post('bitmessage/confirm/code',[BitmessageController::class,'confirmAddress'])
+        ->name('profile.bitmessage.confirmcode');
+
+    /**
+     * Tickets
+     */
+    Route::get('tickets/{ticket?}', [ProfileController::class,'tickets'])
+        -> name('profile.tickets');
+    Route::post('tickets/new', [ProfileController::class,'newTicket'])
+        -> name('profile.tickets.new');
+    Route::post('tickets/{ticket}/newmessage', [ProfileController::class,'newTicketMessage'])
+        -> name('profile.tickets.message.new');
+
 
     /**
      * Product clone

@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/theme/dark', function () {
     return redirect()->back()->withCookie(cookie()->forever('theme', 'dark'));
 })->name('theme.dark');
-
 Route::get('/theme/light', function () {
     return redirect()->back()->withCookie(cookie()->forever('theme', 'light'));
 })->name('theme.light');
+
 
 // Main routes
 Route::name('auth.')->group(function () {
