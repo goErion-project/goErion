@@ -2,7 +2,8 @@
 
 namespace App\Traits;
 
-use Exception;
+use App\Models\DigitalProduct;
+use App\Models\PhysicalProduct;
 use Webpatser\Uuid\Uuid;
 
 /**
@@ -10,19 +11,19 @@ use Webpatser\Uuid\Uuid;
  */
 trait Uuids
 {
-    protected static function boot()
+    /**
+     * Boot function for the trait.
+     */
+    protected static function bootUuids(): void
     {
-        parent::boot();
-
-        static::creating(
-        /**
-         * @throws Exception
-         */ function ($model){
-            if (is_null($model->{$model->getKeyName()})){
+        static::creating(function ($model) {
+            // Digital and physical products don't generate separate IDs
+            // if the key is not already defined
+            if (!($model instanceof PhysicalProduct) &&
+                !($model instanceof DigitalProduct) &&
+                is_null($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = Uuid::generate()->string;
             }
         });
-
-
     }
 }

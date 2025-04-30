@@ -7,6 +7,7 @@ use App\Traits\Adminable;
 use App\Traits\Uuids;
 use App\Traits\Vendorable;
 use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -102,6 +103,23 @@ class User extends Authenticatable
     {
         return $this->referredBy !== null;
     }
+
+    public function products(): HasMany
+    {
+        return $this -> hasMany(Product::class, 'user_id') -> where('active', true) -> orderByDesc('created_at');
+    }
+
+    /**
+     * Return a number of recent products
+     *
+     * @param int $amount
+     * @return Collection|\Illuminate\Support\Collection
+     */
+    public function recentProducts(int $amount = 3): Collection|\Illuminate\Support\Collection
+    {
+        return $this -> products() -> take($amount) -> get();
+    }
+
 
     public function memberSince(): string
     {

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Middleware\CanEditProducts;
 use App\Http\Middleware\HasAdminPanelAccess;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsVendor;
 use App\Http\Middleware\ThemeMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,7 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->web(ThemeMiddleware::class);
         $middleware->alias([
-            HasAdminPanelAccess::class => 'admin_panel_access',
+            'is_vendor' => IsVendor::class,
+            'is_admin' => IsAdmin::class,
+            'admin_panel_access' => HasAdminPanelAccess::class,
+            'can_edit_products' => CanEditProducts::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

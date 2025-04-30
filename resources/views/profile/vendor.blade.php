@@ -9,17 +9,18 @@
 
     <h1 class="mb-3">Vendor settings</h1>
     <hr>
-{{--    @vendor--}}
+    @vendor
     {{-- Vendor Display --}}
 
-{{--    @include('includes.profile.vendor.experience')--}}
+    @include('includes.profile.vendor.experience')
 
-{{--    @include('includes.profile.vendor.editprofile')--}}
+    @include('includes.profile.vendor.editprofile')
 
-{{--    @include('includes.profile.vendor.addproduct')--}}
+    @include('includes.profile.vendor.addproduct')
 
-{{--    @include('includes.profile.vendor.products')--}}
-{{--    @else--}}
+    @include('includes.profile.vendor.products')
+
+    @else
         {{-- Non vendor display --}}
         <h3>Become vendor</h3>
         <hr>
@@ -27,8 +28,8 @@
             on this store.
         </div>
         <div class="text-center">
-            <a href="{{-- route('profile.vendor.become') --}}" class="btn btn-outline-success btn-md">Become vendor</a>
+            <a href="{{ route('profile.vendor.become') }}" class="btn btn-outline-success btn-md">Become vendor</a>
         </div>
 
-{{--        @endvendor--}}
-        @stop
+        @endvendor
+        @endsection

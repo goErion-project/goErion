@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('profilebg')->nullable();
             $table->boolean('trusted')->default(false);
             $table->timestamps();
-            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id')->references('id')->on('users')->onDelete('cascade');// delete users products
         });
     }
 
