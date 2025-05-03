@@ -32,21 +32,19 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerPolicies();
-
+        // $this->registerPolicies(); ← no longer needed
 
         // Gate for moderator
         Gate::define('has-access', function($user, $permission){
-            return $user -> hasPermission($permission);
+            return $user->hasPermission($permission);
         });
 
-        /**
-         * Admin grants access to all
-         */
+        // Admin grants access to all
         Gate::before(function($user, $permission){
-            if($user -> isAdmin()){
+            if ($user->isAdmin()) {
                 return true;
             }
         });
     }
+
 }
