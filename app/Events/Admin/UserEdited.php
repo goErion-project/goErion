@@ -2,6 +2,7 @@
 
 namespace App\Events\Admin;
 
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,25 +13,52 @@ use Illuminate\Queue\SerializesModels;
 
 class UserEdited
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, SerializesModels;
 
+    /**
+     * On what fields are changes registered?
+     *
+     * @var array
+     */
+    private array $listeningForChanges = [
+        'username',
+        'referral_code',
+    ];
+    /**
+     * Edited data
+     *
+     * @var array
+     */
+    public array $editedData = [];
     /**
      * Create a new event instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return void
      */
-    public function broadcastOn(): array
+    public function __construct(User $oldUserData,User $newUserData,User $admin)
     {
-        return [
-            new PrivateChannel('channel-name'),
+
+        $oldUser = $this->removeKeys($oldUserData->getAttributes());
+        $newUser =  $this->removeKeys($newUserData->getAttributes());
+        $diff1 = array_diff($oldUser,$newUser);
+        $diff2 = array_diff($newUser,$oldUser);
+
+        $this->editedData = [
+            'field' => key($diff1),
+            'old' => reset($diff1),
+            'new' => reset($diff2),
+            'admin' => $admin,
+            'user' => $newUserData
         ];
     }
+    public function removeKeys($unfilteredArray): array
+    {
+        $array = [];
+        foreach ($this->listeningForChanges as $field){
+            $array[$field] = $unfilteredArray[$field];
+        }
+        return $array;
+    }
+
+
 }

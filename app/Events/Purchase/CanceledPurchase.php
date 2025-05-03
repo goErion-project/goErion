@@ -2,6 +2,7 @@
 
 namespace App\Events\Purchase;
 
+use App\Models\Purchase;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,25 +13,17 @@ use Illuminate\Queue\SerializesModels;
 
 class CanceledPurchase
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+
+    public Purchase $purchase;
 
     /**
      * Create a new event instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return void
      */
-    public function broadcastOn(): array
+    public function __construct(Purchase $purchase)
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        $this->purchase = $purchase;
     }
 }

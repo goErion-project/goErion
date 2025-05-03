@@ -2,6 +2,7 @@
 
 namespace App\Events\Admin;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -11,7 +12,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserGroupChanged
+class UserPermissionsUpdated
 {
     use Dispatchable;
 
@@ -20,7 +21,7 @@ class UserGroupChanged
      *
      * @var User
      */
-    public User $admin;
+    public Admin|User $admin;
 
     /**
      * User request is being performed on
@@ -29,34 +30,25 @@ class UserGroupChanged
      */
     public User $user;
 
-    /**
-     * User group name
-     *
-     * @var string
-     */
-    public string $userGroup;
-
-    /**
-     * Status
-     * true = given
-     * false = taken
-     *
-     * @var bool
-     */
-    public bool $status;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user,string $userGroup,bool $status,User $admin)
+    public function __construct(User $user, Admin $admin)
     {
-        $this->admin = $admin;
         $this->user = $user;
-        $this->userGroup = $userGroup;
-        $this->status = $status;
-
+        $this->admin = $admin;
     }
 
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return Channel|PrivateChannel|array
+     */
+    public function broadcastOn(): Channel|PrivateChannel|array
+    {
+        return new PrivateChannel('channel-name');
+    }
 }

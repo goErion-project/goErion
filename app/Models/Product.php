@@ -35,6 +35,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property int|mixed $user_id
  * @property mixed $mesure
  * @property mixed $feedback
+ * @property mixed $user
  *
  * @method exists()
  * @method static findOrFail($id)

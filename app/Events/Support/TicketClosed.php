@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events\Message;
+namespace App\Events\Support;
 
-use App\Models\Message;
+use App\Models\Ticket;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,25 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent
+class TicketClosed
 {
     use Dispatchable;
 
-    /**
-     * Message that is being sent
-     *
-     * @var Message
-     */
-    public Message $message;
+
+    public Ticket $ticket;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Message $message)
+    public function __construct(Ticket $ticket)
     {
-
-        $this->message = $message;
+        $this->ticket = $ticket;
     }
 }

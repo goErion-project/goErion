@@ -2,6 +2,7 @@
 
 namespace App\Events\Purchase;
 
+use App\Models\Feedback;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,25 +13,22 @@ use Illuminate\Queue\SerializesModels;
 
 class NewFeedback
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+
+    /**
+     * Feedback that triggered the event
+     *
+     * @var Feedback
+     */
+    public Feedback $feedback;
 
     /**
      * Create a new event instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return void
      */
-    public function broadcastOn(): array
+    public function __construct(Feedback $feedback)
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        $this->feedback = $feedback;
     }
 }

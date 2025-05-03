@@ -2,6 +2,8 @@
 
 namespace App\Events\Purchase;
 
+use App\Models\Purchase;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,25 +14,47 @@ use Illuminate\Queue\SerializesModels;
 
 class ProductDisputeResolved
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+
+
+    /**
+     * User who purchased the product
+     *
+     * @var mixed
+     */
+    public mixed $buyer;
+
+    /**
+     * User who sells the product
+     *
+     * @var mixed
+     */
+    public mixed $vendor;
+
+    /**
+     * Product
+     *
+     * @var
+     */
+    public $product;
+
+    /**
+     * Complete instance of a purchase
+     *
+     *
+     */
+    public Purchase $purchase;
 
     /**
      * Create a new event instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Get the channels the event should broadcast on.
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @return void
      */
-    public function broadcastOn(): array
-    {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+    public function __construct(Purchase $purchase) {
+
+        $this->buyer = $purchase->buyer;
+        $this->vendor = $purchase->vendor;
+        $this->product = $purchase->offer->product;
+        $this->purchase = $purchase;
     }
 }

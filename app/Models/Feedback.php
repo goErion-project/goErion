@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property mixed $communication_rate
  * @property mixed $comment
  * @property mixed $product_name
+ * @property mixed $vendor
  */
 class Feedback extends Model
 {

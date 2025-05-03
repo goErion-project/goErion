@@ -2,6 +2,8 @@
 
 namespace App\Events\Admin;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -12,25 +14,39 @@ use Illuminate\Queue\SerializesModels;
 
 class ProductDeleted
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
 
     /**
      * Create a new event instance.
+     *
+     * @return void
      */
-    public function __construct()
-    {
-        //
-    }
 
     /**
-     * Get the channels the event should broadcast on.
+     * Admin performing the request
      *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
+     * @var User
      */
-    public function broadcastOn(): array
+    public User $admin;
+
+    /**
+     * Product being deleted
+     *
+     * @var Product
+     */
+    public Product $product;
+
+    /**
+     * Vendor owning the product
+     *
+     * @var User
+     */
+    public User $vendor;
+
+    public function __construct(Product $product,User $vendor,User $admin)
     {
-        return [
-            new PrivateChannel('channel-name'),
-        ];
+        $this->product = $product;
+        $this->admin = $admin;
+        $this->vendor = $vendor;
     }
 }
