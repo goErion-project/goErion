@@ -181,7 +181,7 @@ class ProfileController extends Controller
     {
         return view('profile.become',[
             'vendorFee' => config('marketplace.vendor_fee'),
-            'depositAddresses' => auth() -> user() -> vendorPurchases
+            'depositAddresses' => auth() -> user() -> vendorPurchases()
         ]);
     }
 
@@ -243,7 +243,7 @@ class ProfileController extends Controller
     {
         return view('profile.wishlist');
     }
-
+//
 //    /**
 //     * Show the cart page
 //     *

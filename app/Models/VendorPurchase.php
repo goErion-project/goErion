@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property mixed $coin
  * @property mixed $address
  * @property mixed $created_at
+ * @property int|mixed $user_id
  */
 class VendorPurchase extends Model
 {
@@ -142,6 +143,7 @@ class VendorPurchase extends Model
             // send it to market address
             $coinService->sendToAddress($marketCoinAddress, $this->getBalance());
 
+            return true;
         }
         catch (\Exception $e){
             Log::warning($e);

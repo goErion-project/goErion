@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int|mixed $user_id
+ * @property mixed $name
  */
 class Permission extends Model
 {

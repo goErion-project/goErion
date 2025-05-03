@@ -9,17 +9,17 @@ use App\Traits\Adminable;
 use App\Traits\Displayable;
 use App\Traits\Uuids;
 use App\Traits\Vendorable;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 /**
  * @property mixed $referredBy
@@ -176,10 +176,10 @@ class User extends Authenticatable
      *
      * @return HasMany
      */
-//    public function notifications(): HasMany
-//    {
-//        return $this -> hasMany(\App\Notification::class);
-//    }
+    public function notifications(): HasMany
+    {
+        return $this -> hasMany(Notification::class);
+    }
 
     /**
      * Return Product that a user has
@@ -283,102 +283,103 @@ class User extends Authenticatable
         return $this -> purchases() -> where('state', $state) -> count();
     }
 
-//    /**
-//     * Set the bitcoin address
-//     *
-//     * @param $address
-//     * @param string $coin
-//     */
-//    public function setAddress($address, $coin = 'btc')
-//    {
-//        $newAddress = new Address;
-//        $newAddress -> address = $address;
-//        $newAddress -> user_id = $this -> id;
-//        $newAddress -> coin = $coin;
-//        $newAddress -> save();
-//    }
+    /**
+     * Set the bitcoin address
+     *
+     * @param $address
+     * @param string $coin
+     */
+    public function setAddress($address, string $coin = 'btc'): void
+    {
+        $newAddress = new Address;
+        $newAddress -> address = $address;
+        $newAddress -> user_id = $this -> id;
+        $newAddress -> coin = $coin;
+        $newAddress -> save();
+    }
 
-//    /**
-//     * Relationship with the conversations where the user is sender
-//     *
-//     * @return HasMany
-//     */
-//    public function senderconversations(): HasMany
-//    {
-//        return $this -> hasMany(\App\Conversation::class, 'sender_id', 'id');
-//    }
-//
-//    /**
-//     * Relationship with the conversations where the user is sender
-//     *
-//     * @return HasMany
-//     */
-//    public function receiverconversations()
-//    {
-//        return $this -> hasMany(\App\Conversation::class, 'receiver_id', 'id');
-//    }
+    /**
+     * Relationship with the conversations where the user is sender
+     *
+     * @return HasMany
+     */
+    public function senderconversations(): HasMany
+    {
+        return $this -> hasMany(Conversation::class, 'sender_id', 'id');
+    }
 
-   // /**
-//     * All conversations as Query Builder
-//     *
-//     * @return HasMany|\Illuminate\Database\Query\Builder\
-//     */
-//    public function conversations()
-//    {
-//        return Conversation::where('sender_id', $this -> id) -> orWhere('receiver_id', $this -> id);
-//    }
+    /**
+     * Relationship with the conversations where the user is sender
+     *
+     * @return HasMany
+     */
+    public function receiverconversations(): HasMany
+    {
+        return $this -> hasMany(Conversation::class, 'receiver_id', 'id');
+    }
 
-//    /**
-//     * @return Collection
-//     */
-//    public function getConversationsAttribute()
-//    {
-//        return $this -> conversations() -> get();
-//    }
+    /**
+     * All conversations as Query Builder
+     *
+     * @return HasMany
+     */
+    public function conversations(): HasMany
+    {
+        return Conversation::query()->where('sender_id', $this -> id) -> orWhere('receiver_id', $this -> id);
+    }
 
-//    /**
-//     * Return a collection of addresses
-//     *
-//     * @return HasMany
-//     */
-//    public function addresses()
-//    {
-//        return $this -> hasMany(\App\Address::class, 'user_id', 'id');
-//    }
+    /**
+     * @return Collection
+     */
+    public function getConversationsAttribute(): \Illuminate\Support\Collection
+    {
+        return $this -> conversations() -> get();
+    }
 
-//    /**
-//     * Returns the most recent address of the given coin for this user
-//     *
-//     * @param $coin
-//     * @return \App\Address
-//     * @throws \Exception
-//     */
-//    public function coinAddress($coin)
-//    {
-//        if(!in_array($coin, array_keys(config('coins.coin_list'))))
-//            throw new RequestException('Purchase completion attempt unsuccessful, coin not suported by marketpalce');
-//
-//        $usersAddress = $this->addresses()->where('coin', $coin)->orderByDesc('created_at')->first();
-//        if(is_null($usersAddress) && $coin == 'btcm')
-//            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid public key for making multisig address!');
-//        if(is_null($usersAddress))
-//            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid address for sending funds! If this is user who referred you please notify him!');
-//        return $usersAddress;
-//    }
+    /**
+     * Return a collection of addresses
+     *
+     * @return HasMany
+     */
+    public function addresses(): HasMany
+    {
+        return $this -> hasMany(Address::class, 'user_id', 'id');
+    }
 
-//    /**
-//     * Returns how many addresses have user for this $coin
-//     *
-//     * @param $coin
-//     * @return int
-//     */
-//    public function numberOfAddresses($coin)
-//    {
-//        if(!in_array($coin, array_keys(config('coins.coin_list'))))
-//            throw new RequestException('There is no coin under that name!');
-//
-//        return $this -> addresses() -> where('coin', $coin) -> count();
-//    }
+    /**
+     * Returns the most recent address of the given coin for this user
+     *
+     * @param $coin
+     * @return Address
+     * @throws \Exception
+     */
+    public function coinAddress($coin): Address
+    {
+        if(!in_array($coin, array_keys(config('coins.coin_list'))))
+            throw new RequestException('Purchase completion attempt unsuccessful, coin not suported by marketpalce');
+
+        $usersAddress = $this->addresses()->where('coin', $coin)->orderByDesc('created_at')->first();
+        if(is_null($usersAddress) && $coin == 'btcm')
+            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid public key for making multisig address!');
+        if(is_null($usersAddress))
+            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid address for sending funds! If this is user who referred you please notify him!');
+        return $usersAddress;
+    }
+
+    /**
+     * Returns how many addresses have user for this $coin
+     *
+     * @param $coin
+     * @return int
+     * @throws RequestException
+     */
+    public function numberOfAddresses($coin): int
+    {
+        if(!in_array($coin, array_keys(config('coins.coin_list'))))
+            throw new RequestException('There is no coin under that name!');
+
+        return $this -> addresses() -> where('coin', $coin) -> count();
+    }
 
 
     /**
@@ -391,44 +392,44 @@ class User extends Authenticatable
         return date_format($this->created_at,"M/Y");
     }
 
- //   /**
-//     * Generate deposit addresses for this User
-//     */
-//    public function generateDepositAddresses(): void
-//    {
-//        $coinsClasses = config('coins.coin_list');
-//
-//        // vendor fee in usd
-//        $marketVendorFee =  config('marketplace.vendor_fee');
-//
-//        // for each supported coin generate an instance of the coin
-//        foreach ($coinsClasses as $short => $coinClass){
-//            $coinsService = new $coinClass();
-//            try {
-//                // Add a new deposit address
-//                $newDepositAddress = new VendorPurchase;
-//                $newDepositAddress->user_id = $this->id;
-//
-//                $newDepositAddress->address = $coinsService->generateAddress(['user' => $this->id]);
-//                $newDepositAddress->coin = $coinsService->coinLabel();
-//
-//                $newDepositAddress->save();
-//            }catch(\Exception $e){
-//                \Illuminate\Support\Facades\Log::error($e);
-//            }
-//        }
-//    }
+    /**
+     * Generate deposit addresses for this User
+     */
+    public function generateDepositAddresses(): void
+    {
+        $coinsClasses = config('coins.coin_list');
+
+        // vendor fee in usd
+        $marketVendorFee =  config('marketplace.vendor_fee');
+
+        // for each supported coin generate an instance of the coin
+        foreach ($coinsClasses as $short => $coinClass){
+            $coinsService = new $coinClass();
+            try {
+                // Add a new deposit address
+                $newDepositAddress = new VendorPurchase;
+                $newDepositAddress->user_id = $this->id;
+
+                $newDepositAddress->address = $coinsService->generateAddress(['user' => $this->id]);
+                $newDepositAddress->coin = $coinsService->coinLabel();
+
+                $newDepositAddress->save();
+            }catch(\Exception $e){
+                \Illuminate\Support\Facades\Log::error($e);
+            }
+        }
+    }
 
 
-//    /**
-//     * One-to-many relationship with the deposit addresses
-//     *
-//     * @return HasMany
-//     */
-//    public function vendorPurchases(): HasMany
-//    {
-//        return $this -> hasMany(\App\VendorPurchase::class, 'user_id', 'id');
-//    }
+    /**
+     * One-to-many relationship with the deposit addresses
+     *
+     * @return HasMany
+     */
+    public function vendorPurchases(): HasMany
+    {
+        return $this -> hasMany(VendorPurchase::class, 'user_id', 'id');
+    }
 
     /**
      * Relationship with the User who referred $this user
@@ -450,91 +451,92 @@ class User extends Authenticatable
         return $this -> referredBy != null;
     }
 
-//    /**
-//     * Relationship with permissions, User can have 0..* permissions
-//     *
-//     * @return HasMany
-//     */
-//    public function permissions()
-//    {
-//        return $this -> hasMany(\App\Permission::class, 'user_id', 'id');
-//    }
+    /**
+     * Relationship with permissions, User can have 0.* permissions
+     *
+     * @return HasMany
+     */
+    public function permissions(): HasMany
+    {
+        return $this -> hasMany(Permission::class, 'user_id', 'id');
+    }
 
-//    /**
-//     * Returns true if the user has any permission
-//     *
-//     * @return bool
-//     */
-//    public function hasPermissions()
-//    {
-//        return $this -> permissions() -> exists();
-//    }
+    /**
+     * Returns true if the user has any permission
+     *
+     * @return bool
+     */
+    public function hasPermissions(): bool
+    {
+        return $this -> permissions() -> exists();
+    }
 
-//    /**
-//     * Returns if the user has specific permission
-//     *
-//     * @param $name
-//     * @return bool
-//     */
-//    public function hasPermission($name)
-//    {
-//        return $this -> permissions() -> where('name', $name) -> exists();
-//    }
+    /**
+     * Returns if the user has specific permission
+     *
+     * @param $name
+     * @return bool
+     */
+    public function hasPermission($name): bool
+    {
+        return $this -> permissions() -> where('name', $name) -> exists();
+    }
 
-//    /**
-//     * Deletes all old permissions and sets the new permissions
-//     *
-//     * @param array $permissions
-//     * @throws RequestException
-//     */
-//    public function setPermissions(array $permissions)
-//    {
-//        // check if there is forbidden permissions
-//        if(!empty(array_diff($permissions, self::$permissions)))
-//            throw new RequestException("There are forbidden permissions!");
-//
-//        try {
-//            DB::beginTransaction();
-//            // delete old permissions
-//            Permission::where('user_id', $this->id)->delete();
-//
-//            // insert new permissions
-//            foreach ($permissions as $inputPermission) {
-//                $newPermission = new Permission;
-//                $newPermission->name = $inputPermission;
-//                $newPermission->setUser($this);
-//                $newPermission->save();
-//            }
-//
-//            DB::commit();
-//            event(new UserPermissionsUpdated($this, auth()->user()->admin));
-//        }
-//        catch (\Exception $e){
-//            DB::rollBack();
-//            \Illuminate\Support\Facades\Log::error($e);
-//            throw new RequestException("Error happened with the database please try again!");
-//        }
-//    }
+    /**
+     * Deletes all old permissions and sets the new permissions
+     *
+     * @param array $permissions
+     * @throws RequestException
+     * @throws Throwable
+     */
+    public function setPermissions(array $permissions): void
+    {
+        // check if there are forbidden permissions
+        if(!empty(array_diff($permissions, self::$permissions)))
+            throw new RequestException("There are forbidden permissions!");
 
-//    /**
-//     * Relationship with the tickets
-//     *
-//     * @return HasMany
-//     */
-//    public function tickets()
-//    {
-//        return $this -> hasMany(Ticket::class, 'user_id', 'id');
-//    }
+        try {
+            DB::beginTransaction();
+            // delete old permissions
+            Permission::query()->where('user_id', $this->id)->delete();
 
-//    /**
-//     * Collection of tickets replies
-//     *
-//     * @return HasMany
-//     */
-//    public function replies()
-//    {
-//        return $this -> hasMany(TicketReply::class, 'user_id', 'id');
-//    }
+            // insert new permissions
+            foreach ($permissions as $inputPermission) {
+                $newPermission = new Permission;
+                $newPermission->name = $inputPermission;
+                $newPermission->setUser($this);
+                $newPermission->save();
+            }
+
+            DB::commit();
+            event(new UserPermissionsUpdated($this, auth()->user()->admin));
+        }
+        catch (\Exception $e){
+            DB::rollBack();
+            \Illuminate\Support\Facades\Log::error($e);
+            throw new RequestException("Error happened with the database please try again!");
+        }
+    }
+
+    /**
+     * Relationship with the tickets
+     *
+     * @return HasMany
+     */
+    public function tickets(): HasMany
+    {
+        return $this -> hasMany(Ticket::class, 'user_id', 'id');
+    }
+
+    /**
+     * Collection of tickets replies
+     *
+     * @return HasMany
+     */
+    public function replies(): HasMany
+    {
+        return $this -> hasMany(TicketReply::class, 'user_id', 'id');
+    }
 
 
     /**
@@ -559,7 +561,7 @@ class User extends Authenticatable
         // Find the ban sorted by time
         $latestBan = $this->bans()->orderByDesc('until')->first();
 
-        // if the until time is greater than now
+        // if the until time it is greater than now
         if(Carbon::parse($latestBan->until)->gte(Carbon::now()))
             return true;
 

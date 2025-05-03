@@ -15,6 +15,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Can be any Coin that is supported in the config
  *
  * Class Address
+ * @property mixed $created_at
+ * @property mixed $address
+ * @property int|mixed $user_id
+ * @property mixed|string $coin
  * @package App
  */
 class Address extends Model
