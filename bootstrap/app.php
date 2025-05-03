@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Middleware\CanEditProducts;
+use App\Http\Middleware\CanReadMessages;
 use App\Http\Middleware\HasAdminPanelAccess;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsBanned;
 use App\Http\Middleware\IsVendor;
+use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\ThemeMiddleware;
 use App\Http\Middleware\VerifyLogin;
 use Illuminate\Foundation\Application;
@@ -27,6 +29,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'is_banned' => IsBanned::class,
             'admin_panel_access' => HasAdminPanelAccess::class,
             'can_edit_products' => CanEditProducts::class,
+            'can_read_messages' => CanReadMessages::class,
+            'guest'=> RedirectIfAuthenticated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
