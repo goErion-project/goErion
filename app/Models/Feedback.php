@@ -16,6 +16,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property mixed $created_at
  * @property mixed $product_value
  * @property mixed $id
+ * @property mixed $quality_rate
+ * @property mixed $shipping_rate
+ * @property mixed $communication_rate
+ * @property mixed $comment
+ * @property mixed $product_name
  */
 class Feedback extends Model
 {

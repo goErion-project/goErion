@@ -112,11 +112,13 @@ trait Vendorable
     }
 
 
-    public function completedOrders(){
+    public function completedOrders(): int
+    {
         return $this->sales()->where('state','delivered')->count();
     }
 
-    public function disputesLastYear($won = true,$months =12){
+    public function disputesLastYear($won = true,$months =12): int
+    {
         $vendorID = $this->getId();
         return $this->sales()->whereHas('dispute',function ($query) use ($vendorID,$won,$months){
             $operator = '=';

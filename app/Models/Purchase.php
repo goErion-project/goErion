@@ -38,6 +38,10 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property string $state
  * @property mixed $feedback_id
  * @property mixed $type
+ * @property string $delivered_product
+ * @property null $status_notification
+ * @property mixed $dispute
+ * @property mixed $value_sum
  */
 class Purchase extends Model
 {

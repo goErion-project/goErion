@@ -37,6 +37,7 @@ use Throwable;
  * @property mixed $admin
  * @property mixed $vendor
  * @property bool|mixed $login_2fa
+ * @property mixed $vendorPurchases
  * @method static where(string $string, string $username)
  */
 class User extends Authenticatable

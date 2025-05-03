@@ -2,7 +2,16 @@
 
 namespace App\Traits;
 
+use App\Events\Purchase\CanceledPurchase;
+use App\Events\Purchase\NewPurchase;
+use App\Events\Purchase\ProductDelivered;
+use App\Events\Purchase\ProductDisputed;
+use App\Events\Purchase\ProductDisputeResolved;
+use App\Events\Purchase\ProductSent;
 use App\Exceptions\RequestException;
+use App\Marketplace\Cart;
+use App\Models\Dispute;
+use App\Models\DisputeMessage;
 use App\Models\Shipping;
 use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -338,7 +347,7 @@ trait Purchasable
 
 
 
-        // user is not neither vendor nor buyer
+        // the user is not neither vendor nor buyer
         if(!$this -> isBuyer($winner) && !$this -> isVendor($winner))
             throw new RequestException('User must be vendor or buyer!');
 

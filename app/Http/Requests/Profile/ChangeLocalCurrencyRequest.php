@@ -2,8 +2,18 @@
 
 namespace App\Http\Requests\Profile;
 
+use App\Exceptions\RequestException;
+use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
+use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
+/**
+ * @property mixed $old_password
+ * @property mixed $new_password
+ */
 class ChangeLocalCurrencyRequest extends FormRequest
 {
     /**
@@ -11,18 +21,53 @@ class ChangeLocalCurrencyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'old_password' => 'required|string',
+            'new_password' => 'required|string|confirmed|min:8'
         ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'new_password.confirmed' => 'You didn\'t confirm password correctly!',
+            'new_password.min' => 'Your new password must be at least 8 characters length.'
+        ];
+    }
+
+    /**
+     * @throws EnvironmentIsBrokenException
+     * @throws WrongKeyOrModifiedCiphertextException|RequestException
+     */
+    public function persist(): void
+    {
+        $user = auth()->user();
+        if(Hash::check($this -> old_password,$user -> password)){
+
+            // change a user's password
+            $user -> password = Hash::make($this -> new_password);
+
+            // re-encrypt a user's private key with a new password
+            $decryptedPrivateKey = Crypto::decryptWithPassword($user->msg_private_key, $this->old_password);
+            $user->msg_private_key = Crypto::encryptWithPassword($decryptedPrivateKey, $this->new_password);
+
+            // save changes
+            $user -> save();
+
+
+            session() -> flash('success', 'You have successfully changed your password!');
+        }
+        else
+            throw new RequestException("Old password is not valid!");
     }
 }

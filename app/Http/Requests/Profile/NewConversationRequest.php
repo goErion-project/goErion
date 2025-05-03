@@ -5,7 +5,7 @@ namespace App\Http\Requests\Profile;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewTicketMessageRequest extends FormRequest
+class NewConversationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,15 @@ class NewTicketMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'username' => 'required|exists:users,username',
             'message' => 'required|string'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'username.exists' => 'User under that username doesn\'t exists!'
         ];
     }
 }
