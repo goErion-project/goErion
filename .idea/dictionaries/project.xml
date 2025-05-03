@@ -16,6 +16,7 @@
       <w>confirmcode</w>
       <w>confirmdelete</w>
       <w>confirmdelivered</w>
+      <w>detailedsearch</w>
       <w>editprofile</w>
       <w>endhas</w>
       <w>endis</w>
@@ -26,6 +27,7 @@
       <w>hashid</w>
       <w>jcubes</w>
       <w>jswarning</w>
+      <w>listcategories</w>
       <w>manualy</w>
       <w>markfeatured</w>
       <w>mesure</w>
@@ -51,6 +53,7 @@
       <w>topnavbar</w>
       <w>vendorable</w>
       <w>viewmessage</w>
+      <w>viewpicker</w>
       <w>whish</w>
       <w>whishes</w>
       <w>whishing</w>

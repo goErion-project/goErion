@@ -1,4 +1,4 @@
-@extends('master.admin')
+@extends('layouts.admin')
 
 @section('admin-content')
 
@@ -8,7 +8,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    {{ $total_products }}--}}
+                    {{ $total_products }}
                 </h1>
             </div>
             <div class="card-footer">
@@ -18,7 +18,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    {{ $total_purchases }}--}}
+                    {{ $total_purchases }}
                 </h1>
             </div>
             <div class="card-footer">
@@ -29,7 +29,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    {{ $total_users }}--}}
+                    {{ $total_users }}
                 </h1>
             </div>
             <div class="card-footer">
@@ -40,7 +40,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    {{ $total_vendors }}--}}
+                    {{ $total_vendors }}
                 </h1>
             </div>
             <div class="card-footer">
@@ -51,7 +51,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    @include('includes.currency', ['usdValue' => round($avg_product_price,2)])--}}
+                    @include('includes.currency', ['usdValue' => round($avg_product_price,2)])
                 </h1>
             </div>
             <div class="card-footer">
@@ -62,7 +62,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    @include('includes.currency', ['usdValue' => round($total_spent)])--}}
+                    @include('includes.currency', ['usdValue' => round($total_spent)])
                 </h1>
             </div>
             <div class="card-footer">
@@ -73,7 +73,7 @@
         <div class="card text-center">
             <div class="card-body">
                 <h1>
-{{--                    {{ $total_daily_purchases }}--}}
+                    {{ $total_daily_purchases }}
                 </h1>
             </div>
             <div class="card-footer">
@@ -84,12 +84,12 @@
         <div class="card text-center">
             <div class="card-body">
                 <table class="table table-borderless">
-{{--                    @foreach($total_earnings_coin as $coin => $total_sum)--}}
+                    @foreach($total_earnings_coin as $coin => $total_sum)
                         <tr>
-                            <td><span class="badge badge-primary">{{-- strtoupper(\App\Purchase::coinDisplayName($coin)) --}}</span></td>
-                            <td class="text-right">{{-- number_format(round($total_sum, 8), 8) --}}</td>
+                            <td><span class="badge badge-primary">{{ strtoupper(\App\Models\Purchase::coinDisplayName($coin)) }}</span></td>
+                            <td class="text-right">{{ number_format(round($total_sum, 8), 8) }}</td>
                         </tr>
-{{--                    @endforeach--}}
+                    @endforeach
                 </table>
             </div>
             <div class="card-footer">

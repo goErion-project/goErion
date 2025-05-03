@@ -1,28 +1,32 @@
 @extends('layouts.app')
 
+
+@section('title','Verify login')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
-                <div class="card-body">
-                    @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
-                    @endif
+    <div class="row mt-5 justify-content-center">
+        <div class="col-md-6 text-center">
+            @include('includes.flash.error')
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                        @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-                    </form>
-                </div>
+            <h2>Sign In Verify</h2>
+            <div class="form-group">
+                <label>Decrypt this message:</label>
+                <textarea name="decrypt_message" class="form-control" rows="10" style="resize: none;" readonly>{{{ session() -> get('login_encrypted_message') }}}</textarea>
+                <p class="text-muted">Decrypt this message and get validation string.</p>
             </div>
+            <form method="POST" action="{{ route('auth.verify.post') }}" class="form-inline">
+                {{ csrf_field() }}
+                <label for="validation_string">Validation string:</label>
+                <input type="text" class="form-control mx-2" required name="validation_string" id="validation_string"/>
+                <button class="btn btn-outline-success">Login</button>
+
+            </form>
+
+
+
         </div>
     </div>
-</div>
-@endsection
+
+
+@stop
