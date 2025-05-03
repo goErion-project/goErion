@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property mixed $created_at
+ * @property mixed $key
+ * @property int|mixed $user_id
  */
 class PGPKey extends Model
 {

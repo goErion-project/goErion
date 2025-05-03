@@ -16,6 +16,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property mixed $product_id
  * @property mixed $from_quantity
  * @property mixed $to_quantity
+ * @property mixed $id
  */
 class Shipping extends Model
 {

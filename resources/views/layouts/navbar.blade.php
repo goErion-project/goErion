@@ -18,7 +18,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <!-- Search Form -->
             <div class="d-flex justify-content-center flex-grow-1 mx-lg-4">
-                <form action="" method="" class="d-flex" role="search" style="max-width: 600px; width: 100%;">
+                <form action="{{ route('search') }}" method="POST" class="d-flex" role="search" style="max-width: 600px; width: 100%;">
                     @csrf
                     <div class="input-group">
                         <button class="btn btn-outline-dark bg-white hover:text-yellow-500 px-4" type="button"

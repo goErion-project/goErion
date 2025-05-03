@@ -3,7 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Exceptions\RequestException;
+use App\Marketplace\Utility\CurrencyConverter;
 use App\Traits\Adminable;
+use App\Traits\Displayable;
 use App\Traits\Uuids;
 use App\Traits\Vendorable;
 use Database\Factories\UserFactory;
@@ -14,6 +17,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @property mixed $referredBy
@@ -27,83 +33,159 @@ use Illuminate\Support\Carbon;
  * @property mixed $pgp_key
  * @property Carbon|mixed|null $created_at
  * @property int|mixed $id
+ * @property mixed $last_seen
+ * @property mixed $admin
+ * @property mixed $vendor
+ * @property bool|mixed $login_2fa
  * @method static where(string $string, string $username)
  */
 class User extends Authenticatable
 {
+    /**
+     * Traits used by User model
+     */
+    use Notifiable;
     use Uuids;
     use Vendorable;
     use Adminable;
-    /** @use HasFactory<UserFactory> */
+    use Displayable;
 
+    /**
+     * Permissions of the User
+     *
+     * @var array
+     */
+    public static array $permissions = ['categories', 'messages', 'users', 'products', 'logs', 'disputes', 'tickets', 'vendorpurchase', 'purchases'];
+    public static array $permissionsLong = [
+        'categories' =>'Categories',
+        'messages' => 'Messages',
+        'users' => 'Users',
+        'products' => 'Products',
+        'logs' => 'Logs',
+        'disputes' => 'Disputes',
+        'tickets' => 'Tickets',
+        'vendorpurchase' => 'Vendor Purchases',
+        'purchases' => 'Purchases'
+    ];
 
+    public $incrementing = false;
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password',
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var list<string>
+     * @var array
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
     /**
-     * @throws \Exception
+     * Returns User with only a username which is not persisted in db used for market conversations
+     *
+     * @return User
      */
-    public static function findByUsername(string $username)
+    public static function stub(): User
     {
-        $user = self::where('username', $username)->first();
-        if ($user === null)
-        {
-            throw new \Exception('User not found');
+        $stubUser = new User();
+        $stubUser -> username = 'MARKET MESSAGE';
+        return $stubUser;
+    }
+
+    /**
+     * Collection of users just buyers
+     *
+     * @return User[]|Collection
+     */
+    public static function buyers(): Collection|array
+    {
+        $allUsers = User::all();
+        $onlyBuyers = $allUsers -> diff(Admin::allUsers());
+        return $onlyBuyers -> diff(Vendor::allUsers());
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return User
+     */
+    public static function findByUsername(string $username): User {
+        $user = self::where('username',$username)->first();
+        if ($user == null ){
+            throw new NotFoundHttpException('User not found');
         }
         return $user;
     }
 
-    public function hasPGP(): bool
+    /**
+     * Overrides remember token setting during logout
+     * @param string $value
+     */
+    public function setRememberToken($value)
     {
-        return $this->pgp_key !== null;
-    }
-
-    public function pgpKeys(): HasMany
-    {
-        return $this->hasMany(PGPKey::class, 'user_id', 'id');
+        // do nothing
     }
 
     /**
-     * Get the attributes that should be cast.
+     * Determines if the user has pgp key set
      *
-     * @return array<string, string>
+     * @return bool
      */
-    protected function casts(): array
+    public function hasPGP(): bool
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this -> pgp_key != null;
     }
 
-    public function referredBy(): HasOne
+    /**
+     * Collection of old keys that are not in usage
+     *
+     * @return HasMany
+     */
+    public function pgpKeys(): HasMany
     {
-        return $this->hasOne(User::class, 'id', 'referredd_by');
+        return $this -> hasMany(PGPKey::class, 'user_id', 'id');
     }
 
-    public function hasReferredBy(): bool
+    /**
+     * Sets the login 2fa on or off
+     *
+     * @param $turn
+     * @throws RequestException
+     */
+    public function set2fa($turn): void
     {
-        return $this->referredBy !== null;
+        if($turn && $this -> pgp_key == null)
+            throw new RequestException("To turn on the Two Factor Authetication you will need to add PGP key first!");
+        else{
+            // set the login 2fa
+            $this -> login_2fa = $turn == true;
+            $this -> save();
+        }
     }
 
+    /**
+     * Return user's notifications
+     *
+     * @return HasMany
+     */
+//    public function notifications(): HasMany
+//    {
+//        return $this -> hasMany(\App\Notification::class);
+//    }
+
+    /**
+     * Return Product that a user has
+     *
+     * @return HasMany
+     */
     public function products(): HasMany
     {
         return $this -> hasMany(Product::class, 'user_id') -> where('active', true) -> orderByDesc('created_at');
@@ -120,14 +202,404 @@ class User extends Authenticatable
         return $this -> products() -> take($amount) -> get();
     }
 
-
-    public function memberSince(): string
+    /**
+     * Returns collection of whishes
+     *
+     * @return HasMany
+     */
+    public function whishes(): HasMany
     {
-        return date_format($this->created_at, 'M/Y');
+        return $this -> hasMany(Wishlist::class, 'user_id', 'id');
     }
 
-    public function getId()
+    /**
+     * Returns true if this user is whishing product
+     *
+     * @param Product $product
+     * @return bool
+     */
+    public function isWhishing(Product $product): bool
     {
+        return Wishlist::added($product, $this);
+    }
+
+    public function getMsgPublicKeyAttribute($value) {
+        return decrypt($value);
+    }
+    public function setMsgPublicKeyAttribute($value): void
+    {
+        $this->attributes['msg_public_key'] = encrypt($value);
+    }
+    public function getMsgPrivateKeyAttribute($value) {
+        return decrypt($value);
+    }
+    public function setMsgPrivateKeyAttribute($value): void
+    {
+        $this->attributes['msg_private_key'] = encrypt($value);
+    }
+
+    /**
+     * Returns string time how long passed since the user joined
+     *
+     * @return string
+     */
+    public function getJoinedAttribute(): string
+    {
+        return Carbon::parse($this -> created_at) -> diffForHumans();
+    }
+
+    /**
+     * Define the relationship of purchases
+     *
+     * @return HasMany
+     */
+    public function purchases(): HasMany
+    {
+        return $this -> hasMany(Purchase::class, 'buyer_id', 'id');
+    }
+
+    /**
+     * Define vendor relationship of purchases
+     *
+     * @return HasMany
+     */
+    public function sales(): HasMany
+    {
+        return $this -> hasMany(Purchase::class, 'vendor_id', 'id');
+    }
+
+
+    /**
+     * Returns the number of all purchases for this user or the number of purchases in a particular state
+     *
+     * @param string $state
+     * @return int
+     */
+    public function purchasesCount(string $state = ''): int
+    {
+        if(!array_key_exists($state, Purchase::$states))
+            return $this -> purchases() -> count();
+
+        return $this -> purchases() -> where('state', $state) -> count();
+    }
+
+//    /**
+//     * Set the bitcoin address
+//     *
+//     * @param $address
+//     * @param string $coin
+//     */
+//    public function setAddress($address, $coin = 'btc')
+//    {
+//        $newAddress = new Address;
+//        $newAddress -> address = $address;
+//        $newAddress -> user_id = $this -> id;
+//        $newAddress -> coin = $coin;
+//        $newAddress -> save();
+//    }
+
+//    /**
+//     * Relationship with the conversations where the user is sender
+//     *
+//     * @return HasMany
+//     */
+//    public function senderconversations(): HasMany
+//    {
+//        return $this -> hasMany(\App\Conversation::class, 'sender_id', 'id');
+//    }
+//
+//    /**
+//     * Relationship with the conversations where the user is sender
+//     *
+//     * @return HasMany
+//     */
+//    public function receiverconversations()
+//    {
+//        return $this -> hasMany(\App\Conversation::class, 'receiver_id', 'id');
+//    }
+
+   // /**
+//     * All conversations as Query Builder
+//     *
+//     * @return HasMany|\Illuminate\Database\Query\Builder\
+//     */
+//    public function conversations()
+//    {
+//        return Conversation::where('sender_id', $this -> id) -> orWhere('receiver_id', $this -> id);
+//    }
+
+//    /**
+//     * @return Collection
+//     */
+//    public function getConversationsAttribute()
+//    {
+//        return $this -> conversations() -> get();
+//    }
+
+//    /**
+//     * Return a collection of addresses
+//     *
+//     * @return HasMany
+//     */
+//    public function addresses()
+//    {
+//        return $this -> hasMany(\App\Address::class, 'user_id', 'id');
+//    }
+
+//    /**
+//     * Returns the most recent address of the given coin for this user
+//     *
+//     * @param $coin
+//     * @return \App\Address
+//     * @throws \Exception
+//     */
+//    public function coinAddress($coin)
+//    {
+//        if(!in_array($coin, array_keys(config('coins.coin_list'))))
+//            throw new RequestException('Purchase completion attempt unsuccessful, coin not suported by marketpalce');
+//
+//        $usersAddress = $this->addresses()->where('coin', $coin)->orderByDesc('created_at')->first();
+//        if(is_null($usersAddress) && $coin == 'btcm')
+//            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid public key for making multisig address!');
+//        if(is_null($usersAddress))
+//            throw new RequestException('User ' . $this -> username . ' doesn\'t have a valid address for sending funds! If this is user who referred you please notify him!');
+//        return $usersAddress;
+//    }
+
+//    /**
+//     * Returns how many addresses have user for this $coin
+//     *
+//     * @param $coin
+//     * @return int
+//     */
+//    public function numberOfAddresses($coin)
+//    {
+//        if(!in_array($coin, array_keys(config('coins.coin_list'))))
+//            throw new RequestException('There is no coin under that name!');
+//
+//        return $this -> addresses() -> where('coin', $coin) -> count();
+//    }
+
+
+    /**
+     * Returns registration date in format: Month/Year (Jan/2018)
+     *
+     * @return string
+     */
+    public function memberSince(): string
+    {
+        return date_format($this->created_at,"M/Y");
+    }
+
+ //   /**
+//     * Generate deposit addresses for this User
+//     */
+//    public function generateDepositAddresses(): void
+//    {
+//        $coinsClasses = config('coins.coin_list');
+//
+//        // vendor fee in usd
+//        $marketVendorFee =  config('marketplace.vendor_fee');
+//
+//        // for each supported coin generate an instance of the coin
+//        foreach ($coinsClasses as $short => $coinClass){
+//            $coinsService = new $coinClass();
+//            try {
+//                // Add a new deposit address
+//                $newDepositAddress = new VendorPurchase;
+//                $newDepositAddress->user_id = $this->id;
+//
+//                $newDepositAddress->address = $coinsService->generateAddress(['user' => $this->id]);
+//                $newDepositAddress->coin = $coinsService->coinLabel();
+//
+//                $newDepositAddress->save();
+//            }catch(\Exception $e){
+//                \Illuminate\Support\Facades\Log::error($e);
+//            }
+//        }
+//    }
+
+
+//    /**
+//     * One-to-many relationship with the deposit addresses
+//     *
+//     * @return HasMany
+//     */
+//    public function vendorPurchases(): HasMany
+//    {
+//        return $this -> hasMany(\App\VendorPurchase::class, 'user_id', 'id');
+//    }
+
+    /**
+     * Relationship with the User who referred $this user
+     *
+     * @return HasOne
+     */
+    public function referredBy(): HasOne
+    {
+        return $this -> hasOne(User::class, 'id', 'referred_by');
+    }
+
+    /**
+     * Returns if the user has referred by user
+     *
+     * @return bool
+     */
+    public function hasReferredBy(): bool
+    {
+        return $this -> referredBy != null;
+    }
+
+//    /**
+//     * Relationship with permissions, User can have 0..* permissions
+//     *
+//     * @return HasMany
+//     */
+//    public function permissions()
+//    {
+//        return $this -> hasMany(\App\Permission::class, 'user_id', 'id');
+//    }
+
+//    /**
+//     * Returns true if the user has any permission
+//     *
+//     * @return bool
+//     */
+//    public function hasPermissions()
+//    {
+//        return $this -> permissions() -> exists();
+//    }
+
+//    /**
+//     * Returns if the user has specific permission
+//     *
+//     * @param $name
+//     * @return bool
+//     */
+//    public function hasPermission($name)
+//    {
+//        return $this -> permissions() -> where('name', $name) -> exists();
+//    }
+
+//    /**
+//     * Deletes all old permissions and sets the new permissions
+//     *
+//     * @param array $permissions
+//     * @throws RequestException
+//     */
+//    public function setPermissions(array $permissions)
+//    {
+//        // check if there is forbidden permissions
+//        if(!empty(array_diff($permissions, self::$permissions)))
+//            throw new RequestException("There are forbidden permissions!");
+//
+//        try {
+//            DB::beginTransaction();
+//            // delete old permissions
+//            Permission::where('user_id', $this->id)->delete();
+//
+//            // insert new permissions
+//            foreach ($permissions as $inputPermission) {
+//                $newPermission = new Permission;
+//                $newPermission->name = $inputPermission;
+//                $newPermission->setUser($this);
+//                $newPermission->save();
+//            }
+//
+//            DB::commit();
+//            event(new UserPermissionsUpdated($this, auth()->user()->admin));
+//        }
+//        catch (\Exception $e){
+//            DB::rollBack();
+//            \Illuminate\Support\Facades\Log::error($e);
+//            throw new RequestException("Error happened with the database please try again!");
+//        }
+//    }
+
+//    /**
+//     * Relationship with the tickets
+//     *
+//     * @return HasMany
+//     */
+//    public function tickets()
+//    {
+//        return $this -> hasMany(Ticket::class, 'user_id', 'id');
+//    }
+
+//    /**
+//     * Collection of tickets replies
+//     *
+//     * @return HasMany
+//     */
+//    public function replies()
+//    {
+//        return $this -> hasMany(TicketReply::class, 'user_id', 'id');
+//    }
+
+
+    /**
+     * Relationship with the bans
+     *
+     * @return HasMany
+     */
+    public function bans(): HasMany
+    {
+        return $this->hasMany(Ban::class, 'user_id', 'id');
+    }
+
+    /**
+     * Returns bool if the user is banned
+     *
+     * @return bool
+     */
+    public function isBanned() : bool
+    {
+        if(!$this -> bans() ->exists()) return false;
+
+        // Find the ban sorted by time
+        $latestBan = $this->bans()->orderByDesc('until')->first();
+
+        // if the until time is greater than now
+        if(Carbon::parse($latestBan->until)->gte(Carbon::now()))
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Make a ban from now
+     *
+     * @param $days
+     */
+    public function ban($days): void
+    {
+        $newBan = new Ban;
+
+        if($this->bans()->exists())
+        {
+            $latestBan = $this->bans()->orderByDesc('until')->first();
+            if(Carbon::parse($latestBan->until)->lt(Carbon::now()->addDays($days)))
+                $newBan = $latestBan;
+        }
+
+
+        $newBan -> user_id = $this -> id;
+        $newBan -> until = Carbon::now()->addDays($days);
+        $newBan -> save();
+    }
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function getLocalCurrency(){
+        if (!CurrencyConverter::isEnabled()){
+            return 'USD';
+        }
+        return CurrencyConverter::getLocalCurrency();
+    }
+
+    public function getId(){
         return $this->id;
     }
 }

@@ -37,9 +37,9 @@
                 </div>
             </div>
         </form>
-        {{--    @if(\App\Marketplace\Utility\CurrencyConverter::isEnabled())--}}
-        {{--        @include('multicurrency::changeform')--}}
-        {{--    @endif--}}
+            @if(\App\Marketplace\Utility\CurrencyConverter::isEnabled())
+                @include('multicurrency::changeform')
+            @endif
         <h3 class="mt-4">Two Factor Authentication</h3>
         <hr>
         <div class="row">
@@ -48,8 +48,8 @@
             </div>
             <div class="col-md-6 text-right">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a href="" class="btn {{--  @if(auth() -> user() -> login_2fa == true)--}} btn-success {{-- @else --}}btn-outline-success {{--@endif--}}">On</a>
-                    <a href="" class="btn {{--  @if(auth() -> user() -> login_2fa == false)--}} btn-danger {{--@else--}} btn-outline-danger {{--@endif--}}">Off</a>
+                    <a href="" class="btn @if(auth() -> user() -> login_2fa == true) btn-success  @else btn-outline-success @endif">On</a>
+                    <a href="" class="btn   @if(auth() -> user() -> login_2fa == false) btn-danger @else btn-outline-danger @endif">Off</a>
                 </div>
 
             </div>
@@ -59,7 +59,7 @@
         <hr>
         <div class="row">
             <div class="col-md-12">
-                <input type="url" readonly class="form-control disabled" value="{{-- route('auth.signup', auth() -> user() -> referral_code) --}}">
+                <input type="url" readonly class="form-control disabled" value="{{route('auth.signup', auth() -> user() -> referral_code) }}">
                 <p class="text-muted">Paste this address to other users who wants to sign up on the market!</p>
             </div>
         </div>
@@ -69,7 +69,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form action="{{-- route('profile.vendor.address') --}}" method="POST">
+                <form action="{{ route('profile.vendor.address') }}" method="POST">
                     @csrf
                     <div class="form-row">
                         <div class="col-md-6">
@@ -91,7 +91,7 @@
                 <p class="text-muted">On this address you will receive payments from purchases! Funds will be sent to your most recent added address of coin!</p>
 
 
-                {{--            @if(auth() -> user() -> addresses -> isNotEmpty())--}}
+{{--                            @if(auth() -> user() -> addresses -> isNotEmpty())--}}
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>

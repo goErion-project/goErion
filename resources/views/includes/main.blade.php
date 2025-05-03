@@ -1,4 +1,4 @@
-@php use App\Vendor; @endphp
+@php use App\Models\Vendor; @endphp
 <div class="container font-sans">
     <div class="row">
         <div class="col-md-12">
@@ -44,9 +44,9 @@
             <hr>
         </div>
     </div>
-    {{--    @isModuleEnabled('FeaturedProducts')--}}
-    {{--    @include('featuredproducts::frontpagedisplay')--}}
-    {{--    @endisModuleEnabled--}}
+        @isModuleEnabled('FeaturedProducts')
+        @include('featuredproducts::frontpagedisplay')
+        @endisModuleEnabled
 
     <div class="row mt-4">
 
@@ -55,45 +55,45 @@
                 Top Vendors
             </h4>
             <hr>
-            {{--            @foreach(\App\Models\Vendor::topVendors() as $vendor)--}}
+                        @foreach(\App\Models\Vendor::topVendors() as $vendor)
             <table class="table table-borderless table-hover">
                 <tr>
                     <td>
-                        <a href="{{--route('vendor.show',$vendor)--}}"
-                           style="text-decoration: none; color:#212529">{{--$vendor->user->username--}}</a>
+                        <a href="{{route('vendor.show',$vendor) }}"
+                           style="text-decoration: none; color:#212529">{{$vendor->user->username}}</a>
                     </td>
                     <td class="text-right">
                                     <span
-                                        class="btn btn-sm {{--@if($vendor->vendor->experience >= 0) --}}btn-primary {{--@else--}} btn-danger {{--@endif --}}active"
-                                        style="cursor:default">Level {{--$vendor->getLevel()--}}</span>
+                                        class="btn btn-sm @if($vendor->vendor->experience >= 0) btn-primary @else btn-danger @endif active"
+                                        style="cursor:default">Level {{ $vendor->getLevel() }}</span>
 
                     </td>
                 </tr>
             </table>
-            {{--            @endforeach--}}
+                        @endforeach
         </div>
         <div class="col-md-4">
             <h4>
                 Latest orders
             </h4>
             <hr>
-            {{--            @foreach(\App\Purchase::latestOrders() as $order)--}}
+                        @foreach(\App\Models\Purchase::latestOrders() as $order)
             <table class="table table-borderless table-hover">
                 <tr>
                     <td>
                         <img class="img-fluid" height="23px" width="23px"
-                             src="{{-- asset('storage/'  . $order->offer->product->frontImage()->image) --}}"
-                             alt="{{-- $order->offer->product->name --}}">
+                             src="{{ asset('storage/'  . $order->offer->product->frontImage()->image) }}"
+                             alt="{{ $order->offer->product->name }}">
                     </td>
                     <td>
-                        {{--str_limit($order->offer->product->name,50,'...')--}}
+                        {{Illuminate\Support\Str::limit($order->offer->product->name,50,'...')}}
                     </td>
                     <td class="text-right">
-                        {{--$order->getSumLocalCurrency()}} {{$order->getLocalSymbol()--}}
+                        $order->getSumLocalCurrency() $order->getLocalSymbol()
                     </td>
                 </tr>
             </table>
-            {{--            @endforeach--}}
+                        @endforeach
         </div>
 
         <div class="col-md-4">
@@ -101,21 +101,21 @@
                 Rising vendors
             </h4>
             <hr>
-{{--            @foreach(Vendor::risingVendors() as $vendor)--}}
+            @foreach(\App\Models\Vendor::risingVendors() as $vendor)
                 <table class="table table-borderless table-hover">
                     <tr>
                         <td>
-                            <a href="{{--route('vendor.show',$vendor)--}}"
-                               style="text-decoration: none; color:#212529">{{--$vendor->user->username--}}</a>
+                            <a href="{{ route('vendor.show',$vendor) }}"
+                               style="text-decoration: none; color:#212529">$vendor->user->username </a>
                         </td>
                         <td class="text-right">
                                     <span
-                                        class="btn btn-sm {{--@if($vendor->vendor->experience >= 0)--}} btn-primary {{--@else--}} btn-danger {{--@endif--}} active"
-                                        style="cursor:default">Level {{--$vendor->getLevel()--}}</span>
+                                        class="btn btn-sm @if($vendor->vendor->experience >= 0) btn-primary @else btn-danger @endif active"
+                                        style="cursor:default">Level {{$vendor->getLevel()}}</span>
                         </td>
                     </tr>
                 </table>
-{{--            @endforeach--}}
+            @endforeach
         </div>
     </div>
 </div>

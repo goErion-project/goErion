@@ -198,8 +198,8 @@
                         </li>
                         <li>
                             <a class="dropdown-item bg-secondary-subtle rounded "
-                               href="#">
-                                Dashboard
+                               href="">
+                                Vendor
                             </a></li>
                     </ul>
                     @endauth

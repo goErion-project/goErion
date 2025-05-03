@@ -7,38 +7,53 @@
       <w>addimages</w>
       <w>addoffers</w>
       <w>addproduct</w>
+      <w>authetication</w>
       <w>autodelivery</w>
+      <w>btcm</w>
       <w>categ</w>
+      <w>confirmcanceled</w>
       <w>confirmclone</w>
       <w>confirmcode</w>
       <w>confirmdelete</w>
+      <w>confirmdelivered</w>
       <w>editprofile</w>
       <w>endhas</w>
       <w>endis</w>
       <w>endisroute</w>
       <w>endvendor</w>
       <w>featuredproducts</w>
+      <w>frontpagedisplay</w>
+      <w>hashid</w>
       <w>jcubes</w>
       <w>jswarning</w>
       <w>manualy</w>
       <w>markfeatured</w>
       <w>mesure</w>
+      <w>mutlisig</w>
       <w>navlink</w>
       <w>newimage</w>
       <w>newmessage</w>
       <w>offcanvas</w>
       <w>pofile</w>
       <w>randomword</w>
+      <w>receiverconversations</w>
       <w>referredd</w>
       <w>seigaiha</w>
       <w>sendcode</w>
       <w>sendmessage</w>
+      <w>setview</w>
+      <w>shiping</w>
       <w>shippings</w>
       <w>signout</w>
       <w>starrynight</w>
+      <w>strtoupper</w>
       <w>substract</w>
       <w>topnavbar</w>
       <w>vendorable</w>
+      <w>viewmessage</w>
+      <w>whish</w>
+      <w>whishes</w>
+      <w>whishing</w>
     </words>
   </dictionary>
 </component>

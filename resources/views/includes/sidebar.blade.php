@@ -18,7 +18,7 @@
     <div class="card-body">
         <h5 class="card-title">Categories</h5>
         <div class="list-group">
-            @include('includes.subcategories')
+            @include('includes.subcategories',['categories'=>$categories])
         </div>
     </div>
 </div>

@@ -17,6 +17,7 @@ use App\Models\DigitalProduct;
 use App\Models\Image;
 use App\Models\PhysicalProduct;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Models\Vendor;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -317,7 +318,7 @@ class VendorController extends Controller
     public function addDigitalShow(): Factory|\Illuminate\View\View
     {
         return view(
-            'profile.vendor.digital',
+            'profile.vendor.adddigital',
             [
                 'digitalProduct' => session('product_details') ?? new DigitalProduct()
             ]
@@ -625,60 +626,61 @@ class VendorController extends Controller
     }
 
 
-//    /**
-//     * Table with the sales
-//     */
-//    public function sales($state = ''): View|Application|Factory
-//    {
-//        $sales = auth() -> user() -> vendor -> sales() -> with('offer') -> paginate(20);
-//        if(array_key_exists($state, Purchase::$states))
-//            $sales = auth() -> user() -> vendor -> sales() -> where('state', $state) -> paginate(20);
-//
-//        // update unvisited sales
-//        auth() -> user() -> vendor -> sales() -> where('read', false) -> update(['read' => true]);
-//
-//        return view('profile.vendor.sales', [
-//            'sales' => $sales,
-//            'state' => $state
-//        ]);
-//    }
+    /**
+     * Table with the sales
+     */
+    public function sales($state = ''): View|Application|Factory
+    {
+        $sales = auth() -> user() -> vendor -> sales() -> with('offer') -> paginate(20);
+        if(array_key_exists($state, Purchase::$states))
+            $sales = auth() -> user() -> vendor -> sales() -> where('state', $state) -> paginate(20);
 
-//    /**
-//     * Return view for the sale
-//     *
-//     * @param Purchase $sale
-//     * @return Factory|\Illuminate\View\View
-//     */
-//    public function sale(Purchase $sale)
-//    {
-//        if(!$sale -> isAllowed())
-//            return abort(404);
-//
-//        return view('profile.vendor.sale', [
-//            'purchase' => $sale,
-//        ]);
-//    }
+        // update unvisited sales
+        auth() -> user() -> vendor -> sales() -> where('read', false) -> update(['read' => true]);
 
-///
+        return view('profile.vendor.sales', [
+            'sales' => $sales,
+            'state' => $state
+        ]);
+    }
 
-//    /**
-//     * Runs procedure for marking sale as sent
-//     *
-//     * @param Purchase $purchase
-//     * @return RedirectResponse
-//     */
-//    public function markAsSent(Purchase $sale)
-//    {
-//        try{
-//            $sale -> sent();
-//            session() -> flash('success', 'You have successfully marked sale as sent!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> route('profile.sales.single', $sale);
-//    }
+    /**
+     * Return view for the sale
+     *
+     * @param Purchase $sale
+     * @return Factory|\Illuminate\View\View
+     */
+    public function sale(Purchase $sale): Factory|\Illuminate\View\View
+    {
+        if (!$sale->isAllowed()) {
+            abort(404, 'Sale not found or not allowed.');
+        }
+
+        return view('profile.vendor.sale', [
+            'purchase' => $sale,
+        ]);
+    }
+
+
+    /**
+     * Runs procedure for marking sale as sent
+     *
+     * @param Purchase $sale
+     * @return RedirectResponse
+     * @throws \Throwable
+     */
+    public function markAsSent(Purchase $sale): RedirectResponse
+    {
+        try{
+            $sale -> sent();
+            session() -> flash('success', 'You have successfully marked sale as sent!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
+
+        return redirect() -> route('profile.sales.single', $sale);
+    }
 
     /**
      * Update profile description and background for vendor

@@ -34,6 +34,7 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property mixed $category_id
  * @property int|mixed $user_id
  * @property mixed $mesure
+ * @property mixed $feedback
  *
  * @method exists()
  * @method static findOrFail($id)
@@ -318,21 +319,23 @@ class Product extends Model
         }
     }
 
-//    /**
-//     * Relationship one to many with feedback
-//     *
-//     * @return HasMany
-//     */
-//    public function feedback() {
-//        return $this->hasMany(\App\Feedback::class, 'product_id', 'id');
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function hasFeedback() {
-//        return $this->feedback->isNotEmpty();
-//    }
+    /**
+     * Relationship one to many with feedback
+     *
+     * @return HasMany
+     */
+    public function feedback(): HasMany
+    {
+        return $this->hasMany(Feedback::class, 'product_id', 'id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function hasFeedback(): mixed
+    {
+        return $this->feedback->isNotEmpty();
+    }
 
     /**
      * Return string number with two decimals of the average rate
@@ -340,16 +343,17 @@ class Product extends Model
      * @param $type
      * @return string
      */
-//    public function avgRate($type) {
-//        if (!$this->hasFeedback())
-//            return '';
-//
-//        if (!in_array($type, Feedback::$rates))
-//            $type = 'quality_rate';
-//
-//        return number_format($this->feedback->avg($type), 2);
-//
-//    }
+    public function avgRate($type): string
+    {
+        if (!$this->hasFeedback())
+            return '';
+
+        if (!in_array($type, Feedback::$rates))
+            $type = 'quality_rate';
+
+        return number_format($this->feedback->avg($type), 2);
+
+    }
 
     /**
      * Return which view will be shown when you click next in product editing or adding
