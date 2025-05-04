@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Purchase\ProductDisputeNewMessageSent;
 use App\Exceptions\RedirectException;
 use App\Exceptions\RequestException;
 use App\Http\Requests\PGP\NewPGPKeyRequest;
 use App\Http\Requests\PGP\StorePGPRequest;
 use App\Http\Requests\Profile\BecomeVendorRequest;
+use App\Http\Requests\Profile\ChangeAddressRequest;
 use App\Http\Requests\Profile\ChangePasswordRequest;
+use App\Http\Requests\Profile\NewTicketMessageRequest;
+use App\Http\Requests\Profile\NewTicketRequest;
+use App\Http\Requests\Purchase\LeaveFeedbackRequest;
+use App\Http\Requests\Purchase\MakeDisputeRequest;
+use App\Http\Requests\Purchase\NewDisputeMessageRequest;
+use App\Marketplace\Cart;
+use App\Models\Dispute;
 use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\Ticket;
+use App\Models\TicketReply;
 use App\Models\Wishlist;
 use Defuse\Crypto\Exception\EnvironmentIsBrokenException;
 use Defuse\Crypto\Exception\WrongKeyOrModifiedCiphertextException;
@@ -17,6 +28,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -195,7 +207,7 @@ class ProfileController extends Controller
     public function becomeVendor(BecomeVendorRequest $request): RedirectResponse
     {
         try{
-            auth() -> user() -> becomeVendor( $request -> address);
+            auth() -> user() -> becomeVendor( $request ->input('address'));
             return redirect() -> route('profile.vendor');
         }
         catch (RedirectException $e){
@@ -243,42 +255,42 @@ class ProfileController extends Controller
     {
         return view('profile.wishlist');
     }
-//
-//    /**
-//     * Show the cart page
-//     *
-//     * @return Factory|View
-//     */
-//    public function cart()
-//    {
-//        return view('cart.index',[
-//            'items' => Cart::getCart() -> items(),
-//            'numberOfItems' => Cart::getCart()->numberOfItems(),
-//            'totalSum' => Cart::getCart() -> total(),
-//        ]);
-//    }
 
-//    /**
-//     * Add or edit item to cart
-//     *
-//     * @param NewItemRequest $request
-//     * @param Product $product
-//     * @return RedirectResponse
-//     */
-//    public function addToCart(NewItemRequest $request, Product $product)
-//    {
-//        try{
-//            $request -> persist($product);
-//            session() -> flash('success', 'You have added/changed an item!');
-//
-//            return redirect() -> route('profile.cart');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> back();
-//    }
+    /**
+     * Show the cart page
+     *
+     * @return Factory|View
+     */
+    public function cart(): Factory|View
+    {
+        return view('cart.index',[
+            'items' => Cart::getCart() -> items(),
+            'numberOfItems' => Cart::getCart()->numberOfItems(),
+            'totalSum' => Cart::getCart() -> total(),
+        ]);
+    }
+
+    /**
+     * Add or edit item to the cart
+     *
+     * @param NewItemRequest $request
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function addToCart(NewItemRequest $request, Product $product)
+    {
+        try{
+            $request -> persist($product);
+            session() -> flash('success', 'You have added/changed an item!');
+
+            return redirect() -> route('profile.cart');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
+
+        return redirect() -> back();
+    }
 
 //    /**
 //     * Clear cart and return back
@@ -455,162 +467,169 @@ class ProfileController extends Controller
         return redirect() -> route('profile.purchases.single', $purchase);
     }
 
-//    /**
-//     * Make Dispute for the given purchase
-//     *
-//     * @param MakeDisputeRequest $request
-//     * @param Purchase $purchase
-//     * @return RedirectResponse
-//     */
-//    public function makeDispute(MakeDisputeRequest $request, Purchase $purchase)
-//    {
-//        try{
-//            $purchase -> makeDispute($request -> message);
-//            session() -> flash('success', 'You have made a dispute for this purchase!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> back();
-//    }
+    /**
+     * Make Dispute for the given purchase
+     *
+     * @param MakeDisputeRequest $request
+     * @param Purchase $purchase
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function makeDispute(MakeDisputeRequest $request, Purchase $purchase): RedirectResponse
+    {
+        try{
+            $purchase -> makeDispute($request ->input( 'message'));
+            session() -> flash('success', 'You have made a dispute for this purchase!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
 
-//    /**
-//     * Send new dispute message to the dispute
-//     *
-//     * @param NewDisputeMessageRequest $request
-//     * @param Dispute $dispute
-//     * @return RedirectResponse
-//     */
-//    public function newDisputeMessage(NewDisputeMessageRequest $request, Dispute $dispute)
-//    {
-//        try{
-//            $dispute -> newMessage($request -> message);
-//            event(new ProductDisputeNewMessageSent($dispute->purchase,auth()->user()));
-//            session() -> flash('success', 'You have successfully posted new message for dispute!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> back();
-//    }
+        return redirect() -> back();
+    }
+
+    /**
+     * Send a new dispute message to the dispute
+     *
+     * @param NewDisputeMessageRequest $request
+     * @param Dispute $dispute
+     * @return RedirectResponse
+     */
+    public function newDisputeMessage(NewDisputeMessageRequest $request, Dispute $dispute): RedirectResponse
+    {
+        try{
+            $dispute -> newMessage($request ->input( 'message'));
+            event(new ProductDisputeNewMessageSent($dispute->purchase,auth()->user()));
+            session() -> flash('success', 'You have successfully posted new message for dispute!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
+
+        return redirect() -> back();
+    }
 
 
-//    /**
-//     * Leaving feedback
-//     *
-//     * @param LeaveFeedbackRequest $request
-//     * @param Purchase $purchase
-//     * @return RedirectResponse
-//     */
-//    public function leaveFeedback(LeaveFeedbackRequest $request, Purchase $purchase)
-//    {
-//        try{
-//            $request -> persist($purchase);
-//            session() -> flash('success', 'You have left your feedback!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> route('profile.purchases.single', $purchase);
-//    }
+    /**
+     * Leaving feedback
+     *
+     * @param LeaveFeedbackRequest $request
+     * @param Purchase $purchase
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function leaveFeedback(LeaveFeedbackRequest $request, Purchase $purchase): RedirectResponse
+    {
+        try{
+            $request -> persist($purchase);
+            session() -> flash('success', 'You have left your feedback!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
 
-//    /**
-//     * Change vendor's address
-//     *
-//     * @param ChangeAddressRequest $request
-//     * @return RedirectResponse
-//     */
-//    public function changeAddress(ChangeAddressRequest $request)
-//    {
-//        try{
-//            auth() -> user() -> setAddress($request -> address, $request -> coin);
-//            session() -> flash('success', 'You have successfully changed your address!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> back();
-//    }
+        return redirect() -> route('profile.purchases.single', $purchase);
+    }
 
-//    /**
-//     * Remove address of the logged user with given $id
-//     *
-//     * @param $id
-//     * @return RedirectResponse
-//     */
-//    public function removeAddress($id)
-//    {
-//        try{
-////            $address = Address::findOrFail($id);
-//            // Check for number of addresses for coin
-////            if(auth() -> user() -> numberOfAddresses($address -> coin) <= 1)
-////                throw new RequestException('You must have at least one address for each coin!');
-////
-//            auth() -> user() -> addresses() -> where('id', $id) -> delete();
-//            session() -> flash('success', 'You have successfully removed your address!');
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//        }
-//
-//        return redirect() -> back();
-//    }
+    /**
+     * Change vendor's address
+     *
+     * @param ChangeAddressRequest $request
+     * @return RedirectResponse
+     */
+    public function changeAddress(ChangeAddressRequest $request): RedirectResponse
+    {
+        try{
+            auth() -> user() -> setAddress($request ->input( 'address'), $request ->input( 'coin'));
+            session() -> flash('success', 'You have successfully changed your address!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
 
-//    /**
-//     * Showing all tickets
-//     *
-//     * @param Ticket|null $ticket
-//     * @return Factory|View
-//     */
-//    public function tickets(Ticket $ticket = null)
-//    {
-//        // Tickets
-//        if(!is_null($ticket)){
-//            $replies = $ticket -> replies() -> orderByDesc('created_at') -> paginate( config('marketplace.products_per_page'));
-//        }
-//        else {
-//            $replies = collect(); // empty collection
-//        }
-//
-//
-//        return view('profile.tickets', [
-//            'replies' => $replies,
-//            'ticket' => $ticket
-//        ]);
-//    }
+        return redirect() -> back();
+    }
 
-//    /**
-//     * Opens new Ticket form
-//     *
-//     * @param NewTicketRequest $request
-//     */
-//    public function newTicket(NewTicketRequest $request)
-//    {
-//        try {
-//            $newTicket = Ticket::openTicket($request -> title);
-//            TicketReply::postReply($newTicket, $request -> message);
+    /**
+     * Remove the address of the logged user with the given $ i d
+     *
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function removeAddress($id): RedirectResponse
+    {
+        try{
+//            $address = Address::findOrFail($id);
+            // Check for number of addresses for coin
+//            if(auth() -> user() -> numberOfAddresses($address -> coin) <= 1)
+//                throw new RequestException('You must have at least one address for each coin!');
 //
-//            return redirect() -> route('profile.tickets', $newTicket);
-//        }
-//        catch(RequestException $e){
-//            Log::error($e -> getMessage());
-//            session() -> flash('errormessage', $e -> getMessage());
-//        }
-//    }
+            auth() -> user() -> addresses() -> where('id', $id) -> delete();
+            session() -> flash('success', 'You have successfully removed your address!');
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+        }
 
-//    public function newTicketMessage(Ticket $ticket, NewTicketMessageRequest $request)
-//    {
-//        try{
-//            TicketReply::postReply($ticket, $request -> message);
-//        }
-//        catch (RequestException $e){
-//            Log::error($e);
-//            session() -> flash('errormessage', $e -> getMessage());
-//        }
-//        return redirect() -> back();
-//    }
+        return redirect() -> back();
+    }
+
+    /**
+     * Showing all tickets
+     *
+     * @param Ticket|null $ticket
+     * @return Factory|View
+     */
+    public function tickets(Ticket $ticket = null): Factory|View
+    {
+        // Tickets
+        if(!is_null($ticket)){
+            $replies = $ticket -> replies() -> orderByDesc('created_at') -> paginate( config('marketplace.products_per_page'));
+        }
+        else {
+            $replies = collect(); // empty collection
+        }
+
+
+        return view('profile.tickets', [
+            'replies' => $replies,
+            'ticket' => $ticket
+        ]);
+    }
+
+    /**
+     * Opens new Ticket form
+     *
+     * @param NewTicketRequest $request
+     * @return RedirectResponse|void
+     * @throws Throwable
+     */
+    public function newTicket(NewTicketRequest $request)
+    {
+        try {
+            $newTicket = Ticket::openTicket($request ->input( 'title'));
+            TicketReply::postReply($newTicket, $request ->input( 'message'));
+
+            return redirect() -> route('profile.tickets', $newTicket);
+        }
+        catch(RequestException $e){
+            Log::error($e -> getMessage());
+            session() -> flash('errormessage', $e -> getMessage());
+        }
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function newTicketMessage(Ticket $ticket, NewTicketMessageRequest $request): RedirectResponse
+    {
+        try{
+            TicketReply::postReply($ticket, $request ->input( 'message'));
+        }
+        catch (RequestException $e){
+            Log::error($e);
+            session() -> flash('errormessage', $e -> getMessage());
+        }
+        return redirect() -> back();
+    }
 }

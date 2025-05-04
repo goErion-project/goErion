@@ -101,7 +101,7 @@
             <div class="col-md-4 my-2">
                 <label for="countries_option">Ships to</label>
                 <select class="form-control" name="countries_option" id="countries_option">
-                    @foreach(\App\PhysicalProduct::$countriesOptions as $short => $optionName)
+                    @foreach(\App\Models\PhysicalProduct::$countriesOptions as $short => $optionName)
                         <option value="{{ $short }}" @if($short == $physicalProduct -> countries_option) selected @endif>{{ $optionName }}</option>
                     @endforeach
                 </select>

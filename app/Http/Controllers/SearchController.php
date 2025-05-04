@@ -24,30 +24,27 @@ class SearchController extends Controller
      */
     public function search(Request $request): RedirectResponse
     {
-        $searchQuery = $request->search == null ? '' : $request->search;
-        $orderMethods = [
-            'price_asc',
-            'price_desc',
-            'newest'
-        ];
-        if (!in_array($request->order_by, $orderMethods)) {
-            $orderBy = 'newest';
-        } else {
-            $orderBy = $request->order_by;
-        }
+        $searchQuery = $request->input('search', '');
+
+        $orderMethods = ['price_asc', 'price_desc', 'newest'];
+        $orderBy = in_array($request->input('order_by'), $orderMethods)
+            ? $request->input('order_by')
+            : 'newest';
+
         return redirect()->route('search.show', [
             'query' => $searchQuery,
-            'category' => $request->category,
-            'type' => $request->product_type,
-            'price_min' => $request->minimum_price,
-            'price_max' => $request->maximum_price,
-            'user' => $request->user,
+            'category' => $request->input('category'),
+            'type' => $request->input('product_type'),
+            'price_min' => $request->input('minimum_price'),
+            'price_max' => $request->input('maximum_price'),
+            'user' => $request->input('user'),
             'order_by' => $orderBy,
         ]);
     }
 
+
     /**
-     * Applying all search parameters from query string and returns a view
+     * Applying all search parameters from a query string and returns a view
      *
      * @param Request $request
      * @return Factory|View
@@ -130,7 +127,7 @@ class SearchController extends Controller
     }
 
     /**
-     * Accepts collection of products and orders them based on provided $orderQuery
+     * Accepts a collection of products and orders them based on provided $orderQuery
      *
      * @param $collection
      * @param $orderQuery

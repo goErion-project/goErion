@@ -5,6 +5,10 @@ namespace App\Http\Requests\Profile;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $username
+ * @property mixed $message
+ */
 class NewConversationRequest extends FormRequest
 {
     /**

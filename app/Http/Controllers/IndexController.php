@@ -75,7 +75,7 @@ class IndexController extends Controller
     }
 
     /**
-     * Show vendor page, 6 products, and 10 feedbacks
+     * Show the vendor page, 6 products, and 10 feedbacks
      *
      * @param Vendor $user
      * @return Factory|View

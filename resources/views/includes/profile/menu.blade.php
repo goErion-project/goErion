@@ -16,17 +16,17 @@
         <a href="{{ route('profile.sales') }}" class="nav-link @isroute('profile.sales') active @endisroute" data-toggle="pill">
             <i class="fas fa-receipt mr-2"></i>
             Sales
-{{--            @if(auth() -> user() -> vendor -> unreadSales() > 0)--}}
-                <span class="badge badge-warning">{{-- auth() -> user() -> vendor -> unreadSales() --}} new</span>
+            @if(auth() -> user() -> vendor -> unreadSales() > 0)
+                <span class="badge badge-warning">{{ auth() -> user() -> vendor -> unreadSales() }} new</span>
             @endif
         </a>
-{{--    @else--}}
+    @else
         <a href="{{route('profile.become') }}" class="nav-link @isroute('profile.become') active @endisroute" data-toggle="pill">
             <i class="far fa-address-card mr-2"></i>
             Become Vendor
         </a>
 
-{{--    @endif--}}
+    @endif
 
     <a href="{{ route('profile.wishlist') }}" class="nav-link @isroute('profile.wishlist') active @endisroute" data-toggle="pill">
         <i class="fas fa-heart mr-2"></i>
