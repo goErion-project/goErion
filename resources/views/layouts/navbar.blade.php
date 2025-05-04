@@ -45,7 +45,7 @@
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     @admin
                     <li class="nav-item @isroute('admin') active @endisroute">
-                        <a class="nav-link" href="{{ route('admin.index') }}">Admin Panel</a>
+                        <a class="nav-link btn bg-gray-700 text-gray-200" href="{{ route('admin.index') }}">Admin Panel</a>
                     </li>
                     @endadmin
                     @moderator
@@ -61,7 +61,7 @@
                 </ul>
             <ul class="navbar-nav">
                 @auth
-                    username: {{ auth()->user()->username }}
+                    <li class="text-gray-800">username: {{ auth()->user()->username }}</li>
                     <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
                         <a class="nav-link px-2 d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
                             <div class="rounded-circle bg-brown-600 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">

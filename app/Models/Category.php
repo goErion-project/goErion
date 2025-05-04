@@ -87,7 +87,7 @@ class Category extends Model
         foreach ($otherCategories as $categ)
         {
             if ($this->isAncestorOf($categ))
-                $numProducts += count($$categ->products);
+                $numProducts += count($categ->products);
         }
         return $numProducts;
     }
@@ -111,8 +111,7 @@ class Category extends Model
 
     public function childProducts(): LengthAwarePaginator
     {
-        $allAcceptedCategoriesIds = array_merge($this->id,
-            $this->allChildrenIds());
+        $allAcceptedCategoriesIds = array_merge([$this->id], $this->allChildrenIds());
         return Product::query()->where('active', true)
             ->whereIn('category_id', $allAcceptedCategoriesIds)->orderByDesc('created_at')
             ->paginate(config('marketplace.products_per_page'));
