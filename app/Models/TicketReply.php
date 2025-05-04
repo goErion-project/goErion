@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\Support\NewTicketReply;
 use App\Exceptions\RequestException;
 use App\Traits\Uuids;
 use Carbon\Carbon;

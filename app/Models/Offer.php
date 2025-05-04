@@ -60,10 +60,10 @@ class Offer extends Model
      *
      * @return HasMany
      */
-//    public function purchases(): HasMany
-//    {
-//        return $this -> hasMany(\App\Purchase::class, 'offer_id', 'id');
-//    }
+    public function purchases(): HasMany
+    {
+        return $this -> hasMany(Purchase::class, 'offer_id', 'id');
+    }
 
     /**
      * Converts price of the form to local price

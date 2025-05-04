@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Events\Purchase\ProductDisputeNewMessageSent;
 use App\Exceptions\RedirectException;
 use App\Exceptions\RequestException;
+use App\Http\Requests\Cart\MakePurchasesRequest;
+use App\Http\Requests\Cart\NewItemRequest;
 use App\Http\Requests\PGP\NewPGPKeyRequest;
 use App\Http\Requests\PGP\StorePGPRequest;
 use App\Http\Requests\Profile\BecomeVendorRequest;
@@ -185,7 +187,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Become a Vendor page that has a link for become a Vendor request
+     * Become a Vendor page that has a link to become a Vendor request
      *
      * @return Factory|View
      */
@@ -260,6 +262,8 @@ class ProfileController extends Controller
      * Show the cart page
      *
      * @return Factory|View
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public function cart(): Factory|View
     {
@@ -276,8 +280,9 @@ class ProfileController extends Controller
      * @param NewItemRequest $request
      * @param Product $product
      * @return RedirectResponse
+     * @throws Throwable
      */
-    public function addToCart(NewItemRequest $request, Product $product)
+    public function addToCart(NewItemRequest $request, Product $product): RedirectResponse
     {
         try{
             $request -> persist($product);
@@ -292,66 +297,71 @@ class ProfileController extends Controller
         return redirect() -> back();
     }
 
-//    /**
-//     * Clear cart and return back
-//     *
-//     * @return RedirectResponse
-//     */
-//    public function clearCart()
-//    {
-//        session() -> forget(Cart::SESSION_NAME);
-//        session() -> flash('success', 'You have cleared your cart!');
-//
-//        return redirect() -> back();
-//    }
+    /**
+     * Clear the cart and return back
+     *
+     * @return RedirectResponse
+     */
+    public function clearCart(): RedirectResponse
+    {
+        session() -> forget(Cart::SESSION_NAME);
+        session() -> flash('success', 'You have cleared your cart!');
 
-//    /**
-//     * Remove $product from cart
-//     *
-//     * @param Product $product
-//     * @return RedirectResponse
-//     */
-//    public function removeProduct(Product $product)
-//    {
-//        Cart::getCart() -> removeFromCart($product);
-//        session() -> flash('You have removed a product.');
-//
-//        return redirect() -> back();
-//    }
+        return redirect() -> back();
+    }
 
-//    /**
-//     * Return table with checkout
-//     *
-//     * @return Factory|View
-//     */
-//    public function checkout()
-//    {
-//        return view('cart.checkout', [
-//            'items' => Cart::getCart() -> items(),
-//            'totalSum' => Cart::getCart() -> total(),
-//            'numberOfItems' => Cart::getCart()->numberOfItems(),
-//
-//        ]);
-//    }
+    /**
+     * Remove $product from the cart
+     *
+     * @param Product $product
+     * @return RedirectResponse
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function removeProduct(Product $product): RedirectResponse
+    {
+        Cart::getCart() -> removeFromCart($product);
+        session() -> flash('You have removed a product.');
 
-//    /**
-//     * Commit purchases from cart
-//     *
-//     * @param MakePurchasesRequest $request
-//     * @return RedirectResponse
-//     */
-//    public function makePurchases(MakePurchasesRequest $request)
-//    {
-//        try{
-//            $request -> persist();
-//        }
-//        catch (RequestException $e){
-//            $e -> flashError();
-//            return redirect() -> back();
-//        }
-//
-//        return redirect() -> route('profile.purchases');
-//    }
+        return redirect() -> back();
+    }
+
+    /**
+     * Return table with checkout
+     *
+     * @return View
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function checkout(): View
+    {
+        return view('cart.checkout', [
+            'items' => Cart::getCart() -> items(),
+            'totalSum' => Cart::getCart() -> total(),
+            'numberOfItems' => Cart::getCart()->numberOfItems(),
+
+        ]);
+    }
+
+    /**
+     * Commit purchases from the cart
+     *
+     * @param MakePurchasesRequest $request
+     * @return RedirectResponse
+     * @throws Throwable
+     */
+    public function makePurchases(MakePurchasesRequest $request): RedirectResponse
+    {
+        try{
+            $request -> persist();
+        }
+        catch (RequestException $e){
+            $e -> flashError();
+            return redirect() -> back();
+        }
+
+        return redirect() -> route('profile.purchases');
+    }
 
     /**
      * Return all user's purchases
@@ -551,7 +561,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Remove the address of the logged user with the given $ i d
+     * Remove the address of the logged user with the given $ id
      *
      * @param $id
      * @return RedirectResponse

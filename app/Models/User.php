@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\Admin\UserPermissionsUpdated;
 use App\Exceptions\RequestException;
 use App\Marketplace\Utility\CurrencyConverter;
 use App\Traits\Adminable;

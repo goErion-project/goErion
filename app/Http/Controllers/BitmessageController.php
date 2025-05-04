@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\RequestException;
+use App\Http\Requests\Bitmessage\ConfirmAddressRequest;
+use App\Http\Requests\Bitmessage\SendConfirmationRequest;
 use App\Marketplace\Bitmessage\Bitmessage;
 use Illuminate\Config\Repository;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class BitmessageController extends Controller
 {
@@ -50,7 +56,13 @@ class BitmessageController extends Controller
             'user' => auth()->user()
         ]);
     }
-    public function sendConfirmation(SendConfirmationRequest $request){
+
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function sendConfirmation(SendConfirmationRequest $request): RedirectResponse
+    {
         if (!$this->enabled){
             session()->flash('errormessage','Bitmessage service disabled');
             return redirect()->back();
@@ -64,7 +76,12 @@ class BitmessageController extends Controller
         return redirect()->back();
     }
 
-    public function confirmAddress(ConfirmAddressRequest $request){
+    /**
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function confirmAddress(ConfirmAddressRequest $request): RedirectResponse
+    {
         try{
             $request->persist();
         } catch (RequestException $e){

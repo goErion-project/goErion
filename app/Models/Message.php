@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Storage;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Random\RandomException;
 use SodiumException;
 
 /**
@@ -288,8 +289,7 @@ class Message extends Model
      * @param User $receiver
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
-     * @throws RandomException
-     * @throws RequestException
+     * @throws RequestException|RandomException
      */
     public function setContent($content,User $sender ,User $receiver): void
     {

@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Jobs\BitmessageNotify;
+
 /**
  * @method notifications()
  */
