@@ -29,7 +29,8 @@
         "predis/predis": "^2.3",
         "singpolyma/openpgp-php": "^0.7.0",
         "symfony/intl": "^7.2",
-        "webpatser/laravel-uuid": "^4.0"
+        "webpatser/laravel-uuid": "^4.0",
+        "ext-bcmath": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",

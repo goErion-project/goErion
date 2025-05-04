@@ -36,9 +36,11 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property mixed $mesure
  * @property mixed $feedback
  * @property mixed $user
+ * @property int|mixed $featured
  *
  * @method exists()
  * @method static findOrFail($id)
+ * @method static count()
  */
 class Product extends Model
 {

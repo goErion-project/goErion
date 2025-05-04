@@ -18,7 +18,7 @@ interface Coin
     function generateAddress(array $parameters = []): string;
 
     /**
-     * Returns the balance of the addresses under the account defined  by 'account' key in $parameters
+     * Returns the balance of the addresses under the account defined by 'account' key in $parameters
      *
      * @param array $parameters
      * @return float
@@ -28,24 +28,22 @@ interface Coin
     /**
      * Send amount from account to address
      *
-     * @param string $fromAddress
      * @param string $toAddress
      * @param float $amount
      * @return mixed
      * @throws \Exception
      */
-    function sendToAddress(string $toAddress, float $amount);
+    function sendToAddress(string $toAddress, float $amount): mixed;
 
 
     /**
-     * Send amount from account to addresses ith amounts
+     * Send amount from the account to addresses with amounts
      *
-     * @param string $fromAddress
-     * @param string $addressesAmounts [[ 'address' => 1.01 ], [ 'address2' => 2.02 ]]
+     * @param array $addressesAmounts [[ 'address' => 1.01 ], [ 'address2' => 2.02 ]]
      * @return mixed
      * @throws \Exception
      */
-    function sendToMany(array $addressesAmounts);
+    function sendToMany(array $addressesAmounts): mixed;
 
     /**
      * Converts from the amount USD to the amount of the coin
@@ -53,7 +51,7 @@ interface Coin
      * @param float $usd amount of the usd
      * @return float amount of the coin
      */
-    function usdToCoin( $usd ) : float;
+    function usdToCoin( float $usd ) : float;
 
     /**
      * Three characters long text representation of the coin

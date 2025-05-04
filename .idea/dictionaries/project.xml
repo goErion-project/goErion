@@ -7,10 +7,12 @@
       <w>addimages</w>
       <w>addoffers</w>
       <w>addproduct</w>
+      <w>addres</w>
       <w>administraotr</w>
       <w>authetication</w>
       <w>autodelivery</w>
       <w>btcm</w>
+      <w>caluclator</w>
       <w>cancelation</w>
       <w>categ</w>
       <w>confirmcanceled</w>
@@ -18,6 +20,7 @@
       <w>confirmcode</w>
       <w>confirmdelete</w>
       <w>confirmdelivered</w>
+      <w>cryptonote</w>
       <w>detailedsearch</w>
       <w>editprofile</w>
       <w>endhas</w>
@@ -27,8 +30,12 @@
       <w>engouh</w>
       <w>featuredproducts</w>
       <w>frontpagedisplay</w>
+      <w>getaddress</w>
+      <w>getbalance</w>
+      <w>getheight</w>
       <w>hashid</w>
       <w>jcubes</w>
+      <w>jsonrpc</w>
       <w>jswarning</w>
       <w>listcategories</w>
       <w>manualy</w>
@@ -36,11 +43,15 @@
       <w>markfeatured</w>
       <w>messagekey</w>
       <w>mesure</w>
+      <w>monero</w>
+      <w>moneroj</w>
       <w>mutlisig</w>
       <w>navlink</w>
+      <w>newaccount</w>
       <w>newimage</w>
       <w>newmessage</w>
       <w>offcanvas</w>
+      <w>piconero</w>
       <w>pofile</w>
       <w>pramas</w>
       <w>qutoed</w>
@@ -60,6 +71,7 @@
       <w>stringinfied</w>
       <w>strtoupper</w>
       <w>substract</w>
+      <w>tacoshi</w>
       <w>topnavbar</w>
       <w>vendorable</w>
       <w>viewmessage</w>

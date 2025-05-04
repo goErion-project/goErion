@@ -42,6 +42,9 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property null $status_notification
  * @property mixed $dispute
  * @property mixed $value_sum
+ * @property mixed|string $address
+ * @property mixed $dispute_id
+ * @method static count()
  */
 class Purchase extends Model
 {
@@ -422,7 +425,7 @@ class Purchase extends Model
      */
     public function isDisputed(): bool
     {
-        return $this -> state == 'disputed' && Dispute::where('id', $this -> dispute_id) -> exists();
+        return $this -> state == 'disputed' && Dispute::query()->where('id', $this -> dispute_id) -> exists();
     }
 
     /**
@@ -442,7 +445,7 @@ class Purchase extends Model
      * @param Dispute $dispute
      * @return mixed
      */
-    public function setDispute(Dispute $dispute)
+    public function setDispute(Dispute $dispute): mixed
     {
         return $this -> dispute_id = $dispute -> id;
     }
@@ -452,9 +455,9 @@ class Purchase extends Model
      *
      * @return HasOne
      */
-    public function dispute()
+    public function dispute(): HasOne
     {
-        return $this -> hasOne(\App\Dispute::class, 'id', 'dispute_id');
+        return $this -> hasOne(Dispute::class, 'id', 'dispute_id');
     }
 
     /**
