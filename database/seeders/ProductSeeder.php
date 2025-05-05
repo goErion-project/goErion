@@ -17,7 +17,7 @@ use Illuminate\Database\Seeder;
 class ProductSeeder extends Seeder
 {
     private array $imagesArray = [];
-    private $fakerFactory;
+    private \Faker\Generator $fakerFactory;
 
     /**
      * How many products to create
@@ -55,38 +55,38 @@ class ProductSeeder extends Seeder
          */
         $this->command->info('Creating categories...');
         $drinks = new Category();
-        $drinks -> name = 'Drinks';
+        $drinks -> name = 'Electronics';
         $drinks -> save();
 
         // first level categories
         $nonAlchoholic = new Category;
-        $nonAlchoholic -> name = 'Non-Alcoholic';
+        $nonAlchoholic -> name = 'Laptops';
         $nonAlchoholic -> parent_id = $drinks -> id;
         $nonAlchoholic -> save();
 
         $alcoholic = new Category;
-        $alcoholic -> name = 'Alcoholic';
+        $alcoholic -> name = 'Phones';
         $alcoholic -> parent_id = $drinks -> id;
         $alcoholic -> save();
 
         // second level categories
         $beer = new Category;
-        $beer -> name = 'Beer';
+        $beer -> name = 'Radios';
         $beer -> parent_id = $alcoholic -> id;
         $beer -> save();
 
         $vine = new Category;
-        $vine -> name = 'Vine';
+        $vine -> name = 'Tvs';
         $vine -> parent_id = $alcoholic -> id;
         $vine -> save();
 
         $sodas = new Category;
-        $sodas -> name = 'Sodas';
+        $sodas -> name = 'Computers';
         $sodas -> parent_id = $nonAlchoholic -> id;
         $sodas -> save();
 
         $juices = new Category;
-        $juices -> name = 'Juices';
+        $juices -> name = 'Monitors';
         $juices -> parent_id = $nonAlchoholic -> id;
         $juices -> save();
 

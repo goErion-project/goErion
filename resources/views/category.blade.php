@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 col-sm-12 bg-gray-500 rounded-3 text-dark border-gray-700 shadow-sm px-0">
             @include('includes.sidebar')
         </div>
         <div class="col-md-9">

@@ -89,12 +89,12 @@
                     <div class="col-md-4">
                         Panel Permissions
 
-                        @foreach(\App\User::$permissions as $permission)
+                        @foreach(\App\Models\User::$permissions as $permission)
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" @if($user -> hasPermission($permission)) checked @endif name="permissions[]" type="checkbox" value="{{ $permission }}"
                                            id="moderatorCheck">
-                                    {{ \App\User::$permissionsLong[$permission] }}
+                                    {{ \App\Models\User::$permissionsLong[$permission] }}
                                 </label>
                             </div>
                         @endforeach

@@ -1,14 +1,28 @@
-@foreach($categories as $cat)
-    <div class="category card rounded mb1 bg-gray-500">
-        <a href="{{ route('category.show', $cat) }}" class="list-group-item category @if(isset($category) &&
- $cat -> isAncestorOf(optional($category))) active @endif  align-items-center rounded-0 list-group-item-action d-flex justify-content-between">
-            {{ $cat -> name }}
-            <span class="badge badge-warning badge-pill">{{ $cat -> num_products }}</span>
-        </a>
-        @if($cat -> children -> isNotEmpty())
-            <div class="pl-3 subcategories bg-gray-500">
-                @include('includes.subcategories', ['categories' => $cat -> children])
+<ul class="dropdown-menu list-group-flush rounded-bottom rounded mt-5"
+    style="min-width: 350px;">
+    @foreach($categories as $category)
+        <li class="dropdown-item-group">
+            <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item hover:bg-yellow-500 rounded m-1">
+                <a href="{{ route('category.show', $category) }}" class="text-decoration-none text-dark">
+                    {{ $category->name }}
+                </a>
+                @if($category->children->isNotEmpty())
+                    <span class="badge text-bg-secondary">{{ $category -> num_products }}</span>
+                    <i class="fas fa-chevron-right ms-2"></i>
+                @endif
             </div>
-        @endif
-    </div>
-@endforeach
+            @if($category->children->isNotEmpty())
+                <ul class="dropdown-menu dropdown-submenu rounded-3">
+                    @foreach($category->children as $child)
+                        <li>
+                            <a class="dropdown-item py-3 hover:bg-yellow-500 rounded" href="{{ route('category.show', $child) }}">
+                                {{ $child->name }}
+                                <span class="badge text-bg-secondary">{{ $child -> num_products }}</span>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+        </li>
+    @endforeach
+</ul>

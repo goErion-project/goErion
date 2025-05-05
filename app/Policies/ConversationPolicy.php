@@ -15,11 +15,15 @@ class ConversationPolicy
      *
      * @param $user
      * @param $ability
-     * @return bool
+     * @return bool|null
      */
-    public function before($user, $ability): bool
+    public function before($user, $ability): bool|null
     {
-        if($user -> isAdmin()) return true;
+        if($user -> isAdmin())
+        {
+            return true;
+        }
+        return null;
     }
 
     /**

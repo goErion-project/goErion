@@ -35,9 +35,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('banned', [ProfileController::class,'banned'])
         ->name('profile.banned');
     Route::middleware(['is_banned']) -> group(function(){
-//        include 'profile.php';  // the actual file for routing profile not for outside is for testing
+        include 'profile.php';  // the actual file for routing profile not for outside is for testing
     });
-    include 'profile.php';
 });
 
 // Home route

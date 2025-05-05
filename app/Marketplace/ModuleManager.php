@@ -2,7 +2,8 @@
 
 namespace App\Marketplace;
 
-use Module;
+
+use Nwidart\Modules\Facades\Module;
 
 class ModuleManager
 {

@@ -49,9 +49,13 @@ class Category extends Model
         return $ancestorsCollection->reverse();
     }
 
-    public function getChildrenAttribute(): Collection
+//    public function getChildrenAttribute(): Collection
+//    {
+//        return self::query()->where('parent_id',$this->id)->get();
+//    }
+    public function children(): HasMany
     {
-        return self::query()->where('parent_id',$this->id)->get();
+        return $this->hasMany(self::class, 'parent_id');
     }
 
     public function products(): HasMany

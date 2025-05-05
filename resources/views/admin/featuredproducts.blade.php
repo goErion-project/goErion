@@ -6,5 +6,4 @@
     @include('featuredproducts::featuredproductsview')
     @endisModuleEnabled
 
-
-@stop
+@endsection

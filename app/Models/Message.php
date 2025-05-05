@@ -176,17 +176,24 @@ class Message extends Model
         return $this -> sender_id == null;
     }
 
-    public function getReceiver(): User{
-        return User::query()->findOrFail($this->receiver_id);
+    public function getReceiver(): User
+    {
+        if ($this->receiver_id)
+            return User::query()->findOrFail($this->receiver_id);
+
+        // Return a stub user if it is not selected
+        return User::stub(); // ← this may be returning null or something unexpected
     }
-    public function getSender(): User{
-        if($this -> sender_id)
+
+    public function getSender(): User
+    {
+        if ($this->sender_id)
             return User::query()->findOrFail($this->sender_id);
 
         // Return a stub user if it is not selected
-        return User::stub();
-
+        return User::stub(); // ← this may be returning null or something unexpected
     }
+
 
     public function getContentSenderAttribute($value){
         return decrypt($value);

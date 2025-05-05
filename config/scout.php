@@ -12,11 +12,11 @@ return [
     | to the search service. You should adjust this based on your needs.
     |
     | Supported: "algolia", "meilisearch", "typesense",
-    |            "database", "collection", "null"
+    | "database", "collection", "null", "elastic"
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'algolia'),
+    'driver' => env('SCOUT_DRIVER', 'elasticsearch'),  // Change to "elastic" for Elasticsearch
 
     /*
     |--------------------------------------------------------------------------
@@ -43,6 +43,7 @@ return [
     */
 
     'queue' => env('SCOUT_QUEUE', false),
+
 
     /*
     |--------------------------------------------------------------------------
@@ -88,74 +89,39 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Identify User
+    | Elasticsearch Configuration
     |--------------------------------------------------------------------------
     |
-    | This option allows you to control whether to notify the search engine
-    | of the user performing the search. This is sometimes useful if the
-    | engine supports any analytics based on this application's users.
-    |
-    | Supported engines: "algolia"
+    | Configure the Elasticsearch connection settings below.
     |
     */
 
-    'identify' => env('SCOUT_IDENTIFY', false),
+    'elastic' => [
+        'client' => [
+            'hosts' => [
+                env('ELASTICSEARCH_HOST', 'http://localhost:9200'),  // Ensure this is correct for your setup
+            ],
+        ],
+        'index' => env('SCOUT_ELASTICSEARCH_INDEX', 'products'),  // Default index name for your data
+    ],
 
     /*
     |--------------------------------------------------------------------------
-    | Algolia Configuration
+    | Other Engine Configurations
     |--------------------------------------------------------------------------
     |
-    | Here you may configure your Algolia settings. Algolia is a cloud hosted
-    | search engine which works great with Scout out of the box. Just plug
-    | in your application ID and admin API key to get started searching.
-    |
+    | Below are configurations for other search engines like Algolia, Meilisearch, Typesense, etc.
     */
 
     'algolia' => [
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
-        'index-settings' => [
-            // 'users' => [
-            //     'searchableAttributes' => ['id', 'name', 'email'],
-            //     'attributesForFaceting'=> ['filterOnly(email)'],
-            // ],
-        ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Meilisearch Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your Meilisearch settings. Meilisearch is an open
-    | source search engine with minimal configuration. Below, you can state
-    | the host and key information for your own Meilisearch installation.
-    |
-    | See: https://www.meilisearch.com/docs/learn/configuration/instance_options#all-instance-options
-    |
-    */
 
     'meilisearch' => [
         'host' => env('MEILISEARCH_HOST', 'http://localhost:7700'),
         'key' => env('MEILISEARCH_KEY'),
-        'index-settings' => [
-            // 'users' => [
-            //     'filterableAttributes'=> ['id', 'name', 'email'],
-            // ],
-        ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Typesense Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your Typesense settings. Typesense is an open
-    | source search engine using minimal configuration. Below, you will
-    | state the host, key, and schema configuration for the instance.
-    |
-    */
 
     'typesense' => [
         'client-settings' => [
@@ -164,45 +130,8 @@ return [
                 [
                     'host' => env('TYPESENSE_HOST', 'localhost'),
                     'port' => env('TYPESENSE_PORT', '8108'),
-                    'path' => env('TYPESENSE_PATH', ''),
-                    'protocol' => env('TYPESENSE_PROTOCOL', 'http'),
                 ],
             ],
-            'nearest_node' => [
-                'host' => env('TYPESENSE_HOST', 'localhost'),
-                'port' => env('TYPESENSE_PORT', '8108'),
-                'path' => env('TYPESENSE_PATH', ''),
-                'protocol' => env('TYPESENSE_PROTOCOL', 'http'),
-            ],
-            'connection_timeout_seconds' => env('TYPESENSE_CONNECTION_TIMEOUT_SECONDS', 2),
-            'healthcheck_interval_seconds' => env('TYPESENSE_HEALTHCHECK_INTERVAL_SECONDS', 30),
-            'num_retries' => env('TYPESENSE_NUM_RETRIES', 3),
-            'retry_interval_seconds' => env('TYPESENSE_RETRY_INTERVAL_SECONDS', 1),
-        ],
-        // 'max_total_results' => env('TYPESENSE_MAX_TOTAL_RESULTS', 1000),
-        'model-settings' => [
-            // User::class => [
-            //     'collection-schema' => [
-            //         'fields' => [
-            //             [
-            //                 'name' => 'id',
-            //                 'type' => 'string',
-            //             ],
-            //             [
-            //                 'name' => 'name',
-            //                 'type' => 'string',
-            //             ],
-            //             [
-            //                 'name' => 'created_at',
-            //                 'type' => 'int64',
-            //             ],
-            //         ],
-            //         'default_sorting_field' => 'created_at',
-            //     ],
-            //     'search-parameters' => [
-            //         'query_by' => 'name'
-            //     ],
-            // ],
         ],
     ],
 

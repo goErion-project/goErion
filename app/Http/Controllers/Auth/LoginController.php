@@ -43,7 +43,7 @@ class LoginController extends Controller
         auth()->logout();
         session()->flush();
         return redirect()->route('home')
-            ->with('success message', 'You have been logged out');
+            ->with('success_message', 'You have been logged out');
     }
 
     public function showVerify(): \Illuminate\Contracts\View\View|Application|Factory

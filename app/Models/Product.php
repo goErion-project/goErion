@@ -45,7 +45,7 @@ use Psr\Container\NotFoundExceptionInterface;
 class Product extends Model
 {
     use Uuids;
-    use Searchable;
+//    use Searchable;
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -56,10 +56,21 @@ class Product extends Model
         'name' => 'name',
     ];
 
+    protected $casts = [
+        'featured' => 'boolean',
+    ];
+
+
     public static function frontPage(): LengthAwarePaginator
     {
         return self::query()->where('active', 1)->paginate(config('marketplace.products_per_page'));
     }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('featured', true);
+    }
+
 
     public function toSearchableArray(): array
     {
@@ -83,7 +94,7 @@ class Product extends Model
         {
             $array['type'] = 'physical';
         }
-        if ($this->isDigital)
+        if ($this->isDigital())
         {
             $array['type'] = 'digital';
         }

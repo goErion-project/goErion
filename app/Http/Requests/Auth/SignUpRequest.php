@@ -65,11 +65,11 @@ class SignUpRequest extends FormRequest
      */
     public function persist(): void
     {
-        //check if there is referral id
+        //check if there is a referral id
         $referred_by = null;
       if($this->refid !== null)
       {
-          $referred_by = User::where('referral_code','=', $this->refid,'and')->first();
+          $referred_by = User::where('referral_code', $this->refid)->first();
       }
 
       //create users public and private RSA keys

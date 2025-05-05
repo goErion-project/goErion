@@ -14,32 +14,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
+{{--        <!-- Search Form -->--}}
+        @include('layouts.search')
+{{--        <!-- Search Form -->--}}
+
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Search Form -->
-            <div class="d-flex justify-content-center flex-grow-1 mx-lg-4">
-                <form action="{{ route('search') }}" method="POST" class="d-flex" role="search" style="max-width: 600px; width: 100%;">
-                    @csrf
-                    <div class="input-group">
-                        <button class="btn btn-outline-dark bg-white hover:text-yellow-500 px-4" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            All
-                        </button>
-                        <ul class="dropdown-menu bg-white">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
-                        <input class="form-control" type="text" placeholder="Search" id="search"
-                               name="Search" value="{{app('request')->input('query')}}">
-                        <button class="btn btn-warning px-4" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
             <!-- Navigation Items -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -53,15 +33,9 @@
                         <a class="nav-link" href="{{ route('admin.index') }}">Moderator Panel</a>
                     </li>
                     @endmoderator
-                    @auth
-                        <li class="nav-item @isroute('profile.tickets') active @endisroute">
-                            <a class="nav-link" href="{{ route('profile.tickets') }}">Support</a>
-                        </li>
-                    @endauth
                 </ul>
             <ul class="navbar-nav">
                 @auth
-                    <li class="text-gray-800">username: {{ auth()->user()->username }}</li>
                     <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
                         <a class="nav-link px-2 d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
                             <div class="rounded-circle bg-brown-600 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">

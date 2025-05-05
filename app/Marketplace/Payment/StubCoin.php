@@ -43,6 +43,11 @@ class StubCoin implements Coin
         return 'stb';
     }
 
+    /**
+     * @param string $toAddress
+     * @param float $amount
+     * @return mixed
+     */
     function sendToAddress(string $toAddress, float $amount): mixed
     {
         Log::info("Sending to address " . $toAddress . " to amount " . $amount);

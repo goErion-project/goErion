@@ -44,9 +44,9 @@
             <hr>
         </div>
     </div>
-        @isModuleEnabled('FeaturedProducts')
-        @include('featuredproducts::frontpagedisplay')
-        @endisModuleEnabled
+    @isModuleEnabled('FeaturedProducts')
+    @include('featuredproducts::frontpagedisplay')
+    @endisModuleEnabled
 
     <div class="row mt-4">
 

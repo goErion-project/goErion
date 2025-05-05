@@ -9,69 +9,8 @@
                style="min-height: 64px; min-width: 350px;">
                 <i class="fas fa-list-ul me-4 icon-xl"></i> Categories <i class="fas fa-chevron-right ms-4 rotate-icon icon-xl"></i>
             </a>
-
-
-            <ul class="dropdown-menu list-group-flush rounded-bottom rounded mt-5"
-                style="min-width: 350px;">
-                <li class="dropdown-item-group">
-                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
-                        <span>Electronics</span>
-                        <i class="fas fa-chevron-right ms-2 "></i>
-                    </div>
-                    <ul class="dropdown-menu dropdown-submenu rounded-3">
-                        <li><a class="dropdown-item py-3" href="#">Computers</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Smartphones</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Cameras</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-item-group">
-                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
-                        <span>Clothing</span>
-                        <i class="fas fa-chevron-right ms-2"></i>
-                    </div>
-                    <ul class="dropdown-menu dropdown-submenu rounded-3">
-                        <li><a class="dropdown-item py-3" href="#">Men's</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Women's</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Kids</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-item-group">
-                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
-                        <span>Home & Kitchen</span>
-                        <i class="fas fa-chevron-right ms-2"></i>
-                    </div>
-                    <ul class="dropdown-menu dropdown-submenu rounded-3">
-                        <li><a class="dropdown-item py-3" href="#">Appliances</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Furniture</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Cookware</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-item-group">
-                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
-                        <span>Books</span>
-                        <i class="fas fa-chevron-right ms-2"></i>
-                    </div>
-                    <ul class="dropdown-menu dropdown-submenu">
-                        <li><a class="dropdown-item py-3" href="#">Fiction</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Non-Fiction</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Educational</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-item-group">
-                    <div class="d-flex align-items-center justify-content-between py-3 px-3 hover-item">
-                        <span>Toys</span>
-                        <i class="fas fa-chevron-right ms-2"></i>
-                    </div>
-                    <ul class="dropdown-menu dropdown-submenu rounded-3">
-                        <li><a class="dropdown-item py-3" href="#">Action Figures</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Board Games</a></li>
-                        <li><a class="dropdown-item py-3" href="#">Educational Toys</a></li>
-                    </ul>
-                </li>
-            </ul>
+            @include('includes.subcategories',['categories'=>$categories])
         </div>
-
-
 {{--        <!-- Mobile Toggle Button -->--}}
         <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent" aria-controls="navbarContent"
@@ -82,6 +21,7 @@
         {{-- Collapsible Content --}}
         <div class="collapse navbar-collapse bg-gray-950 rounded-end-3" id="navbarContent">
 {{--            <!-- Nav Links -->--}}
+
         {{-- home--}}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
@@ -111,21 +51,23 @@
                     <div class="dropdown">
                         <button class="btn py-3 text-white hover:text-yellow-500 px-4" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-comment-dots me-2 icon-lg"></i> Messages
-
                         </button>
                         @auth
-                        <ul class="dropdown-menu  rounded p-1">
+                        <ul class="dropdown-menu rounded p-1">
                             <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
-                                   href="{{ route('profile.index') }}">
-                                    Profile
+                                <a class="dropdown-item bg-secondary-subtle rounded fw-bold hover:bg-yellow-500"
+                                   href="{{ route("profile.messages") }}">
+                                    Messages
                                 </a>
                             </li>
+
                             <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded "
-                                   href="#">
-                                    Dashboard
-                                </a></li>
+                                <a class="dropdown-item bg-secondary-subtle rounded mt-2 fw-bold hover:bg-yellow-500"
+                                   href="{{ route('profile.bitmessage') }}">
+                                    Bitmessage
+                                </a>
+                            </li>
+
                         </ul>
                         @endauth
                     </div>
@@ -166,16 +108,11 @@
                         @auth
                         <ul class="dropdown-menu rounded p-1">
                             <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
-                                   href="{{ route('profile.index') }}">
-                                    Profile
+                                <a class="dropdown-item bg-secondary-subtle rounded hover:bg-yellow-500 fw-bold"
+                                   href="{{ route('profile.cart') }}">
+                                    Items
                                 </a>
                             </li>
-                            <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded "
-                                   href="#">
-                                    Dashboard
-                                </a></li>
                         </ul>
                         @endauth
                     </div>
@@ -215,16 +152,18 @@
                         @auth
                         <ul class="dropdown-menu rounded p-1">
                             <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded mb-2 fw-bold"
-                                   href="{{ route('profile.index') }}">
-                                    Profile
+                                <a class="dropdown-item bg-secondary-subtle rounded fw-bold mb-2 hover:bg-yellow-500"
+                                   href="{{ route('profile.notifications') }}">
+                                    Notification
                                 </a>
                             </li>
+
                             <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded "
-                                   href="#">
-                                    Dashboard
-                                </a></li>
+                                <a class="dropdown-item bg-secondary-subtle rounded fw-bold hover:bg-yellow-500"
+                                   href="{{ route('profile.tickets') }}">
+                                    Tickets
+                                </a>
+                            </li>
                         </ul>
                         @endauth
                     </div>
@@ -239,10 +178,6 @@
                     <i class="fas text-gray-100 fs-3xl {{ $theme === 'dark' ? 'fa-sun' : 'fa-moon' }}"></i>
                 </button>
             </div>
-
-
-
-
         </div>
     </div>
 </nav>

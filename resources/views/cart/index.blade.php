@@ -40,7 +40,7 @@
         @if(!empty($items))
             @foreach($items as $productId => $item)
                 <div class="col-md-12  my-1 py-2">
-                    <form action="{{ route('profile.cart.add', \App\Product::find($productId)) }}" method="POST">
+                    <form action="{{ route('profile.cart.add', \App\Models\Product::find($productId)) }}" method="POST">
                         {{ csrf_field() }}
                         <div class="form-row bg-light">
                             <div class="col-md-2">

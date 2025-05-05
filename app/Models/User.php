@@ -13,6 +13,7 @@ use App\Traits\Vendorable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -39,6 +40,7 @@ use Throwable;
  * @property mixed $vendor
  * @property bool|mixed $login_2fa
  * @property mixed $vendorPurchases
+ * @property mixed|string $password
  * @method static where(string $string, string $username)
  */
 class User extends Authenticatable
@@ -94,12 +96,14 @@ class User extends Authenticatable
      *
      * @return User
      */
-    public static function stub(): User
+    public static function stub(): self
     {
-        $stubUser = new User();
-        $stubUser -> username = 'MARKET MESSAGE';
+        $stubUser = new self();
+        $stubUser->id = 0; // Important: Assign a dummy ID
+        $stubUser->username = 'MARKET MESSAGE';
         return $stubUser;
     }
+
 
     /**
      * Collection of users just buyers
@@ -327,8 +331,9 @@ class User extends Authenticatable
      */
     public function conversations(): HasMany
     {
-        return Conversation::query()->where('sender_id', $this -> id) -> orWhere('receiver_id', $this -> id);
+        return $this->hasMany(Conversation::class,'sender_id', $this -> id) -> orWhere('receiver_id', $this -> id);
     }
+
 
     /**
      * @return Collection

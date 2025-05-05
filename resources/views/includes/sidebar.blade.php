@@ -14,13 +14,3 @@
         </div>
     </div>
 @endauth
-<div class="m-2 card shadow bg-gray-500">
-    <div class="card-body">
-        <h5 class="card-title">Categories</h5>
-        <div class="list-group">
-            @include('includes.subcategories',['categories'=>$categories])
-        </div>
-    </div>
-</div>
-
-

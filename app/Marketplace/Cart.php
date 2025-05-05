@@ -11,7 +11,7 @@ use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 /**
- * Singleton class that manages adding, editing and removing products from cart
+ * Singleton class that manages to add, editing and removing products from cart
  *
  * Class Cart
  * @package App\Marketplace
@@ -26,11 +26,13 @@ class Cart
      *
      *
      */
-    private static Cart $cart;
+    private static ?Cart $cart = null;
+
     public static function getCart() : Cart
     {
-        if(self::$cart == null)
+        if (self::$cart === null) {
             self::$cart = new Cart();
+        }
         return self::$cart;
     }
 

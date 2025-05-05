@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+
 use App\Exceptions\RequestException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\DeleteProductRequest;
@@ -57,12 +58,12 @@ class ProductController extends Controller
         return redirect()->route('admin.products',[
             'order_by' => $request->get('order_by'),
             'user' => $request->get('user'),
-            'product' => $request ->get(' product')
+            'product' => $request ->get('product')
         ]);
     }
 
     /**
-     * Deleteing a product from an Admin panel
+     * Deleting a product from an Admin panel
      *
      * @param DeleteProductRequest $request
      * @return RedirectResponse
@@ -84,14 +85,13 @@ class ProductController extends Controller
     /**
      * Method for showing all editing forms for the product
      *
-     * //     *
-     * @param $id
+     * @@param mixed $id ID of the product
      * @param string $section
      * @return RedirectResponse|mixed
      *
      * @throws AuthorizationException
      */
-    public function editProduct($id, string $section = 'basic'): mixed
+    public function editProduct(mixed $id, string $section = 'basic'): mixed
     {
 
         $myProduct = Product::findOrFail($id);
@@ -106,14 +106,14 @@ class ProductController extends Controller
         if($myProduct -> isDigital() && $section == 'delivery')
             return redirect() -> route('admin.index');
 
-        // physical product cant have digtial section
+        // physical product cant have a digital section
         if($myProduct -> isPhysical() && $section == 'digital')
             return redirect() -> route('admin.index');
 
         // set a product type section
         session() -> put('product_type', $myProduct -> type);
 
-        // string to view a map to retrive which view
+        // string to view a map to retrieve which view
         $sectionMap = [
             'basic' =>
                 view('admin.product.basic',
@@ -162,14 +162,14 @@ class ProductController extends Controller
     public function purchases(): Factory|View
     {
         return view('admin.purchases', [
-            'purchases' => Purchase::query()->orderByDesc('created_at')->paginate(config('marketplace.products_per_page')),
+            'purchases' => Purchase::orderByDesc('created_at')->paginate(config('marketplace.products_per_page')),
         ]);
     }
 
     public function featuredProductsShow(): View
     {
 
-        $products = Product::query()->where('featured',1)->paginate(25);
+        $products = Product::where('featured',1)->paginate(25);
 
         return view('admin.featuredproducts')->with([
             'products' => $products
@@ -177,7 +177,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Deleteing a product from an Admin panel
+     * Deleting a product from an Admin panel
      *
      * @param RemoveProductFromFeaturedReuqest $request
      * @return RedirectResponse

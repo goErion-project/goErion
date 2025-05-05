@@ -78,9 +78,9 @@ class AdminController extends Controller
     /**
      * Return view with the category list
      *
-     * @return Factory|View
+     * @return View
      */
-    public function categories(): Factory|View
+    public function categories(): View
     {
         $this -> categoriesCheck();
 
@@ -155,6 +155,8 @@ class AdminController extends Controller
     /**
      * Accepts request for editing category
      *
+     * @param $id
+     * @param NewCategoryRequest $request
      * @return RedirectResponse
      */
     public function editCategory($id, NewCategoryRequest $request): RedirectResponse

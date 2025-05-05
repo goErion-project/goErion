@@ -9,8 +9,9 @@ use Illuminate\Support\ServiceProvider;
 class BladeServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
-     * Bootstrap Blade Engine Services
+     * Bootstrap Blade Engine services.
+     *
+     * @return void
      */
     public function boot(): void
     {
