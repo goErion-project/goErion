@@ -4,7 +4,7 @@
 
     @include('includes.flash.error')
 
-    <h1 class="mb-3">Your old PGP keys:</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Your old PGP keys:</h1>
     <hr>
     @if($keys -> isNotEmpty())
         @foreach($keys as $pgp)

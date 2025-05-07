@@ -6,7 +6,7 @@
     @include('includes.flash.error')
     @include('includes.validation')
 
-    <h3 class="mb-5">Message to everyone</h3>
+    <h3 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Message to everyone</h3>
     <hr>
     <form action="{{ route('admin.messages.send') }}" method="POST">
         {{ csrf_field() }}
@@ -38,8 +38,8 @@
                     </label>
                 </div>
             </div>
-            <div class="col-md-6 justify-content-lg-end d-flex">
-                <button type="submit" class="btn btn-outline-primary mt-auto">Send messages</button>
+            <div class="col-md-6 justify-content-lg-end d-flex mt-4">
+                <button type="submit" class="btn btn-outline-primary hover:bg-yellow-500 mt-auto">Send messages</button>
             </div>
         </div>
 

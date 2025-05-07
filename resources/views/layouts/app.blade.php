@@ -17,9 +17,11 @@
 @include('layouts.navbar')
 @include('layouts.navlink')
 <div class="container-fluid">
-    <div class="mt-4">
+    <div class="mt-4 mb-4">
         @yield('content')
     </div>
 </div>
+{{--@include('layouts.footer')--}}
+
 </body>
 </html>

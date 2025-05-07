@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg border border-gray-400 bg-gray-300 rounded-3 py-3 shadow-sm mb-4">
     <div class="container-fluid">
         <!-- Brand -->
-        <a class="navbar-brand fs-2 fw-extrabold text-brown-900 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
-           style="letter-spacing: 1px;">
-            {{ config('app.name') }}
-        </a>
-
-
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand fs-2 fw-extrabold text-brown-900 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
+               style="letter-spacing: 1px;">
+                {{ config('app.name') }}
+            </a>
+        </div>
         <!-- Mobile Toggle Button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarContent" aria-controls="navbarContent"
@@ -20,20 +20,18 @@
 
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Navigation Items -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    @admin
-                    <li class="nav-item @isroute('admin') active @endisroute">
-                        <a class="nav-link btn bg-gray-700 text-gray-200" href="{{ route('admin.index') }}">Admin Panel</a>
-                    </li>
-                    @endadmin
-                    @moderator
-                    <li class="nav-item @isroute('admin') active @endisroute">
-                        <a class="nav-link" href="{{ route('admin.index') }}">Moderator Panel</a>
-                    </li>
-                    @endmoderator
-                </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                @admin
+                <li class="nav-item @isroute('admin') active @endisroute">
+                    <a class="nav-link btn bg-gray-700 text-gray-200" href="{{ route('admin.index') }}">Admin Panel</a>
+                </li>
+                @endadmin
+                @moderator
+                <li class="nav-item @isroute('admin') active @endisroute">
+                    <a class="nav-link" href="{{ route('admin.index') }}">Moderator Panel</a>
+                </li>
+                @endmoderator
+            </ul>
             <ul class="navbar-nav">
                 @auth
                     <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
@@ -45,10 +43,17 @@
                                     <span class="text-white fw-bold" style="font-size: 16px;">{{ strtoupper(substr(auth()->user()->username, 0, 2)) }}</span>
                                 @endif
                             </div>
-                            <span>Logged in as <b>{{ auth()->user()->username }}</b></span>
+                            <div class="d-flex flex-column">
+                                <div class="">
+                                    <span>Logged in as <b>{{ auth()->user()->username }}</b></span>
+                                </div>
+                                <div>
+                                    <span class="fs-sm">BTC:</span> 0.00000000 /
+                                    <span class="wallet-label">XMR:</span> 0.00000000
+                                </div>
+                            </div>
                         </a>
                     </li>
-
                     <li class="nav-item pe-5">
                         <form action="{{route('auth.signout.post')}}" method="post">
                             @csrf
@@ -62,7 +67,6 @@
                     </li>
                 @endauth
             </ul>
-            </div>
         </div>
     </div>
 </nav>

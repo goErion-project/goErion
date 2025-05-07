@@ -5,7 +5,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="mb-3">PGP keys</h1>
+            <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">PGP keys</h1>
         </div>
         <div class="col-md-6">
             <h3 class="mb-3">Your pgp key</h3>

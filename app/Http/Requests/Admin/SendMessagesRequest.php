@@ -48,7 +48,7 @@ class SendMessagesRequest extends FormRequest
     }
 
     /**
-     * @throws RequestException
+     * @throws RequestException|\Random\RandomException
      */
     public function persist(): int
     {

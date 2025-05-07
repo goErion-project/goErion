@@ -7,6 +7,18 @@
       <sourceFolder url="file://$MODULE_DIR$/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules" isTestSource="false" packagePrefix="Modules\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/app" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts/Tests\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/app" isTestSource="false" packagePrefix="Modules\FeaturedProducts\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/app" isTestSource="false" packagePrefix="Modules\FinalizeEarly\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />
@@ -160,13 +172,13 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/webpatser/laravel-uuid" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/wikimedia/composer-merge-plugin" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/babenkoivan/elastic-adapter" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/babenkoivan/elastic-client" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/babenkoivan/elastic-scout-driver" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/clue/stream-filter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/client-common" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/message" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/options-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/curl-client" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

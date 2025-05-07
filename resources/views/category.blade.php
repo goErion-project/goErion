@@ -9,9 +9,8 @@
         </div>
         <div class="col-md-9">
             <div class="row">
-                <h1 class="col-md-11">{{ $category -> name}}
-                    <small>- category</small>
-                </h1>
+                <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">{{ $category -> name}} - category
+                </h2>
                 <div class="col-md-1 text-lg-right">
                     @include('includes.viewpicker')
                 </div>

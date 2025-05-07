@@ -1,0 +1,32 @@
+{
+    "name": "nwidart/featuredproducts",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\FeaturedProducts\\Providers\\FeaturedProductsServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\FeaturedProducts\\": "Modules/FeaturedProducts/",
+            "Modules\\FeaturedProducts\\Database\\Factories\\": "Modules/FeaturedProducts/database/factories/",
+            "Modules\\FeaturedProducts\\Database\\Seeders\\": "Modules/FeaturedProducts/database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\FeaturedProducts\\Tests\\": "Modules/FeaturedProducts/Tests/"
+        }
+    }
+}

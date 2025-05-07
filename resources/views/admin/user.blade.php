@@ -3,7 +3,7 @@
 @section('admin-content')
     <div class="row">
         <div class="col">
-            <h4>
+            <h4 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">
                 Displaying details for user {{$user->username}}
             </h4>
             <hr>

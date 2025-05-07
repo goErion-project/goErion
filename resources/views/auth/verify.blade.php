@@ -9,7 +9,7 @@
         <div class="col-md-6 text-center">
             @include('includes.flash.error')
 
-            <h2>Sign In Verify</h2>
+            <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Sign In Verify</h2>
             <div class="form-group">
                 <label>Decrypt this message:</label>
                 <textarea name="decrypt_message" class="form-control" rows="10" style="resize: none;" readonly>{{{ session() -> get('login_encrypted_message') }}}</textarea>

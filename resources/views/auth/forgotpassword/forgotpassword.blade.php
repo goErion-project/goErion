@@ -7,7 +7,7 @@
 
     <div class="row mt-5 justify-content-center" >
         <div class="col-md-4 text-center">
-            <h2>Forgot your password?</h2>
+            <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Forgot your password?</h2>
             <div class="alert alert-warning">
                 Note that you will not be able to read messages encrypted by the key from previous password.
             </div>

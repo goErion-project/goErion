@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-12">
             @include('includes.flash.error')
-            <h2 class="mb-3">Checkout ({{ $numberOfItems }})</h2>
+            <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Checkout ({{ $numberOfItems }})</h2>
 
             <table class="table table-hover table-striped">
                 <thead>

@@ -3,7 +3,7 @@
 @section('admin-content')
     <div class="row mb-4">
         <div class="col">
-            <h3>
+            <h3 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">
                 All Tickets
             </h3>
         </div>
@@ -26,39 +26,40 @@
             </form>
         </div>
     </div>
-
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Opened by</th>
-            <th>Time</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($tickets as $ticket)
+    <div class="card rounded p-4">
+        <table class="table">
+            <thead>
             <tr>
-                <td>
-                    <a href="{{ route('admin.tickets.view', $ticket) }}" class="mt-1">{{ $ticket -> title }}</a>
-                    @if($ticket -> solved)
-                        <span class="badge badge-success">Solved</span>
-                    @else
-                        @if($ticket -> answered)
-                            <span class="badge badge-warning">Answered</span>
-                        @endif
-                    @endif
-                </td>
-                <td>
-                    <strong>{{ $ticket -> user -> username }}</strong>
-                </td>
-                <td>
-                    <small>{{ $ticket -> time_passed }}</small>
-                </td>
-
+                <th>Title</th>
+                <th>Opened by</th>
+                <th>Time</th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($tickets as $ticket)
+                <tr>
+                    <td>
+                        <a href="{{ route('admin.tickets.view', $ticket) }}" class="mt-1">{{ $ticket -> title }}</a>
+                        @if($ticket -> solved)
+                            <span class="badge badge-success">Solved</span>
+                        @else
+                            @if($ticket -> answered)
+                                <span class="badge badge-warning">Answered</span>
+                            @endif
+                        @endif
+                    </td>
+                    <td>
+                        <strong>{{ $ticket -> user -> username }}</strong>
+                    </td>
+                    <td>
+                        <small>{{ $ticket -> time_passed }}</small>
+                    </td>
+
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <div class="row">
         <div class="col-md-6 offset-md-3">

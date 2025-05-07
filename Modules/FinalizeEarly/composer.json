@@ -1,0 +1,32 @@
+{
+    "name": "nwidart/finalizeearly",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\FinalizeEarly\\Providers\\FinalizeEarlyServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\FinalizeEarly\\": "Modules/FinalizeEarly/",
+            "Modules\\FinalizeEarly\\Database\\Factories\\": "Modules/FinalizeEarly/database/factories/",
+            "Modules\\FinalizeEarly\\Database\\Seeders\\": "Modules/FinalizeEarly/database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\FinalizeEarly\\Tests\\": "Modules/FinalizeEarly/tests/"
+        }
+    }
+}

@@ -22,6 +22,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
+use Random\RandomException;
 
 class AdminController extends Controller
 {
@@ -192,6 +193,7 @@ class AdminController extends Controller
      *
      * @param SendMessagesRequest $request
      * @return RedirectResponse
+     * @throws RandomException
      */
     public function sendMessage(SendMessagesRequest $request): RedirectResponse
     {

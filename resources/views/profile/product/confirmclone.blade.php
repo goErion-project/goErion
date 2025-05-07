@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 
 @section('title','Product Clone')
 
@@ -26,4 +26,4 @@
         </form>
     </div>
 
-@stop
+@endsection

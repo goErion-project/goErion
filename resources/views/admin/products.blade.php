@@ -3,13 +3,12 @@
 @section('admin-content')
     <div class="row">
         <div class="col">
-            <h4>
+            <h4 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">
                 List of Products
             </h4>
             <hr>
         </div>
     </div>
-
 
     <div class="row mt-2">
 
@@ -20,8 +19,6 @@
             <form action="{{route('admin.products.query')}}" method="post" class="">
                 {{csrf_field()}}
                 <div class="row">
-
-
                     <div class="col-md-3 col-sm-6">
                         <div class="form-group">
                             <label for="">Product name: (optional)</label>
@@ -64,72 +61,70 @@
             </form>
         </div>
     </div>
-    <div class="row">
+    <div class="row card rounded mb-4">
         <div class="col">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Price (best)</th>
+                    <th>Type</th>
+                    <th>Vendor</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <form action="{{route('admin.product.delete')}}" method="post">
+                    {{csrf_field()}}
 
+                    @if($products->count() == 0 )
+                        <tr>
+                            <td colspan="6" class="text-center">
+                                <h4 class="mt-5">No products found</h4>
+                            </td>
+                        </tr>
+                    @else
+                        @foreach($products as $product)
+                            <tr>
+                                <td>
+                                    <strong>{{$product->name}}</strong>
+                                </td>
+                                <td>
+                                    {{$product->category->name}}
+                                </td>
+                                <td>
+                                    @include('includes.currency', ['usdValue' => $product->price_from])
+                                </td>
+                                <td>
+                                    <span class="badge badge-info">{{$product->type}}</span>
+                                </td>
+                                <td>
+                                    <a href="{{route('admin.users.view',['user'=>$product->user->id])}}">{{$product->user->username}}</a>
+                                </td>
+                                <td>
+                                    @isModuleEnabled('FeaturedProducts')
+                                    @include('featuredproducts::markasfeatured')
+                                    @endisModuleEnabled
+
+                                    <a href="{{ route('admin.product.edit', $product -> id) }}" class="btn btn-outline-mblue">
+                                        <i class="fas fa-pen-square"></i>
+                                    </a>
+                                    <button type="submit" value="{{$product->id}}" name="product_id"
+                                            class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                    @endif
+                </form>
+
+                </tbody>
+            </table>
         </div>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Price (best)</th>
-            <th>Type</th>
-            <th>Vendor</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <form action="{{route('admin.product.delete')}}" method="post">
-            {{csrf_field()}}
-
-            @if($products->count() == 0 )
-                <tr>
-                    <td colspan="6" class="text-center">
-                        <h4 class="mt-5">No products found</h4>
-                    </td>
-                </tr>
-            @else
-                @foreach($products as $product)
-                    <tr>
-                        <td>
-                            <strong>{{$product->name}}</strong>
-                        </td>
-                        <td>
-                            {{$product->category->name}}
-                        </td>
-                        <td>
-                            @include('includes.currency', ['usdValue' => $product->price_from])
-                        </td>
-                        <td>
-                            <span class="badge badge-info">{{$product->type}}</span>
-                        </td>
-                        <td>
-                            <a href="{{route('admin.users.view',['user'=>$product->user->id])}}">{{$product->user->username}}</a>
-                        </td>
-                        <td>
-                            @isModuleEnabled('FeaturedProducts')
-                            @include('featuredproducts::markasfeatured')
-                            @endisModuleEnabled
-
-                            <a href="{{ route('admin.product.edit', $product -> id) }}" class="btn btn-outline-mblue">
-                                <i class="fas fa-pen-square"></i>
-                            </a>
-                            <button type="submit" value="{{$product->id}}" name="product_id"
-                                    class="btn btn-outline-danger">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </td>
-                    </tr>
-                @endforeach
-
-            @endif
-        </form>
-
-        </tbody>
-    </table>
-
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="text-center">

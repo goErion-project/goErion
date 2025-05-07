@@ -7,7 +7,7 @@
     <div class="row mt-5 justify-content-center" >
         <div class="col-md-6 text-center">
 
-            <h2>Reset password</h2>
+            <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Reset password</h2>
 
             <div class="mt-3">
 

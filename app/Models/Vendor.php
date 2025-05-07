@@ -135,16 +135,16 @@ class Vendor extends User
      * @param int|null $months
      * @return int
      */
-    public function countFeedbackByType(string $type,int $months = null): int
-    {
-        $query = $this->feedback()->where('type',$type);
-        if ($months != null){
-            $now = Carbon::now();
-            $start = $now->subMonths($months);
-            $query->where('created_at','>',$start);
-        }
-        return $query->count();
+    public function countFeedbackByType(string $type, ?int $months = null): int
+{
+    $query = $this->feedback()->where('type', $type);
+    if ($months !== null) {
+        $now = Carbon::now();
+        $start = $now->subMonths($months);
+        $query->where('created_at', '>', $start);
     }
+    return $query->count();
+}
 
     /**
      * Return string number with two decimals of the average rate

@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 
 @section('admin-content')
-
-    @isModuleEnabled('FeaturedProducts')
-    @include('featuredproducts::featuredproductsview')
-    @endisModuleEnabled
+    <div class="card rounded p-4">
+        @isModuleEnabled('FeaturedProducts')
+        @include('featuredproducts::featuredproductsview')
+        @endisModuleEnabled
+    </div>
 
 @endsection

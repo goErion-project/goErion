@@ -4,7 +4,7 @@
 
     @include('includes.flash.error')
 
-    <h1 class="mt-5 mb-3">Confirm your PGP key:</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Confirm your PGP key:</h1>
     <hr>
     <div class="form-group">
         <label for="decrypt_message">Decrypt this message:</label>

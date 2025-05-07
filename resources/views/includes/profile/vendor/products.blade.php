@@ -1,44 +1,45 @@
-<h3 class="mt-3">My products</h3>
-<hr>
+<h3 class="card rounded bg-gray-800 text-gray-300 fw-bold p-4 mb-4 text-center">My products</h3>
 
 @if(auth() -> user() -> products -> isNotEmpty())
 
-    <table class="table table-hover table-striped">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Quantity</th>
-            <th>Price from</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($myProducts as $product)
+    <div class="card rounded p-4">
+        <table class="table table-hover table-striped">
+            <thead>
             <tr>
-                <td><a href="{{ route('product.show', $product) }}">{{ $product -> name }}</a></td>
-                <td class="text-right">{{ $product -> quantity }}</td>
-                <td class="text-right">{{--@include('includes.currency', ['usdValue' => $product -> price_from ])--}}</td>
-                <td><a href="{{ route('category.show', $product -> category) }}">{{ $product -> category -> name }}</a></td>
-                <td><span class="badge badge-primary">{{ $product -> isDigital() ? 'Digital' : 'Physical' }}</span></td>
-                <td class="text-right">
-                    <a href="{{ route('profile.vendor.product.clone.show', $product ) }}" class="btn btn-sm btn-info">
-                        Clone
-                    </a>
-                    <a href="{{ route('profile.vendor.product.edit', $product -> id) }}" class="btn btn-sm btn-primary">
-                        <i class="far fa-edit"></i>
-                    </a>
-                    <a href="{{ route('profile.vendor.product.remove.confirm', $product -> id) }}" class="btn btn-sm btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </a>
-
-                </td>
+                <th>Title</th>
+                <th>Quantity</th>
+                <th>Price from</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th></th>
             </tr>
-        @endforeach
+            </thead>
+            <tbody>
+            @foreach($myProducts as $product)
+                <tr>
+                    <td><a href="{{ route('product.show', $product) }}">{{ $product -> name }}</a></td>
+                    <td class="text-right">{{ $product -> quantity }}</td>
+                    <td class="text-right">@include('includes.currency', ['usdValue' => $product -> price_from ])</td>
+                    <td><a href="{{ route('category.show', $product -> category) }}">{{ $product -> category -> name }}</a></td>
+                    <td><span class="badge badge-primary">{{ $product -> isDigital() ? 'Digital' : 'Physical' }}</span></td>
+                    <td class="text-right">
+                        <a href="{{ route('profile.vendor.product.clone.show', $product ) }}" class="btn btn-sm btn-info">
+                            Clone
+                        </a>
+                        <a href="{{ route('profile.vendor.product.edit', $product -> id) }}" class="btn btn-sm btn-primary">
+                            <i class="far fa-edit"></i>
+                        </a>
+                        <a href="{{ route('profile.vendor.product.remove.confirm', $product -> id) }}" class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
 
-        </tbody>
-    </table>
+                    </td>
+                </tr>
+            @endforeach
+
+            </tbody>
+        </table>
+    </div>
 
     {{{ $myProducts -> links('includes.paginate') }}}
 

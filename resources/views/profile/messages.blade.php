@@ -6,7 +6,7 @@
     @include('includes.validation')
 
 
-    <h1 class="my-3">Private Messages</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Private Messages</h1>
     <hr>
     <div class="row justify-content-center">
         <div class="col-md-4">

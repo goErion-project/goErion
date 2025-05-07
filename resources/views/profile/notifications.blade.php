@@ -6,7 +6,7 @@
     @include('includes.flash.success')
     @include('includes.flash.error')
 
-    <h1 class="mb-3">Notifications</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Notifications</h1>
     <hr>
     <p>List of your notifications. You can delete them any time</p>
     <form action="{{route('profile.notifications.delete')}}" method="post">

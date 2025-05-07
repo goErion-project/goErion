@@ -7,7 +7,7 @@
     @include('includes.flash.error')
     @include('includes.flash.invalid')
 
-    <h1 class="mb-3">Vendor settings</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Vendor settings</h1>
     <hr>
     @vendor
     {{-- Vendor Display --}}
@@ -32,4 +32,5 @@
         </div>
 
         @endvendor
+
         @endsection

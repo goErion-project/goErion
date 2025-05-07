@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-8">
-            <h2 class="mb-3">Cart ({{ $numberOfItems }})</h2>
+            <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Cart ({{ $numberOfItems }})</h2>
         </div>
         <div class="col-md-4 text-right">
             <a href="{{ route('profile.cart.clear') }}" class="btn btn-lg btn-danger">

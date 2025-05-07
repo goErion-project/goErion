@@ -2,10 +2,10 @@
 
 @section('admin-content')
 
-    <h1 class="mb-3">Market Statistics</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Market Statistics</h1>
 
     <div class="card-columns">
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     {{ $total_products }}
@@ -15,7 +15,7 @@
                 Number of products in market
             </div>
         </div>
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     {{ $total_purchases }}
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     {{ $total_users }}
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     {{ $total_vendors }}
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     @include('includes.currency', ['usdValue' => round($avg_product_price,2)])
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     @include('includes.currency', ['usdValue' => round($total_spent)])
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <h1>
                     {{ $total_daily_purchases }}
@@ -81,7 +81,7 @@
             </div>
         </div>
 
-        <div class="card text-center">
+        <div class="card text-center mb-4 ">
             <div class="card-body">
                 <table class="table table-borderless">
                     @foreach($total_earnings_coin as $coin => $total_sum)

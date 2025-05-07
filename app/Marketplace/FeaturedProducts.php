@@ -15,9 +15,11 @@ class FeaturedProducts
 
     public static function get(){
         try{
-            $featuredStatus = resolve('FeaturedProductsModule\Status');
+            $featuredStatus = resolve('Modules\FeaturedProducts\main\FeaturedStatus');
+            // dd($featuredStatus);
             $featuredProducts = $featuredStatus->getFeaturedProducts();
         } catch(\Exception $e){
+            dd($e->getMessage());
             $featuredProducts = null;
         }
 

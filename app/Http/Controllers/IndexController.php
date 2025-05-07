@@ -32,11 +32,15 @@ class IndexController extends Controller
         else
             $featuredProducts = FeaturedProducts::get();
 
+            //fetch latest products
+        $latestProducts = Product::orderBy('created_at','desc')->limit(10)->get();
+
         return view('welcome', [
             'productsView' => session() -> get('products_view'),
             'products' => Product::frontPage(),
             'categories' => Category::roots(),
-            'featuredProducts' => $featuredProducts
+            'featuredProducts' => $featuredProducts,
+            'latestProducts' => $latestProducts,//pass new products to the view
         ]);
     }
 

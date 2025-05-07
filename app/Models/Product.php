@@ -37,6 +37,8 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property mixed $feedback
  * @property mixed $user
  * @property int|mixed $featured
+ * @property mixed $rule
+ * @property \Illuminate\Support\Carbon|mixed|null $created_at
  *
  * @method exists()
  * @method static findOrFail($id)
@@ -74,40 +76,57 @@ class Product extends Model
 
     public function toSearchableArray(): array
     {
-        $product = $this->with('category')
-            ->with('user')
-            ->where('id',$this->id)->first();
-        $array = [];
-        $array['name'] = $product->name;
-        $array['description'] = $product->description;
-        $array['rule'] = $product->rule;
-        $array['quantity'] = $product->quantity;
-        $array['mesure'] = $product->mesure;
-        $array['created_at'] = $product->created_at;
-        if ($this->isPhysical())
-        {
-            $physicalProduct = PhysicalProduct::query()->where('id',$this->id)->first();
-            $array['from_country_full'] = $physicalProduct->shipsFrom();
-            $array['from_country_code'] = $physicalProduct->country_from;
-        }
-        if ($this->isPhysical())
-        {
-            $array['type'] = 'physical';
-        }
-        if ($this->isDigital())
-        {
-            $array['type'] = 'digital';
-        }
-        $array['category'] [] = $product->category->name;
-        //add parents
-        foreach ($product->category->parents() as $parent)
-        {
-            $array['category'][] = $parent->name;
+        // Eager load relationships to avoid N+1 queries
+        $this->loadMissing([
+            'category.parents',
+            'user',
+            'physicalProduct' // Assuming you have this relationship defined
+        ]);
+
+        $array = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'rule' => $this->rule,
+            'quantity' => $this->quantity,
+            'mesure' => $this->mesure,
+            'created_at' => $this->created_at->toIso8601String(),
+            'price' => $this->price_from,
+            'type' => $this->isPhysical() ? 'physical' : ($this->isDigital() ? 'digital' : null),
+        ];
+
+        // Handle category with parents
+        if ($this->category) {
+            $array['category'] = [$this->category->name];
+            if (method_exists($this->category, 'parents')) {
+                foreach ($this->category->parents() as $parent) {
+                    $array['category'][] = $parent->name;
+                }
+            }
         }
 
-        $array['user'] = $product->user->username;
-        $array['price'] = $this->price_from;
+        // Handle user
+        if ($this->user) {
+            $array['user'] = $this->user->username;
+        }
+
+        // Handle physical product specific fields
+        if ($this->isPhysical() && $this->physicalProduct) {
+            $array['from_country_full'] = $this->physicalProduct->shipsFrom();
+            $array['from_country_code'] = $this->physicalProduct->country_from;
+        }
+
         return $array;
+    }
+    protected function getProductType(): string
+    {
+        if ($this->isPhysical()) {
+            return 'physical';
+        }
+        if ($this->isDigital()) {
+            return 'digital';
+        }
+        return 'unknown';
     }
 
     /**

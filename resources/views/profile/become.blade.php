@@ -4,7 +4,7 @@
     @include('includes.flash.error')
     @include('includes.flash.success')
 
-    <h1 class="my-3">Become a Vendor</h1>
+    <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Become a Vendor</h1>
 
     <p class="my-3">Become a Vendor on this market and you will have access to post products that you want to sell.</p>
 

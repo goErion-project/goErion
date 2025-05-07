@@ -5,21 +5,21 @@
     @include('includes.flash.success')
 
     <div class="justify-content-center align-items-center">
-        <h1 class="my-3">Settings</h1>
+        <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Settings</h1>
 
         <h3 class="mt-4">Change password</h3>
         <hr>
-        <form action="" method="POST" class="justify-content-between">
+        <form action="{{ route('profile.password.change') }}" method="POST" class="justify-content-between">
             @csrf
             <div class="form-row my-2">
                 <label for="old_password" class="col-form-label col-md-2">Old password:</label>
-                <div class="col-md-10">
+                <div class="col-md-5">
                     <input type="password" class="form-control" id="old_password" name="old_password" placeholder="Type the old password">
                 </div>
             </div>
             <div class="form-row my-2">
                 <label for="new_password" class="col-form-label col-md-2">New password:</label>
-                <div class="col-md-5">
+                <div class="col-md-5 mb-4">
                     <input type="password" class="form-control @error('new_password', $errors) is-invalid @enderror" id="new_password" name="new_password" placeholder="Type new password">
                 </div>
                 <div class="col-md-5">
@@ -75,15 +75,15 @@
                         <div class="col-md-6">
                             <input type="text" class="form-control form-control-lg d-flex" name="address" id="address" placeholder="Place your new address(pubkey) here">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2 mt-4">
                             <select name="coin" id="coin" class="form-control form-control-lg d-flex">
                                 <option>Coin</option>
-                                {{--                            @foreach(config('coins.coin_list') as $supportedCoin => $instance)--}}
-                                {{--                                <option value="{{ $supportedCoin }}">{{ strtoupper(\App\Address::label($supportedCoin)) }}</option>--}}
-                                {{--                            @endforeach--}}
+                                                            @foreach(config('coins.coin_list') as $supportedCoin => $instance)
+                                                                <option value="{{ $supportedCoin }}">{{ strtoupper(\App\Models\Address::label($supportedCoin)) }}</option>
+                                                            @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-4">
                             <button class="btn btn-block btn-success btn-lg">Change</button>
                         </div>
                     </div>
@@ -91,35 +91,37 @@
                 <p class="text-muted">On this address you will receive payments from purchases! Funds will be sent to your most recent added address of coin!</p>
 
 
-{{--                            @if(auth() -> user() -> addresses -> isNotEmpty())--}}
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>Address</th>
-                        <th>Coin</th>
-                        <th class="text-right">Added</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{--                    @foreach(auth() -> user() -> addresses as $address)--}}
-                    <tr>
-                        <td>
-                            <input type="text" readonly class="form-control" value="{{-- $address -> address --}}">
-                        </td>
-                        <td><span class="badge badge-info">{{-- strtoupper($address -> coin) --}}</span></td>
-                        <td class="text-muted text-right">
-                            {{--                                {{ $address -> added_ago }}--}}
-                        </td>
-                        <td class="text-right"><a href="{{-- route('profile.vendor.address.remove', $address) --}}" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Remove</a></td>
-                    </tr>
-                    {{--                    @endforeach--}}
-                    </tbody>
+                            @if(auth() -> user() -> addresses -> isNotEmpty())
+                <div class="card rounded p-4">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Coin</th>
+                            <th class="text-right">Added</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach(auth() -> user() -> addresses as $address)
+                            <tr>
+                                <td>
+                                    <input type="text" readonly class="form-control" value="{{ $address -> address }}">
+                                </td>
+                                <td><span class="badge badge-info">{{ strtoupper($address -> coin) }}</span></td>
+                                <td class="text-muted text-right">
+                                    {{ $address -> added_ago }}
+                                </td>
+                                <td class="text-right"><a href="{{ route('profile.vendor.address.remove', $address) }}" class="btn btn-danger"><i class="fa fa-trash mr-1"></i>Remove</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
 
-                </table>
-                {{--            @else--}}
+                    </table>
+                </div>
+                            @else
                 <div class="alert text-center alert-warning">You addresses list is empty!</div>
-                {{--            @endif--}}
+                            @endif
             </div>
         </div>
     </div>

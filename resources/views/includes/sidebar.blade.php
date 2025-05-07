@@ -10,6 +10,9 @@
             </div>
             <div>
                 <h6 class="mb-0 fw-bold">{{ auth()->user()->username }}</h6>
+                <div>
+                    <span>Member since {{ auth()->user()->created_at->format('d M Y') }}</span>
+                </div>
             </div>
         </div>
     </div>

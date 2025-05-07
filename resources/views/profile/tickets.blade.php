@@ -4,7 +4,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="mb-3">Support</h1>
+            <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Support</h1>
             <hr>
             @include('includes.flash.error')
             @include('includes.flash.invalid')

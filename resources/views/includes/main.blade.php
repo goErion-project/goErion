@@ -1,44 +1,31 @@
-@php use App\Models\Vendor; @endphp
 <div class="container font-sans">
     <div class="row">
         <div class="col-md-12">
             <h1>Welcome to {{ config('app.name') }}</h1>
             <hr>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, aliquid cupiditate dolore enim et
-            eveniet fugiat illum ipsum itaque minus molestias nihil optio porro quisquam quo saepe sunt velit
-            veritatis.
-        </div>
-    </div>
-    <div class="row mt-5">
+    </div>        
+</div>
 
-        <div class="col-md-4">
-            <h4><i class="fa fa-money-bill-wave-alt text-info"></i> No deposit</h4>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid dolorem hic nisi
-                ratione repellendus suscipit totam vitae!
-            </p>
-        </div>
-
-        <div class="col-md-4">
-            <h4><i class="fa fa-shield-alt text-info"></i> Escrow</h4>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid dolorem hic nisi
-                ratione repellendus suscipit totam vitae!
-            </p>
-        </div>
-
-        <div class="col-md-4">
-            <h4><i class="fa fa-coins text-info"></i> Multiple-Coins</h4>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aliquid dolorem hic nisi
-                ratione repellendus suscipit totam vitae!
-            </p>
-        </div>
+<!-- New Products Section -->
+<div class="row mt-1 mb-2">
+    <div class="col">
+        <h4>New Products</h4>
     </div>
+</div>
+<div class="row">
+    @if(isset($latestProducts) && $latestProducts->isNotEmpty())
+        @foreach($latestProducts as $product)
+            <div class="col-md-4 my-md-0 my-2 col-12">
+                @include('includes.product.card', ['product' => $product])
+            </div>
+        @endforeach
+    @else
+        <div class="col-12">
+            <p>No new products available at the moment.</p>
+        </div>
+    @endif
+</div>
     <div class="row">
         <div class="col">
             <hr>
@@ -59,8 +46,9 @@
             <table class="table table-borderless table-hover">
                 <tr>
                     <td>
-                        <a href="{{route('vendor.show',$vendor) }}"
-                           style="text-decoration: none; color:#212529">{{$vendor->user->username}}</a>
+                        <a href="{{route('vendor.show',$vendor)}}"
+                           class="text-gray-100  btn btn-outline-secondary"
+                           style="text-decoration: none; ">{{$vendor->user->username}}</a>
                     </td>
                     <td class="text-right">
                                     <span

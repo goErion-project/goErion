@@ -364,14 +364,13 @@ class Purchase extends Model
      * @param User|null $user
      * @return bool
      */
-    public function isVendor(User $user = null) : bool
-    {
-        // Compare id if the user is given
-        if(!is_null($user))
-            return $this -> vendor_id == $user -> id;
-        // otherwise check logged user
-        return auth() -> check() && auth() -> user() -> id == $this -> vendor_id;
+    public function isVendor(?User $user = null): bool
+{
+    if (!is_null($user)) {
+        return $this->vendor_id == $user->id;
     }
+    return auth()->check() && auth()->user()->id == $this->vendor_id;
+}
 
     /**
      * Returns true if the user is a buyer
@@ -379,14 +378,18 @@ class Purchase extends Model
      * @param User|null $user
      * @return bool
      */
-    public function isBuyer(User $user = null) : bool
-    {
-        // if user is set than check if given user is a buyer
-        if(!is_null($user))
-            return $this -> buyer == $user;
-        // otherwise check if logged user
-        return auth() -> check() && auth() -> user() == $this -> buyer;
+    public function isBuyer(?User $user = null): bool
+{
+    if (!is_null($user)) {
+        return $this->buyer == $user;
     }
+    return auth()->check() && auth()->user() == $this->buyer;
+}
+
+    public static function latestOrders()
+{
+    return self::with(['offer.product'])->orderBy('created_at', 'desc')->limit(5)->get();
+}
 
     /**
      * Returns true if the purchase is purchased
