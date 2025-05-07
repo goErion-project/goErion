@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use Elasticsearch\ClientBuilder;
+use Elastic\Elasticsearch\ClientBuilder;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
 use Illuminate\Support\Collection;

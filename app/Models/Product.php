@@ -76,13 +76,19 @@ class Product extends Model
 
     public function toSearchableArray(): array
     {
-        // Eager load relationships to avoid N+1 queries
-        $this->loadMissing([
-            'category.parents',
-            'user',
-            'physicalProduct' // Assuming you have this relationship defined
-        ]);
-
+        // Ensure relationships are loaded only if they exist
+        if ($this->relationLoaded('category') && $this->category) {
+            $this->category->loadMissing('parents');
+        }
+    
+        if (!$this->relationLoaded('user')) {
+            $this->loadMissing('user');
+        }
+    
+        if ($this->isPhysical() && !$this->relationLoaded('physical')) {
+            $this->loadMissing('physical');
+        }
+    
         $array = [
             'id' => $this->id,
             'name' => $this->name,
@@ -94,28 +100,28 @@ class Product extends Model
             'price' => $this->price_from,
             'type' => $this->isPhysical() ? 'physical' : ($this->isDigital() ? 'digital' : null),
         ];
-
+    
         // Handle category with parents
-        if ($this->category) {
+        if ($this->relationLoaded('category') && $this->category) {
             $array['category'] = [$this->category->name];
-            if (method_exists($this->category, 'parents')) {
-                foreach ($this->category->parents() as $parent) {
+            if ($this->category->relationLoaded('parents')) {
+                foreach ($this->category->parents as $parent) {
                     $array['category'][] = $parent->name;
                 }
             }
         }
-
+    
         // Handle user
-        if ($this->user) {
+        if ($this->relationLoaded('user') && $this->user) {
             $array['user'] = $this->user->username;
         }
-
+    
         // Handle physical product specific fields
-        if ($this->isPhysical() && $this->physicalProduct) {
-            $array['from_country_full'] = $this->physicalProduct->shipsFrom();
-            $array['from_country_code'] = $this->physicalProduct->country_from;
+        if ($this->isPhysical() && $this->relationLoaded('physical') && $this->physical) {
+            $array['from_country_full'] = $this->physical->shipsFrom();
+            $array['from_country_code'] = $this->physical->country_from;
         }
-
+    
         return $array;
     }
     protected function getProductType(): string
