@@ -6,6 +6,8 @@ use App\Models\Category;
 use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Services\ElasticsearchEngine;
+use Laravel\Scout\EngineManager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +29,9 @@ class AppServiceProvider extends ServiceProvider
         //
         $categories = Category::with('children')->withCount('products')->whereNull('parent_id')->get();
         View::share('categories', $categories);
+
+        resolve(EngineManager::class)->extend('elastic', function () {
+            return new ElasticsearchEngine();
+        });
     }
 }

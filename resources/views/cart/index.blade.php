@@ -63,7 +63,7 @@
                                 @if(count($item -> offer -> product -> getCoins()) > 1)
                                     <select name="coin" id="coin" class="form-control form-control-sm">
                                         @foreach($item -> offer -> product -> getCoins() as $coin)
-                                            <option value="{{ $coin }}" {{ $coin == $item -> coin_name ? 'selected' : ''}} >{{ strtoupper(\App\Purchase::coinDisplayName($coin)) }}</option>
+                                            <option value="{{ $coin }}" {{ $coin == $item -> coin_name ? 'selected' : ''}} >{{ strtoupper(\App\Models\Purchase::coinDisplayName($coin)) }}</option>
                                         @endforeach
                                     </select>
                                 @elseif(count($item -> offer -> product -> getCoins()) == 1)
@@ -95,7 +95,7 @@
                                     </select>
                                 @elseif(count($item -> offer -> product -> getTypes()) == 1)
                                     <input type="hidden" name="type" value="{{ $item -> offer -> product -> getTypes()[0] }}">
-                                    <input type="text" value="{{ \App\Purchase::$types[$item -> offer -> product -> getTypes()[0]]  }}" class="form-control form-control-sm disabled" disabled>
+                                    <input type="text" value="{{ \App\Models\Purchase::$types[$item -> offer -> product -> getTypes()[0]]  }}" class="form-control form-control-sm disabled" disabled>
                                 @endif
                             </div>
 

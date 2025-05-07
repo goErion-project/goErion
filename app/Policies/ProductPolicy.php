@@ -15,11 +15,11 @@ class ProductPolicy
      *
      * @param User|null $user
      * @param Product $product
-     * @return false
+     * @return bool
      */
-    public function view(?User $user, Product $product): false
+    public function view(?User $user, Product $product): bool
     {
-        return $product -> active;
+        return (bool)$product -> active;
     }
 
     /**

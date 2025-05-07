@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SCOUT_DRIVER', 'elasticsearch'),  // Change to "elastic" for Elasticsearch
+    'driver' => env('SCOUT_DRIVER', 'elastic'),  // Change to "elastic" for Elasticsearch
 
     /*
     |--------------------------------------------------------------------------
@@ -96,13 +96,10 @@ return [
     |
     */
 
-    'elastic' => [
-        'client' => [
-            'hosts' => [
-                env('ELASTICSEARCH_HOST', 'http://localhost:9200'),  // Ensure this is correct for your setup
-            ],
-        ],
-        'index' => env('SCOUT_ELASTICSEARCH_INDEX', 'products'),  // Default index name for your data
+    'elasticsearch' => [
+    'index' => env('ELASTICSEARCH_INDEX', 'products'), // Default index name
+    'hosts' => [
+        env('ELASTICSEARCH_HOST', 'localhost') . ':' . env('ELASTICSEARCH_PORT', 9200),
     ],
 
     /*
@@ -134,5 +131,5 @@ return [
             ],
         ],
     ],
-
+],
 ];

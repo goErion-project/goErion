@@ -47,7 +47,7 @@ use Psr\Container\NotFoundExceptionInterface;
 class Product extends Model
 {
     use Uuids;
-//    use Searchable;
+   use Searchable;
 
     public $incrementing = false;
     protected $keyType = 'string';

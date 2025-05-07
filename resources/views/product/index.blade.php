@@ -3,7 +3,10 @@
 @section('product-content')
 
 
-    <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(nl2br(e($product -> description))) !!}</p>
-
+@if(!empty($product->description))
+    <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($product->description) !!}</p>
+@else
+    <p>No description available.</p>
+@endif
 
 @stop

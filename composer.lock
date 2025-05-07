@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5fd8e61cb8d586eaea0bf09c1ccb40d0",
+    "content-hash": "8f63c07d0e3c75a5939dc295b348fc29",
     "packages": [
         {
             "name": "brick/math",
@@ -4323,6 +4323,64 @@
                 "source": "https://github.com/gggeek/phpxmlrpc/tree/4.11.1"
             },
             "time": "2025-01-17T17:04:37+00:00"
+        },
+        {
+            "name": "phpxmlrpc/polyfill-xmlrpc",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gggeek/polyfill-xmlrpc.git",
+                "reference": "2c79dc261569a70ef9cd047b234a49be23598a3d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gggeek/polyfill-xmlrpc/zipball/2c79dc261569a70ef9cd047b234a49be23598a3d",
+                "reference": "2c79dc261569a70ef9cd047b234a49be23598a3d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.4.0 || ^7.0 || ^8.0",
+                "phpxmlrpc/phpxmlrpc": "^4.10.2"
+            },
+            "provide": {
+                "ext-xmlrpc": "*"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.8 || ^5.0 || ^8.5.12",
+                "phpunit/phpunit-selenium": "*",
+                "yoast/phpunit-polyfills": "*"
+            },
+            "suggest": {
+                "ext-iconv": "Required when using anything other than utf-8 as target encoding for the decoded xml",
+                "ext-xmlrpc": "Recommended for running the test suite. We can not declare it in require-dev because it is missing in php 8"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "PhpXmlRpc\\Polyfill\\XmlRpc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "A pure-php reimplementation of the API exposed by the native XML-RPC extension",
+            "keywords": [
+                "extension",
+                "php",
+                "polyfill",
+                "webservices",
+                "xmlrpc"
+            ],
+            "support": {
+                "issues": "https://github.com/gggeek/polyfill-xmlrpc/issues",
+                "source": "https://github.com/gggeek/polyfill-xmlrpc/tree/1.0.0"
+            },
+            "time": "2024-04-15T11:49:22+00:00"
         },
         {
             "name": "predis/predis",
@@ -11455,8 +11513,7 @@
         "php": "^8.2",
         "ext-bcmath": "*",
         "ext-curl": "*",
-        "ext-gmp": "*",
-        "ext-xmlrpc": "*"
+        "ext-gmp": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"

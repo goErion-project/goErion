@@ -1620,15 +1620,11 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Finds an entry of the container by its identifier and returns it.
+         * {@inheritdoc}
          *
          * @template TClass of object
          * @param string|class-string<TClass> $id
          * @return ($id is class-string<TClass> ? TClass : mixed)
-         * @param string $id Identifier of the entry to look for.
-         * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
-         * @throws ContainerExceptionInterface Error while retrieving the entry.
-         * @return mixed Entry.
          * @static 
          */
         public static function get($id)
@@ -20670,6 +20666,63 @@ namespace Nwidart\Modules\Facades {
             }
     }
 
+namespace Illuminate\Support {
+    /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template-covariant TValue
+     * @implements \ArrayAccess<TKey, TValue>
+     * @implements \Illuminate\Support\Enumerable<TKey, TValue>
+     */
+    class Collection {
+        /**
+         * 
+         *
+         * @see \App\Models\Product::touch()
+         * @static 
+         */
+        public static function searchable()
+        {
+            return \Illuminate\Support\Collection::searchable();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::withoutRecursion()
+         * @static 
+         */
+        public static function unsearchable()
+        {
+            return \Illuminate\Support\Collection::unsearchable();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::resolveObserveAttributes()
+         * @static 
+         */
+        public static function searchableSync()
+        {
+            return \Illuminate\Support\Collection::searchableSync();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::resolveObserveAttributes()
+         * @static 
+         */
+        public static function unsearchableSync()
+        {
+            return \Illuminate\Support\Collection::unsearchableSync();
+        }
+
+            }
+    }
+
 namespace Illuminate\Http {
     /**
      * 
@@ -20804,6 +20857,235 @@ namespace Illuminate\Routing {
         public static function emailVerification()
         {
             return \Illuminate\Routing\Router::emailVerification();
+        }
+
+            }
+    }
+
+namespace Illuminate\Database\Eloquent\Relations {
+    /**
+     * 
+     *
+     * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+     * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+     * @template TResult
+     * @mixin \Illuminate\Database\Eloquent\Builder<TRelatedModel>
+     */
+    class Relation {
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function searchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\Relation::searchable($chunk);
+        }
+
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function unsearchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\Relation::unsearchable($chunk);
+        }
+
+            }
+    /**
+     * 
+     *
+     * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+     * @template TIntermediateModel of \Illuminate\Database\Eloquent\Model
+     * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+     * @extends \Illuminate\Database\Eloquent\Relations\HasOneOrManyThrough<TRelatedModel, TIntermediateModel, TDeclaringModel, \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>>
+     */
+    class HasManyThrough {
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function searchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasManyThrough::searchable($chunk);
+        }
+
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function unsearchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasManyThrough::unsearchable($chunk);
+        }
+
+            }
+    /**
+     * 
+     *
+     * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+     * @template TIntermediateModel of \Illuminate\Database\Eloquent\Model
+     * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+     * @template TResult
+     * @extends \Illuminate\Database\Eloquent\Relations\Relation<TRelatedModel, TIntermediateModel, TResult>
+     */
+    class HasOneOrManyThrough {
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function searchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasOneOrManyThrough::searchable($chunk);
+        }
+
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function unsearchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasOneOrManyThrough::unsearchable($chunk);
+        }
+
+            }
+    /**
+     * 
+     *
+     * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+     * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+     * @extends \Illuminate\Database\Eloquent\Relations\HasOneOrMany<TRelatedModel, TDeclaringModel, \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>>
+     */
+    class HasMany {
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function searchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasMany::searchable($chunk);
+        }
+
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function unsearchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasMany::unsearchable($chunk);
+        }
+
+            }
+    /**
+     * 
+     *
+     * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+     * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+     * @template TResult
+     * @extends \Illuminate\Database\Eloquent\Relations\Relation<TRelatedModel, TDeclaringModel, TResult>
+     */
+    class HasOneOrMany {
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function searchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasOneOrMany::searchable($chunk);
+        }
+
+        /**
+         * 
+         *
+         * @see \Laravel\Scout\SearchableScope::extend()
+         * @param mixed $chunk
+         * @static 
+         */
+        public static function unsearchable($chunk = null)
+        {
+            return \Illuminate\Database\Eloquent\Relations\HasOneOrMany::unsearchable($chunk);
+        }
+
+            }
+    }
+
+namespace Illuminate\Database\Eloquent {
+    /**
+     * 
+     *
+     * @template TKey of array-key
+     * @template TModel of \Illuminate\Database\Eloquent\Model
+     * @extends \Illuminate\Support\Collection<TKey, TModel>
+     */
+    class Collection {
+        /**
+         * 
+         *
+         * @see \App\Models\Product::touch()
+         * @static 
+         */
+        public static function searchable()
+        {
+            return \Illuminate\Database\Eloquent\Collection::searchable();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::withoutRecursion()
+         * @static 
+         */
+        public static function unsearchable()
+        {
+            return \Illuminate\Database\Eloquent\Collection::unsearchable();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::resolveObserveAttributes()
+         * @static 
+         */
+        public static function searchableSync()
+        {
+            return \Illuminate\Database\Eloquent\Collection::searchableSync();
+        }
+
+        /**
+         * 
+         *
+         * @see \App\Models\Product::resolveObserveAttributes()
+         * @static 
+         */
+        public static function unsearchableSync()
+        {
+            return \Illuminate\Database\Eloquent\Collection::unsearchableSync();
         }
 
             }

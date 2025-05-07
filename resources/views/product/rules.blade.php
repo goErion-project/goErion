@@ -1,9 +1,13 @@
-@extends('master.product')
+@extends('layouts.product')
 
 @section('product-content')
 
 
-    <p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml(nl2br(e($product -> rules))) !!}</p>
+@if(!empty($product->rules))
+<p>{!! \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($product->rules) !!}</p>
+@else
+<p>No rules available.</p>
+@endif
 
 
 @stop

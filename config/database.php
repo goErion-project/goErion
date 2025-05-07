@@ -169,14 +169,6 @@ return [
             'database' => env('REDIS_CACHE_DB', '1'),
         ],
 
-
-        'elasticsearch' => [
-            'hosts' => explode(',', env('ELASTICSEARCH_HOSTS', 'localhost:9200')),
-            'retries' => env('ELASTICSEARCH_RETRIES', 3),
-            'username' => env('ELASTICSEARCH_USERNAME'),
-            'password' => env('ELASTICSEARCH_PASSWORD'),
-        ],
-
     ],
 
 ];
