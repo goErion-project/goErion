@@ -70,19 +70,10 @@ class SearchController extends Controller
 
         }
         //category
-        // $category = Category::all();
         $categoryQuery = $request->get('category');
-if ($categoryQuery !== null && $categoryQuery !== 'any') {
-    $category = Category::find('category',$categoryQuery);
-    if ($category) {
-       // Get all child category IDs and flatten the array
-       $childCategoryIds = $category->descendants()->pluck('id')->toArray();
-       $categoryIds = array_merge([$category->id], $childCategoryIds);
-
-       // Ensure the array is flat and valid before passing to whereIn
-       $query->whereIn('category', array_unique(array_filter($categoryIds)));
-    }
-}
+        if ($categoryQuery !== null && $categoryQuery !== 'any') {
+            $query->where('category', $categoryQuery);
+        }
         //type
         $typeQuery = $request->get('type');
         $supportedTypes = ['digital', 'physical'];
@@ -111,19 +102,12 @@ if ($categoryQuery !== null && $categoryQuery !== 'any') {
         $end = round($end, 5);
 
         return view('results', [
-            'productsView' => session()->get('products_view'),
-    'products' => $finalResult,
-    'categories' => Category::roots(),
-    'query' => $searchQuery,
-    'time' => $end,
-    'results_count' => $results->count(),
-    'filters' => [
-        'category' => $categoryQuery,
-        'type' => $typeQuery,
-        'price_min' => $minPriceQuery,
-        'price_max' => $maxPriceQuery,
-        'order_by' => $orderQuery,
-    ],
+            'productsView' => session() -> get('products_view'),
+            'products' => $finalResult,
+            'categories' => Category::roots(),
+            'query' => $searchQuery,
+            'time' => $end,
+            'results_count' => $results->count()
         ]);
     }
 
@@ -170,16 +154,10 @@ if ($categoryQuery !== null && $categoryQuery !== 'any') {
                 });
             }
         }
-        return match ($orderQuery) {
-            'price_asc' => $collection->sortBy('price_from'),
-            'price_desc' => $collection->sortByDesc('price_from'),
-            'newest' => $collection->sortByDesc('created_at'),
-            default => $collection,
-        };
+        return $ordered;
     }
 
     private function priceFilter($collection,$minPriceQuery,$maxPriceQuery){
-
         //min price
         $filteredCollection = $collection;
         if ($minPriceQuery !== null && floatval($minPriceQuery) > 0){
