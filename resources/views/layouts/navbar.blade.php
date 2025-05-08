@@ -52,7 +52,6 @@
                                         <a href="" target="_blank" class="text-decoration-none text-dark">XMR:</a>
                                     </small> 0.00000000
                                 </li>
-                            </li>
                         </a>
                     </ul>
                     <li class="nav-item d-flex gap-2 pe-5">
