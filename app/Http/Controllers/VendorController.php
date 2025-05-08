@@ -217,7 +217,7 @@ class VendorController extends Controller
             $physicalProduct = new PhysicalProduct();
         }
 
-        return view('profile.vendor.addderivery',
+        return view('profile.vendor.adddelivery',
             [
                 'physicalProduct' => $physicalProduct ?? new PhysicalProduct,
                 'productsShipping' => session('product_shippings'),

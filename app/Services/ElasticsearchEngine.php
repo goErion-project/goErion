@@ -41,18 +41,32 @@ class ElasticsearchEngine extends Engine
 
     public function search(Builder $builder)
     {
+       // If the query is empty, return all results
+    if (empty($builder->query)) {
         $response = $this->client->search([
             'index' => env('ELASTICSEARCH_INDEX'),
             'body' => [
                 'query' => [
-                    'match' => [
-                        '_all' => $builder->query,
-                    ],
+                    'match_all' => new \stdClass(),
                 ],
             ],
         ]);
 
         return $response['hits']['hits'];
+    }
+
+    $response = $this->client->search([
+        'index' => env('ELASTICSEARCH_INDEX'),
+        'body' => [
+            'query' => [
+                'match' => [
+                    '_all' => $builder->query,
+                ],
+            ],
+        ],
+    ]);
+
+    return $response['hits']['hits'];
     }
 
     public function map(Builder $builder, $results, $model)
