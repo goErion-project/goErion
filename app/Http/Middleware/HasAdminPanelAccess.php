@@ -18,7 +18,7 @@ class HasAdminPanelAccess
         if (auth()->check())
         {
             if (auth()->user()->isAdmin()
-                || auth()->user()->hasPermission)
+                || auth()->user()->hasPermissions())
                 return $next($request);
         }
         return redirect()->route('home')->with('error', 'You do not have access to the admin panel.');

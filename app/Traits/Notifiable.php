@@ -25,7 +25,7 @@ trait Notifiable
          */
         if (config('bitmessage.enabled')){
             if ($this->bitmessage_address !== NULL){
-                // if its enabled sent message
+                // if its enabled sent a message
                 BitmessageNotify::dispatch('Notification from marketplace',$content,$this->bitmessage_address)->delay(now()->addSecond(1));;
             }
         }

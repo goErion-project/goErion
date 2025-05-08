@@ -127,7 +127,7 @@ class Feedback extends Model
     }
 
     /**
-     * Returns 'during last month' | 'during last three months' | 'during last six months' | 'during past year' | 'more than a year ago'
+     * Returns 'during last month' | 'during the last three months' | 'during the last six months' | 'during the past year' | 'more than a year ago'
      *
      * @return string
      */

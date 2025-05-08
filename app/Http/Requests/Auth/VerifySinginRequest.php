@@ -50,6 +50,6 @@ class VerifySinginRequest extends FormRequest
         }
         else
             throw new RequestException("Invalid validation string");
-        return redirect()->back();
+//        return redirect()->back();
     }
 }

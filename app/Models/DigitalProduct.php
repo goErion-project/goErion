@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Exceptions\RequestException;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property string $content
@@ -16,7 +17,7 @@ class DigitalProduct extends User
 {
     use Uuids;
 
-    public function product()
+    public function product(): HasOne
     {
         return $this->hasOne(Product::class, 'id', 'id');
     }
@@ -29,7 +30,7 @@ class DigitalProduct extends User
     public function setContent(?string $newContent): void
     {
         $newContent = empty($newContent) ? null : $newContent;
-        //remove consecutive new lines and trim balnk chars
+        //remove consecutive new lines and trim blank chars
         $formatedContent = trim(preg_replace('/[\r\n]{2,}/', "\n", $newContent));
         $this->content = $formatedContent;
     }

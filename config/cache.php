@@ -10,7 +10,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option controls the default cache store that will be used by the
-    | framework. This connection is utilized if another isn't explicitly
+    | framework. This connection is utilized if another isn't explicit
     | specified when running a cache operation inside the application.
     |
     */

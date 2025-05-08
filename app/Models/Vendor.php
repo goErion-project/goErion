@@ -195,7 +195,7 @@ class Vendor extends User
         return false;
 
     }
-//
+
     /**
      * Checks if vendor should have DWC tag
      *

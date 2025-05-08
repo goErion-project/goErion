@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Carbon;
 use Laravel\Scout\Searchable;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -38,7 +39,8 @@ use Psr\Container\NotFoundExceptionInterface;
  * @property mixed $user
  * @property int|mixed $featured
  * @property mixed $rule
- * @property \Illuminate\Support\Carbon|mixed|null $created_at
+ * @property Carbon|mixed|null $created_at
+ * @property Category|mixed $category
  *
  * @method exists()
  * @method static findOrFail($id)
@@ -65,7 +67,7 @@ class Product extends Model
 
     public static function frontPage(): LengthAwarePaginator
     {
-        return self::query()->where('active', 1)->paginate(config('marketplace.products_per_page'));
+        return self::where('active', 1)->paginate(config('marketplace.products_per_page'));
     }
 
     public function scopeFeatured($query)
@@ -80,15 +82,15 @@ class Product extends Model
         if ($this->relationLoaded('category') && $this->category) {
             $this->category->loadMissing('parents');
         }
-    
+
         if (!$this->relationLoaded('user')) {
             $this->loadMissing('user');
         }
-    
+
         if ($this->isPhysical() && !$this->relationLoaded('physical')) {
             $this->loadMissing('physical');
         }
-    
+
         $array = [
             'id' => $this->id,
             'name' => $this->name,
@@ -100,7 +102,7 @@ class Product extends Model
             'price' => $this->price_from,
             'type' => $this->isPhysical() ? 'physical' : ($this->isDigital() ? 'digital' : null),
         ];
-    
+
         // Handle category with parents
         if ($this->relationLoaded('category') && $this->category) {
             $array['category'] = [$this->category->name];
@@ -110,18 +112,18 @@ class Product extends Model
                 }
             }
         }
-    
+
         // Handle user
         if ($this->relationLoaded('user') && $this->user) {
             $array['user'] = $this->user->username;
         }
-    
+
         // Handle physical product specific fields
         if ($this->isPhysical() && $this->relationLoaded('physical') && $this->physical) {
             $array['from_country_full'] = $this->physical->shipsFrom();
             $array['from_country_code'] = $this->physical->country_from;
         }
-    
+
         return $array;
     }
     protected function getProductType(): string

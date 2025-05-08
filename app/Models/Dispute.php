@@ -52,19 +52,23 @@ class Dispute extends Model
     public function canPostMessage() : bool
     {
         // if it is not logged in
-        if(!auth()->check()) return false;
+        if(!auth()->check())
+            return false;
 
         // Define when the user can post
-        if($this -> purchase -> isVendor()) return true;
-        if($this -> purchase -> isBuyer()) return true;
-        if(auth() -> user() -> isAdmin()) return true;
+        if($this -> purchase -> isVendor())
+            return true;
+        if($this -> purchase -> isBuyer())
+            return true;
+        if(auth() -> user() -> isAdmin())
+            return true;
 
         return false;
 
     }
 
     /**
-     * Posts new message to this dispute
+     * Posts a new message to this dispute
      *
      * @param string $message
      * @throws RequestException

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Random\RandomException;
 
 /**
  * @property mixed $groups
@@ -48,7 +49,7 @@ class SendMessagesRequest extends FormRequest
     }
 
     /**
-     * @throws RequestException|\Random\RandomException
+     * @throws RequestException|RandomException
      */
     public function persist(): int
     {

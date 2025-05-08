@@ -64,7 +64,7 @@ class Shipping extends Model
     }
 
     /**
-     * Returns 2 decimals stringed number of local value of the shipping
+     * Returns 2 decimals stringed amount of local value of the shipping
      *
      * @return string
      * @throws ContainerExceptionInterface

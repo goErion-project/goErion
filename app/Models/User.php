@@ -409,7 +409,7 @@ class User extends Authenticatable
         // vendor fee in usd
         $marketVendorFee =  config('marketplace.vendor_fee');
 
-        // for each supported coin generate an instance of the coin
+        // for each supported coin, generate an instance of the coin
         foreach ($coinsClasses as $short => $coinClass){
             $coinsService = new $coinClass();
             try {

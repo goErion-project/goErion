@@ -68,7 +68,7 @@
                                     </select>
                                 @elseif(count($item -> offer -> product -> getCoins()) == 1)
                                     <input type="hidden" name="coin" value="{{ $item -> offer -> product -> getCoins()[0] }}">
-                                    <input type="text" value="{{ strtoupper(\App\Purchase::coinDisplayName($item -> offer -> product -> getCoins()[0])) }}" class="form-control form-control-sm disabled" disabled>
+                                    <input type="text" value="{{ strtoupper(\App\Models\Purchase::coinDisplayName($item -> offer -> product -> getCoins()[0])) }}" class="form-control form-control-sm disabled" disabled>
                                 @endif
 
 

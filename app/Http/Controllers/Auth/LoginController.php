@@ -38,6 +38,9 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * @return RedirectResponse
+     */
     public function postSignOut(): RedirectResponse
     {
         auth()->logout();

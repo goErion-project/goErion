@@ -14,6 +14,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
  * @property mixed $id
  * @property mixed $products
  * @property mixed $children
+ * @method descendants()
  */
 class Category extends Model
 {
@@ -111,6 +112,16 @@ class Category extends Model
     public function allChildrenIds()
     {
         return $this->allChildren()->pluck('name')->toArray();
+    }
+
+    /**
+     * Array of all subcategory names
+     *
+     * @return mixed
+     */
+    public function allChildrenNames() : array
+    {
+        return $this -> allChildren() -> pluck('name') -> toArray();
     }
 
     public function childProducts(): LengthAwarePaginator

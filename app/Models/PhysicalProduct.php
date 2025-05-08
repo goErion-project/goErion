@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\Uuids;
+use Illuminate\Config\Repository;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * @property mixed $countries_option
@@ -29,7 +31,7 @@ class PhysicalProduct extends User
             'exclude' => 'All except excluded countries'
         ];
 
-    public function product()
+    public function product(): HasOne
     {
         return $this->hasOne(Product::class, 'id', 'id');
     }
@@ -51,6 +53,9 @@ class PhysicalProduct extends User
         return $countries;
     }
 
+    /**
+     * @return string
+     */
     public function shipTo(): string
     {
         if ($this->countries_option == 'all')
@@ -60,6 +65,16 @@ class PhysicalProduct extends User
         return 'except to countries';
     }
 
+    /**
+     * Returns the long name of the country from which the product is sent
+     *
+     * @return Repository|mixed
+     */
+    public function shipsFrom(): mixed
+    {
+        return config('countries.' . $this -> country_from);
+    }
+
     public function countriesLong(): string
     {
         if (!empty($this->countriesLongArray()))
@@ -67,10 +82,6 @@ class PhysicalProduct extends User
         return '';
     }
 
-    public function shipsFrom()
-    {
-        return config('countries.' . $this->country_from);
-    }
 
     public function setCountries(?array $countries): void
     {

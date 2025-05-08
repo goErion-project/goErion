@@ -11,6 +11,7 @@ use App\Traits\Purchasable;
 use App\Traits\Uuids;
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Log;
@@ -296,7 +297,7 @@ class Purchase extends Model
     }
 
     /**
-     * Sum of Coin needed to be paid
+     * The Sum of Coin needed to be paid
      *
      * @return float
      */
@@ -386,8 +387,8 @@ class Purchase extends Model
     return auth()->check() && auth()->user() == $this->buyer;
 }
 
-    public static function latestOrders()
-{
+    public static function latestOrders(): Collection
+    {
     return self::with(['offer.product'])->orderBy('created_at', 'desc')->limit(5)->get();
 }
 
@@ -470,8 +471,10 @@ class Purchase extends Model
      */
     public function canMakeDispute() : bool
     {
-        if(!auth() -> check()) return false;
-        if($this -> isBuyer() || $this -> isVendor()) return true;
+        if(!auth() -> check())
+            return false;
+        if($this -> isBuyer() || $this -> isVendor())
+            return true;
 
         return false;
     }
@@ -484,8 +487,10 @@ class Purchase extends Model
      */
     public function userRole(User $user) : string
     {
-        if($user -> id == $this -> vendor_id) return '(vendor)';
-        if($user -> id == $this -> buyer_id) return '(buyer)';
+        if($user -> id == $this -> vendor_id)
+            return '(vendor)';
+        if($user -> id == $this -> buyer_id)
+            return '(buyer)';
 
         return '';
     }

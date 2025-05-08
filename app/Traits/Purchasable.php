@@ -28,7 +28,7 @@ trait Purchasable
      */
     public function purchased(): void
     {
-        // check if shipping is not deleted in the meantime
+        // check if shipping is not deleted in the meantime,
         // shipping is deleted between adding to cart and checkout
         if($this->shipping && Shipping::query()->where('id',$this->shipping->id)->where('deleted', '=', 1)->exists()){
             Cart::getCart()->clearCart(); // clear cart
@@ -124,7 +124,7 @@ trait Purchasable
      */
     public function release(): void
     {
-        // state must be 'sent' to be delivered
+        // the state must be 'sent' to be delivered
         throw_unless($this->state=='sent', new RequestException('This purchase is already delivered!'));
 
 
@@ -152,7 +152,7 @@ trait Purchasable
     /**
      * Adapted for Finalize Early purchases
      *
-     * Function that does mark the purchase as delivered but in case of error restores to purchased state
+     * Function that does mark the purchase as delivered but in case of error restores to purchase state
      * Adapted for completing purchases
      *
      * @throws RequestException
@@ -160,7 +160,7 @@ trait Purchasable
      */
     private function markingAsDelivered(): void
     {
-        // state must be 'sent' to be delivered
+        // the state must be 'sent' to be delivered
         throw_unless($this->state=='sent', new RequestException('This purchase is already delivered!'));
 
 
@@ -199,7 +199,7 @@ trait Purchasable
 
         throw_if($this->type!='normal', new RequestException('This purchase must be Escrow type!'));
 
-        // state must be 'sent' to be delivered
+        // the state must be 'sent' to be delivered
         throw_unless($this->state=='sent', new RequestException('This purchase is already delivered!'));
 
 

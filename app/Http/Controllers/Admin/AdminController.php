@@ -297,7 +297,7 @@ class AdminController extends Controller
     {
         $ticket -> solved = !$ticket -> solved;
         $ticket -> save();
-        session() -> flash('successmessage', 'The ticket has been solved!');
+        session() -> flash('success_message', 'The ticket has been solved!');
 
         event(new TicketClosed($ticket));
 

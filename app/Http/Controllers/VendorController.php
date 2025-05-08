@@ -576,7 +576,7 @@ class VendorController extends Controller
         // set a product type section
         session()->put('product_type', $myProduct->type);
 
-        // string to view map to retrieve which view
+        // string to view a map to retrieve which view
         $sectionMap = [
             'delivery' =>
                 view('profile.vendor.adddelivery', [
@@ -660,6 +660,19 @@ class VendorController extends Controller
         ]);
     }
 
+    /**
+     * Returns view for confirming sent
+     *
+     * @param Purchase $sale
+     * @return Factory|\Illuminate\View\View
+     */
+    public function confirmSent(Purchase $sale): Factory|View
+    {
+        return view('profile.purchases.confirmsent', [
+            'backRoute' => redirect() -> back() -> getTargetUrl(),
+            'sale' => $sale
+        ]);
+    }
 
     /**
      * Runs procedure for marking sale as sent

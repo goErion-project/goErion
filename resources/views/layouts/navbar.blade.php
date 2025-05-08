@@ -33,7 +33,7 @@
             </ul>
             <ul class="navbar-nav">
                 @auth
-                    <li class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
+                    <ul class="nav-item @isroute('profile.index') active @endisroute d-flex align-items-center">
                         <a class="nav-link px-2 d-flex align-items-center gap-2" href="{{ route('profile.index') }}">
                             <div class="rounded-circle bg-brown-600 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
                                 @if(auth()->user()->avatar)
@@ -42,22 +42,20 @@
                                     <span class="text-white fw-bold" style="font-size: 16px;">{{ strtoupper(substr(auth()->user()->username, 0, 2)) }}</span>
                                 @endif
                             </div>
-                            <div class="d-flex flex-column">
-                                <div class="">
-                                    <span>Logged in as <b>{{ auth()->user()->username }}</b></span>
-                                </div>
-                                <div>
-                                    <span class="fs-sm">
-                                        <a href="https://www.coindesk.com/price/bitcoin" target="_blank" class="text-decoration-none text-dark">BTC:</a>
-                                    </span> 0.00000000 /
-                                    <span class="wallet-label">
-                                        <a href="https://www.coindesk.com/price/monero" target="_blank" class="text-decoration-none text-dark">XMR:</a>
-                                    </span> 0.00000000
-                                </div>
-                            </div>
+                            <li class="nav-item d-flex flex-column">
+                                <li>
+                                    <small>Logged in as <b>{{ auth()->user()->username }}</b></small>
+                                    <small class="fs-sm">
+                                        <a href="" target="_blank" class="text-decoration-none text-dark">BTC:</a>
+                                    </small> 0.00000000 /
+                                    <small class="wallet-label">
+                                        <a href="" target="_blank" class="text-decoration-none text-dark">XMR:</a>
+                                    </small> 0.00000000
+                                </li>
+                            </li>
                         </a>
-                    </li>
-                    <li class="nav-item pe-5">
+                    </ul>
+                    <li class="nav-item d-flex gap-2 pe-5">
                         <form action="{{ route('auth.signout.post') }}" method="post">
                             @csrf
                             <button class="btn btn-dark text-white border-danger border d-flex ms-auto" type="submit">Logout</button>

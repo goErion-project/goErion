@@ -9,6 +9,7 @@ use App\Marketplace\Bitmessage\Bitmessage;
 use Illuminate\Config\Repository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -29,7 +30,7 @@ class BitmessageController extends Controller
      *
      * @var Repository|mixed
      */
-    protected $address;
+    protected mixed $address;
 
     public function __construct() {
 
@@ -48,7 +49,8 @@ class BitmessageController extends Controller
         }
     }
 
-    public function show() {
+    public function show(): View
+    {
 
         return view('profile.bitmessage')->with([
             'enabled' => $this->enabled,

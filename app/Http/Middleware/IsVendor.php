@@ -15,7 +15,7 @@ class IsVendor
      */
     public function handle(Request $request, Closure $next): Response
     {
-        //if logged-in user is not vendor
+        //if logged user is not vendor
         if (auth()->check())
         {
             if (auth()->user()->isVendor())

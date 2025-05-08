@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 trait Adminable
 {
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return Admin::where('id',$this->id)->exists();
     }

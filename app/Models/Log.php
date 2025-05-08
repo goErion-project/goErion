@@ -31,7 +31,7 @@ class Log extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     public function performedOn(): ?array

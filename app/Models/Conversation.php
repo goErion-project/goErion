@@ -75,7 +75,7 @@ class Conversation extends Model
             }) -> first();
 
         /**
-         * If it is not found make new conversation
+         * If it is not found, make new conversation
          */
         if($oldConversation == null)
         {
@@ -141,7 +141,7 @@ class Conversation extends Model
         if(auth() -> check() && auth() -> user()  == $this -> receiver)
             if($this -> sender)
                 return $this -> sender;
-            // if the sender is null then return stub user
+            // if the sender is null, then return stub user
             else
                 return User::stub(); // non-persisted user
 
@@ -166,7 +166,8 @@ class Conversation extends Model
      */
     public function markMessagesAsRead(): void
     {
-        $this -> messages() -> where('receiver_id', auth() -> user() -> id) -> where('read', false) -> update(['read' => true]);
+        $this -> messages() -> where('receiver_id', auth() -> user() -> id)
+            -> where('read', false) -> update(['read' => true]);
     }
 
     /**

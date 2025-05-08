@@ -52,7 +52,7 @@
                         </td>
                         <td>
                             @if($item -> message)
-                                @if(\App\Message::messageEncrypted($item -> message))
+                                @if(\App\Models\Message::messageEncrypted($item -> message))
                                     <textarea class="form-control"  readonly rows="5">{{ $item -> message }}</textarea>
                                 @else
                                     <p class="text-muted">

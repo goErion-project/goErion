@@ -66,7 +66,7 @@ class VendorPurchase extends Model
 
 
     /**
-     * Returns how much need to be paid to the address
+     * Returns how much needs to be paid to the address
      *
      * @return float
      */

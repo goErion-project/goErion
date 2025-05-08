@@ -73,7 +73,7 @@ class SearchController extends Controller
         // $category = Category::all();
         $categoryQuery = $request->get('category');
 if ($categoryQuery !== null && $categoryQuery !== 'any') {
-    $category = Category::find($categoryQuery);
+    $category = Category::find('category',$categoryQuery);
     if ($category) {
        // Get all child category IDs and flatten the array
        $childCategoryIds = $category->descendants()->pluck('id')->toArray();
@@ -179,7 +179,7 @@ if ($categoryQuery !== null && $categoryQuery !== 'any') {
     }
 
     private function priceFilter($collection,$minPriceQuery,$maxPriceQuery){
-          
+
         //min price
         $filteredCollection = $collection;
         if ($minPriceQuery !== null && floatval($minPriceQuery) > 0){

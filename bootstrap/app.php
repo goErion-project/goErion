@@ -8,6 +8,7 @@ use App\Http\Middleware\IsBanned;
 use App\Http\Middleware\IsVendor;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\ThemeMiddleware;
+use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\VerifyLogin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->append(TrimStrings::class);
         $middleware->web(ThemeMiddleware::class);
         $middleware->alias([
             'verify_2fa' => VerifyLogin::class,

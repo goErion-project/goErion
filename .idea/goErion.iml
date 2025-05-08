@@ -19,6 +19,14 @@
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts" isTestSource="false" packagePrefix="Modules\FeaturedProducts\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly" isTestSource="false" packagePrefix="Modules\FinalizeEarly\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />
@@ -179,6 +187,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-http/curl-client" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpxmlrpc/polyfill-xmlrpc" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

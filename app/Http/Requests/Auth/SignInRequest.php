@@ -12,7 +12,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
-use Str;
+use Illuminate\Support\Str;
 
 /**
  * @property mixed $username
