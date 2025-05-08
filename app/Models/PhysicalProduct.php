@@ -82,6 +82,7 @@ class PhysicalProduct extends User
 
     public function shippings()
     {
-        //
+        return $this->hasMany(Shipping::class, 'product_id', 'id')
+        ->where('deleted','=',0);
     }
 }
