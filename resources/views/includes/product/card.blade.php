@@ -14,7 +14,7 @@
         <div class="card ms-2 border border-gray-400 bg-gray-300" style="max-width: 334px">
             <div class="card-body text-start">
                 <p class="card-subtitle">
-                    From: <strong>{{ $product->getLocalPriceFrom() ?? 'N/A' }} {{ \App\Marketplace\Utility\CurrencyConverter::getLocalSymbol() }}</strong>
+                    From: <strong>{{ $product->getLocalPriceFrom() ?? '' }} {{ \App\Marketplace\Utility\CurrencyConverter::getLocalSymbol() }}</strong>
                     - {{ $product->category?->name ?? 'No Category' }}
                     - <span class="badge badge-info">{{ $product->type ?? 'Unknown' }}</span>
                 </p>
@@ -32,7 +32,7 @@
 </div>
         <div class="card border border-gray-400 bg-gray-300 px-4 py-2">
             <p class="card-title text-end">
-                    {{ $product->shipFrom() }} ---> {{ $product->shipTo() }}
+                    {{ $product->shipFrom() }} <span class="px-2" style="display: inline-block; transform: scaleX(2);">→</span> {{ $product->shipTo() }}
             </p>
         </div>
 </div>

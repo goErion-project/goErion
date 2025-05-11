@@ -19,26 +19,40 @@
     </div>
     <hr>
 
-    <div class="row ps-3">
+    <div class="mb-3 ps-5">
+        <a class="btn btn-primary btn-sm d-inline me-4 mb-3 px-5 py-1 rounded-4">BTC:</a>
+        <a class="btn btn-primary btn-sm d-inline gap-2 mb-3 px-5 py-1 rounded-4">XMR:</a>
+    </div>
+
+    <hr>
+    
+    <div class="row ps-4">
         <ul>
         <li class="d-inline gap-2 mb-3">
             <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
         </li>
         <li class="d-inline gap-2 p-2">
-            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+            <a href="" class="btn btn-outline-dark px-5 py-2">Favorites</a>
         </li>
         </ul>
     </div>
-    <div class="row ps-3">
+    <div class="row d-inline-flex gap-1 ps-5">
         <ul>
         <li class="d-inline gap-2 mb-3">
-            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+            <a href="" class="btn btn-outline-dark px-4 py-2">My Settings</a>
         </li>
         <li class="d-inline gap-2 p-2">
-            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+            <form class="d-inline" action="{{route('auth.signout.post')}}" method="post">
+                @csrf               
+                <button class="btn btn-outline-dark px-5 py-2" type="submit">Logout</button>
+            </form>
         </li>
         </ul>
     </div>
+    {{-- <form action="{{route('auth.signout.post')}}" method="post">
+        @csrf
+        <button class="btn btn-dark text-white border-danger border d-flex ms-auto" type="submit">Logout</button>
+    </form> --}}
     <!-- Detailed Search Form -->
     <div class="m-2 card shadow bg-gray-300 p-3">
         <h6 class="fw-bold">Quick Search</h6>

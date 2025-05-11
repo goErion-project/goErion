@@ -14,12 +14,14 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-{{--        <!-- Search Form -->--}}
-        @include('layouts.search')
-{{--        <!-- Search Form -->--}}
+
 
         <!-- Collapsible Content -->
         <div class="collapse navbar-collapse" id="navbarContent">
+            {{--        <!-- Search Form -->--}}
+        @include('layouts.search')
+        {{--        <!-- Search Form -->--}}
+
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 @admin
                 <li class="nav-item @isroute('admin') active @endisroute">
@@ -54,12 +56,12 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item pe-5">
+                    {{-- <li class="nav-item pe-5">
                         <form action="{{route('auth.signout.post')}}" method="post">
                             @csrf
                             <button class="btn btn-dark text-white border-danger border d-flex ms-auto" type="submit">Logout</button>
                         </form>
-                    </li>
+                    </li> --}}
                 @else
                     <li class="nav-item d-flex gap-2 pe-5">
                         <a class="btn btn-outline-dark" href="{{route('auth.signin')}}">Sign In</a>
