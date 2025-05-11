@@ -1,4 +1,7 @@
  Digital Currency Marketplace
+ ![Home Page](https://github.com/user-attachments/assets/1518394c-daa3-4860-ae47-e4e74ae8555a)
+![light Home Page](https://github.com/user-attachments/assets/868debfd-851a-4670-a856-cd31d819b975)
+
 #![Screenshot 2025-05-11 at 19-31-54 GoErion - Home Page](https://github.com/user-attachments/assets/eee6f190-a071-429b-9f77-7d96bd4d1642)
 ion
 ![Screenshot 2025-05-09 ![Vendor Settings](https://github.com/user-attachments/assets/8aceb8fe-b297-4f1e-910e-bacff5efb06a)
