@@ -25,7 +25,7 @@
     </div>
 
     <hr>
-    
+
     <div class="row ps-4">
         <ul>
         <li class="d-inline gap-2 mb-3">
@@ -55,7 +55,7 @@
     </form> --}}
     <!-- Detailed Search Form -->
     <div class="m-2 card shadow bg-gray-300 p-3">
-        <h6 class="fw-bold">Quick Search</h6>
+        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Quick Search</h6>
         <form action="{{ url('/search') }}" method="GET">
             <!-- Search Terms -->
             <div class="form-group mb-2">
@@ -104,40 +104,7 @@
                     <option value="physical" {{ request('type') == 'physical' ? 'selected' : '' }}>Physical</option>
                     <option value="digital" {{ request('type') == 'digital' ? 'selected' : '' }}>Digital</option>
                 </select>
-            </div>
-
-            <!-- Price Range -->
-            <div class="form-group mb-2">
-                <label for="price_min" class="form-label">Price range:</label>
-                <div class="d-flex gap-2">
-                    <input
-                        type="number"
-                        name="price_min"
-                        id="price_min"
-                        class="form-control"
-                        placeholder="Min"
-                        value="{{ request('price_min') }}"
-                    />
-                    <input
-                        type="number"
-                        name="price_max"
-                        id="price_max"
-                        class="form-control"
-                        placeholder="Max"
-                        value="{{ request('price_max') }}"
-                    />
-                </div>
-            </div>
-
-            <!-- Order By -->
-            <div class="form-group mb-3">
-                <label for="order_by" class="form-label">Order By:</label>
-                <select name="order_by" id="order_by" class="form-control">
-                    <option value="newest" {{ request('order_by') == 'newest' ? 'selected' : '' }}>Newest</option>
-                    <option value="price_asc" {{ request('order_by') == 'price_asc' ? 'selected' : '' }}>Price: Low to High</option>
-                    <option value="price_desc" {{ request('order_by') == 'price_desc' ? 'selected' : '' }}>Price: High to Low</option>
-                </select>
-            </div>
+            </div>                 
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary btn-sm w-100">Search</button>
@@ -146,15 +113,13 @@
 
     <!-- Browse Categories -->
     <div class="m-2 card shadow bg-gray-300 p-3">
-        <h6 class="fw-bold">Browse Categories</h6>
-        <ul class="list-group">
-            <li class="list-group-item bg-gray-500">
-                <a href="{{ url('/search?category=') }}" class="text-decoration-none text-white">All Categories</a>
-            </li>
+        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Browse Categories</h6>
+        <ul class="list-group">           
             @foreach($categories as $category)
-                <li class="list-group-item bg-gray-500">
-                    <a href="{{ url('/search?category=' . $category->id) }}" class="text-decoration-none text-white">
+                <li class="card bg-gray-300 border-sm mb-2 py-2 ps-3">
+                    <a href="{{ url('/search?category=' . $category->id) }}" class="text-decoration-none text-dark fw-bold">
                         {{ $category->name }}
+                        <span class="badge text-bg-secondary">{{ $category -> num_products }}</span>
                     </a>
                 </li>
             @endforeach

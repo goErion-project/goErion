@@ -39,8 +39,8 @@
                         </li>
                         <li>
                             <a class="dropdown-item bg-secondary-subtle rounded "
-                               href="#">
-                                Dashboard
+                               href="{{ route('profile.tickets') }}">
+                                Support
                             </a></li>
                     </ul>
                 </div>
