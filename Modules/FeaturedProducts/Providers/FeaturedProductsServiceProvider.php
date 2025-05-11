@@ -19,7 +19,7 @@ class FeaturedProductsServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->registerFeaturedStatus();
     }
 
@@ -41,10 +41,10 @@ class FeaturedProductsServiceProvider extends ServiceProvider
     protected function registerConfig(): void
     {
         $this->publishes([
-            __DIR__.'/../config/config.php' => config_path('featuredproducts.php'),
+            __DIR__ . '/../config/config.php' => config_path('featuredproducts.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            __DIR__.'/../config/config.php', 'featuredproducts'
+            __DIR__ . '/../config/config.php', 'featuredproducts'
         );
     }
 
@@ -65,7 +65,7 @@ class FeaturedProductsServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/featuredproducts';
-        }, \Config::get('view.paths')), [$sourcePath]), 'featuredproducts');
+        }, \config::get('view.paths')), [$sourcePath]), 'featuredproducts');
     }
 
     /**
@@ -92,7 +92,7 @@ class FeaturedProductsServiceProvider extends ServiceProvider
     public function registerFactories(): void
     {
 //        if (! app()->environment('production')) {
-//            app(Factory::class)->load(__DIR__ . '/../../database/factories');
+//            app(Factory::class)->load(__DIR__ . '/../../Database/factories');
 //        }
     }
 

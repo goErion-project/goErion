@@ -27,8 +27,8 @@ return [
         'enabled' => false,
         'path' => base_path('vendor/nwidart/laravel-modules/src/Commands/stubs'),
         'files' => [
-            'routes/web' => 'routes/web.php',
-            'routes/api' => 'routes/api.php',
+            'Routes/web' => 'Routes/web.php',
+            'Routes/api' => 'Routes/api.php',
             'views/index' => 'resources/views/index.blade.php',
             'views/master' => 'resources/views/layouts/master.blade.php',
             'scaffold/config' => 'config/config.php',
@@ -55,8 +55,8 @@ return [
              *
              * Note: Keys should be in UPPERCASE.
              */
-            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'PLURAL_LOWER_NAME', 'KEBAB_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
-            'routes/api' => ['LOWER_NAME', 'STUDLY_NAME', 'PLURAL_LOWER_NAME', 'KEBAB_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
+            'Routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'PLURAL_LOWER_NAME', 'KEBAB_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
+            'Routes/api' => ['LOWER_NAME', 'STUDLY_NAME', 'PLURAL_LOWER_NAME', 'KEBAB_NAME', 'MODULE_NAMESPACE', 'CONTROLLER_NAMESPACE'],
             'vite' => ['LOWER_NAME', 'STUDLY_NAME', 'KEBAB_NAME'],
             'json' => ['LOWER_NAME', 'STUDLY_NAME', 'KEBAB_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
             'views/index' => ['LOWER_NAME'],
@@ -99,14 +99,14 @@ return [
 
         /*
         |--------------------------------------------------------------------------
-        | The migrations' path
+        | The Migrations' path
         |--------------------------------------------------------------------------
         |
         | Where you run the 'module:publish-migration' command, where do you publish the
         | the migration files?
         |
         */
-        'migration' => base_path('database/migrations'),
+        'migration' => base_path('Database/Migrations'),
 
         /*
         |--------------------------------------------------------------------------
@@ -162,10 +162,10 @@ return [
             // config/
             'config' => ['path' => 'config', 'generate' => true],
 
-            // database/
-            'factory' => ['path' => 'database/factories', 'generate' => true],
-            'migration' => ['path' => 'database/migrations', 'generate' => true],
-            'seeder' => ['path' => 'database/seeders', 'generate' => true],
+            // Database/
+            'factory' => ['path' => 'Database/factories', 'generate' => true],
+            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
+            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
 
             // lang/
             'lang' => ['path' => 'lang', 'generate' => false],
@@ -175,8 +175,8 @@ return [
             'component-view' => ['path' => 'resources/views/components', 'generate' => false],
             'views' => ['path' => 'resources/views', 'generate' => true],
 
-            // routes/
-            'routes' => ['path' => 'routes', 'generate' => true],
+            // Routes/
+            'Routes' => ['path' => 'Routes', 'generate' => true],
 
             // tests/
             'test-feature' => ['path' => 'tests/Feature', 'generate' => true],
@@ -202,7 +202,7 @@ return [
         | This option for register migration automatically.
         |
         */
-        'migrations' => true,
+        'Migrations' => true,
 
         /*
         |--------------------------------------------------------------------------
@@ -283,7 +283,7 @@ return [
     | Activators
     |--------------------------------------------------------------------------
     |
-    | You can define new types of activators here, file, database, etc. The only
+    | You can define new types of activators here, file, Database, etc. The only
     | required parameter is 'class'.
     | The file activator will store the activation status in storage/installed_modules
     */

@@ -387,7 +387,7 @@ class VendorController extends Controller
     }
 
     /**
-     * Remove image form database or session and delete a file from the server
+     * Remove image form Database or session and delete a file from the server
      *
      * @param $id
      * @return RedirectResponse

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\FeaturedProducts\main;
+namespace Modules\FeaturedProducts\Main;
 
 use App\Models\Product;
 
@@ -10,7 +10,7 @@ class FeaturedStatus
         try{
             $cacheMinutes = intval(config('marketplace.front_page_cache.featured_products'));
             $featuredProducts = \Cache::remember('featured_products_front_page', $cacheMinutes, function () {
-                return Product::where('featured',1)->inRandomOrder()->limit(3)->get();
+                return Product::where('featured',1)->inRandomOrder()->limit(16)->get();
             });
         } catch (\Exception $e){
             $featuredProducts = null;

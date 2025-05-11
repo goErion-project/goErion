@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/featuredproducts",
+    "name": "goerion/featuredproducts",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "GoErion Inc.",
+            "email": "goerionteam@gmail.com"
         }
     ],
     "extra": {
@@ -26,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Modules\\FeaturedProducts\\Tests\\": "Modules/FeaturedProducts/Tests/"
+            "Modules\\FeaturedProducts\\Tests\\": "Modules/FeaturedProducts/tests/"
         }
     }
 }

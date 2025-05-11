@@ -27,9 +27,16 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        $categories = Category::with('children')->withCount('products')->whereNull('parent_id')->get();
+        try {
+        $categories = Category::with('children')
+        ->withCount('products')
+        ->whereNull('parent_id')
+        ->get();
         View::share('categories', $categories);
-
+        } catch (\Exception $e) {
+            \Log::error('Error fetching categories: ' . $e->getMessage());
+            view()->share('categories', collect());
+        }
         resolve(EngineManager::class)->extend('elastic', function () {
             return new ElasticsearchEngine();
         });

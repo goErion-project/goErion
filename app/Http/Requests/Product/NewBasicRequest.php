@@ -59,7 +59,7 @@ class NewBasicRequest extends FormRequest
         foreach ($this -> coins as $coin)
             if(!in_array($coin, array_keys(config('coins.coin_list'))))
                 throw new RequestException('Coin "' . $coin . '" is not supported!');
-        // check if it is in a database
+        // check if it is in a Database
 
 
         /**

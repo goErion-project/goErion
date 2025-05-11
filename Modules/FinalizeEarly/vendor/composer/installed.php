@@ -3,7 +3,7 @@
         'name' => 'nwidart/finalizeearly',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a2df5a6b0244b9c0eaa7c60e47adcd2e16261b8b',
+        'reference' => 'bb9f03adfbe187bfb32b6ba1599beb6605f99841',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'nwidart/finalizeearly' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a2df5a6b0244b9c0eaa7c60e47adcd2e16261b8b',
+            'reference' => 'bb9f03adfbe187bfb32b6ba1599beb6605f99841',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

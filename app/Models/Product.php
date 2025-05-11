@@ -508,4 +508,20 @@ class Product extends Model
         return CurrencyConverter::getLocalSymbol();
     }
 
+    public function shipFrom(): string
+{
+    if ($this->isPhysical() && $this->physical) {
+        return $this->physical->shipsFrom() ?? 'Unknown';
+    }
+    return 'N/A';
+}
+
+public function shipTo(): string
+{
+    if ($this->isPhysical() && $this->physical) {
+        return $this->physical->shipTo() ?? 'Unknown';
+    }
+    return 'N/A';
+}
+
 }

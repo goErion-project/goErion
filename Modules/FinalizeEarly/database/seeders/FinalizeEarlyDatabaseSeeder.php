@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class FinalizeEarlyDatabaseSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Run the Database seeds.
      */
     public function run(): void
     {

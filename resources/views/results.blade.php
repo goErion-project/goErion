@@ -37,10 +37,10 @@
                         @include('includes.product.row', ['product' => $product])
                     @endforeach
                 @else
-                    @foreach($products->chunk(3) as $chunks)
+                    @foreach($products->chunk(2) as $chunks)
                         <div class="row mt-3">
                             @foreach($chunks as $product)
-                                <div class="col-md-4 my-md-0 my-2 col-12">
+                                <div class="col-md-6 my-md-0 my-2 col-12">
                                     @include('includes.product.card', ['product' => $product])
                                 </div>
                             @endforeach

@@ -6,8 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Modules\\FeaturedProducts\\Tests\\' => array($baseDir . '/tests'),
-    'Modules\\FeaturedProducts\\Database\\Seeders\\' => array($baseDir . '/database/seeders'),
-    'Modules\\FeaturedProducts\\Database\\Factories\\' => array($baseDir . '/database/factories'),
-    'Modules\\FeaturedProducts\\' => array($baseDir . '/app'),
+    'Modules\\FeaturedProducts\\Tests\\' => array($baseDir . '/Modules/FeaturedProducts/tests'),
+    'Modules\\FeaturedProducts\\Database\\Seeders\\' => array($baseDir . '/Modules/FeaturedProducts/database/seeders'),
+    'Modules\\FeaturedProducts\\Database\\Factories\\' => array($baseDir . '/Modules/FeaturedProducts/database/factories'),
+    'Modules\\FeaturedProducts\\' => array($baseDir . '/Modules/FeaturedProducts'),
 );

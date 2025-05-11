@@ -12,7 +12,7 @@ use App\Http\Controllers\VendorController;
 
 
 /**
- * All routes related to user profile
+ * All Routes related to user profile
  * Grouped under the prefix "profile" and under auth middleware
  */
 Route::prefix('profile')->group(function ()
@@ -30,7 +30,7 @@ Route::prefix('profile')->group(function ()
     Route::get('wishlist', [ProfileController::class,'wishlist'])
         -> name('profile.wishlist');
 
-    //PGP routes
+    //PGP Routes
     Route::get('pgp',[ProfileController::class,'pgp'])
         ->name('profile.pgp');
     Route::post('pgp',[ProfileController::class,'pgpPost'])
@@ -53,7 +53,7 @@ Route::prefix('profile')->group(function ()
         -> name('profile.vendor.address.remove'); // add address to account
 
 
-    //vendor routes
+    //vendor Routes
     Route::get('vendor',[VendorController::class,'vendor'])
         ->name('profile.vendor');
     Route::post('vendor/update/profile',[VendorController::class,'updateVendorProfilePost'])
@@ -113,7 +113,7 @@ Route::prefix('profile')->group(function ()
     Route::get('vendor/product/edit/{id}/section/{section?}', [VendorController::class,'editProduct'])
         -> name('profile.vendor.product.edit');
 
-    // Sales routes
+    // Sales Routes
     Route::get('sales/{state?}', [VendorController::class,'sales'])
         -> name('profile.sales');
     Route::get('sale/{sale}', [VendorController::class,'sale'])
@@ -123,7 +123,7 @@ Route::prefix('profile')->group(function ()
     Route::get('sale/{sale}/sent', [VendorController::class,'markAsSent'])
         -> name('profile.sales.sent');
 
-    // Cart routes
+    // Cart Routes
     Route::get('cart', [ProfileController::class,'cart'])
         -> name('profile.cart');
     Route::post('cart/{product}/add', [ProfileController::class,'addToCart'])
@@ -137,7 +137,7 @@ Route::prefix('profile')->group(function ()
     Route::get('make/purchase', [ProfileController::class,'makePurchases'])
         -> name('profile.cart.make.purchases');
 
-    // Purchases routes
+    // Purchases Routes
     Route::get('purchases/{state?}', [ProfileController::class,'purchases'])
         -> name('profile.purchases');
     Route::get('purchases/{purchase}/message', [ProfileController::class,'purchaseMessage'])

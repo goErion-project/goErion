@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
-// Theme routes
+// Theme Routes
 Route::get('/theme/dark', function () {
     return redirect()->back()->withCookie(cookie()->forever('theme', 'dark'));
 })->name('theme.dark');
@@ -15,12 +15,12 @@ Route::get('/theme/light', function () {
 })->name('theme.light');
 
 
-// Main routes
+// Main Routes
 Route::name('auth.')->group(function () {
     include 'auth.php';
 });
 
-//admin routes
+//admin Routes
 Route::prefix('admin')->group(function ()
 {
     Route::middleware(['admin_panel_access'])->group(function ()
@@ -30,7 +30,7 @@ Route::prefix('admin')->group(function ()
 });
 
 
-// Profile routes
+// Profile Routes
 Route::middleware(['auth'])->group(function () {
     Route::get('banned', [ProfileController::class,'banned'])
         ->name('profile.banned');
@@ -54,7 +54,7 @@ Route::get('/confirmation', [IndexController::class,'confirmation'])
 Route::get('setview/{list}', [IndexController::class,'setView'])
     -> name('setview');
 
-// Product routes
+// Product Routes
 Route::get('product/{product}', [ProductController::class,'show'])
     -> name('product.show');
 Route::get('product/{product}/rules', [ProductController::class,'showRules'])
@@ -66,11 +66,11 @@ Route::get('product/{product}/delivery', [ProductController::class,'showDelivery
 Route::get('product/{product}/vendor', [ProductController::class,'showVendor'])
     -> name('product.vendor');
 
-// category routes
+// category Routes
 Route::get('category/{category}', [IndexController::class,'category'])
     -> name('category.show');
 
-// vendor routes
+// vendor Routes
 Route::get('vendor/{user}', [IndexController::class,'vendor'])
     -> name('vendor.show');
 

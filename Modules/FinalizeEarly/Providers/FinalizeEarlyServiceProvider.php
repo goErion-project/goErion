@@ -23,7 +23,7 @@ class FinalizeEarlyServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(__DIR__ . '/../database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->registerInfo();
         $this->registerProcedure();
     }
@@ -102,13 +102,13 @@ class FinalizeEarlyServiceProvider extends ServiceProvider
     }
     public function registerInfo(): void
     {
-        $this->app->bind('FinalizeEarlyModule\Info', function ($app) {
+        $this->app->bind('FinalizeEarlyModule\main\Info', function ($app) {
             return new Info();
         });
     }
     public function registerProcedure(): void
     {
-        $this->app->bind('FinalizeEarlyModule\Procedure', function ($app) {
+        $this->app->bind('FinalizeEarlyModule\main\Procedure', function ($app) {
             return new Procedure();
         });
     }

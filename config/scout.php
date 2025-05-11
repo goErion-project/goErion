@@ -12,7 +12,7 @@ return [
     | to the search service. You should adjust this based on your needs.
     |
     | Supported: "algolia", "meilisearch", "typesense",
-    | "database", "collection", "null", "elastic"
+    | "Database", "collection", "null", "elastic"
     |
     */
 
@@ -51,7 +51,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This configuration option determines if your data will only be synced
-    | with your search indexes after every open database transaction has
+    | with your search indexes after every open Database transaction has
     | been committed, thus preventing any discarded data from syncing.
     |
     */

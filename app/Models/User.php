@@ -521,7 +521,7 @@ class User extends Authenticatable
         catch (\Exception $e){
             DB::rollBack();
             \Illuminate\Support\Facades\Log::error($e);
-            throw new RequestException("Error happened with the database please try again!");
+            throw new RequestException("Error happened with the Database please try again!");
         }
     }
 

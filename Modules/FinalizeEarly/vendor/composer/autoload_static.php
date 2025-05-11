@@ -19,19 +19,19 @@ class ComposerStaticInit62045f0d2d8ecee1e130345618b9853f
     public static $prefixDirsPsr4 = array (
         'Modules\\FinalizeEarly\\Tests\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/tests',
+            0 => __DIR__ . '/../..' . '/Modules/FinalizeEarly/tests',
         ),
         'Modules\\FinalizeEarly\\Database\\Seeders\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/database/seeders',
+            0 => __DIR__ . '/../..' . '/Modules/FinalizeEarly/database/seeders',
         ),
         'Modules\\FinalizeEarly\\Database\\Factories\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/database/factories',
+            0 => __DIR__ . '/../..' . '/Modules/FinalizeEarly/database/factories',
         ),
         'Modules\\FinalizeEarly\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app',
+            0 => __DIR__ . '/../..' . '/Modules/FinalizeEarly',
         ),
     );
 

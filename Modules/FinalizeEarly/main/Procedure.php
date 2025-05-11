@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\FinalizeEarly\main;
+namespace Modules\FinalizeEarly\Main;
 
 use App\Models\Purchase;
 use Illuminate\Http\Client\RequestException;

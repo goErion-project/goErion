@@ -1,35 +1,26 @@
-<div class="container font-sans">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Welcome to {{ config('app.name') }}</h1>
-            <hr>
-        </div>
-    </div>        
+<div>
+    @include('includes.banners')
 </div>
-
 <!-- New Products Section -->
-<div class="row mt-1 mb-2">
+<div class="row mt-1 mb-4">
     <div class="col">
-        <h4>New Products</h4>
+        <h3 class="fw-bold">New Listings</h3>
     </div>
 </div>
 <div class="row">
     @if(isset($latestProducts) && $latestProducts->isNotEmpty())
         @foreach($latestProducts as $product)
-            <div class="col-md-4 my-md-0 my-2 col-12">
+            <div class="col-md-6 my-md-0 my-2 col-12">
                 @include('includes.product.card', ['product' => $product])
             </div>
         @endforeach
     @else
-        <div class="col-12">
-            <p>No new products available at the moment.</p>
+        <div class="col-12 fw-bold">
+            <p>No New Listings</p>
         </div>
     @endif
 </div>
     <div class="row">
-        <div class="col">
-            <hr>
-        </div>
     </div>
     @isModuleEnabled('FeaturedProducts')
     @include('featuredproducts::frontpagedisplay')

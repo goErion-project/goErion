@@ -1,4 +1,4 @@
-<div class="row my-2">
+<div class="row my-2" style="max-width: 600px">
 
     <div class="col-md-3 col-sm-4 col-12">
         <img class="rounded img-thumbnail mw-100" src="{{ asset('storage/'  . $product -> frontImage() -> image) }}"

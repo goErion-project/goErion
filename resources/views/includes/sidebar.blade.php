@@ -1,6 +1,6 @@
 @auth
     <!-- User Info Card -->
-    <div class="m-2 card shadow bg-gray-500">
+    <div class="m-2">
         <div class="d-flex align-items-start gap-3 p-3 rounded-3">
             <div class="rounded-circle bg-primary d-flex align-items-center justify-content-center" style="width: 55px; height: 55px;">
                 @if(auth()->user()->avatar)
@@ -17,34 +17,55 @@
             </div>
         </div>
     </div>
+    <hr>
 
+    <div class="row ps-3">
+        <ul>
+        <li class="d-inline gap-2 mb-3">
+            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+        </li>
+        <li class="d-inline gap-2 p-2">
+            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+        </li>
+        </ul>
+    </div>
+    <div class="row ps-3">
+        <ul>
+        <li class="d-inline gap-2 mb-3">
+            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+        </li>
+        <li class="d-inline gap-2 p-2">
+            <a href="" class="btn btn-outline-dark px-5 py-2">My Order</a>
+        </li>
+        </ul>
+    </div>
     <!-- Detailed Search Form -->
-    <div class="m-2 card shadow bg-gray-500 p-3">
-        <h6 class="fw-bold">Detailed Search</h6>
+    <div class="m-2 card shadow bg-gray-300 p-3">
+        <h6 class="fw-bold">Quick Search</h6>
         <form action="{{ url('/search') }}" method="GET">
             <!-- Search Terms -->
             <div class="form-group mb-2">
                 <label for="query" class="form-label">Search terms:</label>
-                <input 
-                    type="text" 
-                    name="query" 
-                    id="query" 
-                    class="form-control" 
-                    placeholder="Enter keywords..." 
-                    value="{{ request('query') }}" 
+                <input
+                    type="text"
+                    name="query"
+                    id="query"
+                    class="form-control"
+                    placeholder="Enter keywords..."
+                    value="{{ request('query') }}"
                 />
             </div>
 
             <!-- User -->
             <div class="form-group mb-2">
                 <label for="user" class="form-label">User:</label>
-                <input 
-                    type="text" 
-                    name="user" 
-                    id="user" 
-                    class="form-control" 
-                    placeholder="Enter username..." 
-                    value="{{ request('user') }}" 
+                <input
+                    type="text"
+                    name="user"
+                    id="user"
+                    class="form-control"
+                    placeholder="Enter username..."
+                    value="{{ request('user') }}"
                 />
             </div>
 
@@ -75,21 +96,21 @@
             <div class="form-group mb-2">
                 <label for="price_min" class="form-label">Price range:</label>
                 <div class="d-flex gap-2">
-                    <input 
-                        type="number" 
-                        name="price_min" 
-                        id="price_min" 
-                        class="form-control" 
-                        placeholder="Min" 
-                        value="{{ request('price_min') }}" 
+                    <input
+                        type="number"
+                        name="price_min"
+                        id="price_min"
+                        class="form-control"
+                        placeholder="Min"
+                        value="{{ request('price_min') }}"
                     />
-                    <input 
-                        type="number" 
-                        name="price_max" 
-                        id="price_max" 
-                        class="form-control" 
-                        placeholder="Max" 
-                        value="{{ request('price_max') }}" 
+                    <input
+                        type="number"
+                        name="price_max"
+                        id="price_max"
+                        class="form-control"
+                        placeholder="Max"
+                        value="{{ request('price_max') }}"
                     />
                 </div>
             </div>
@@ -110,7 +131,7 @@
     </div>
 
     <!-- Browse Categories -->
-    <div class="m-2 card shadow bg-gray-500 p-3">
+    <div class="m-2 card shadow bg-gray-300 p-3">
         <h6 class="fw-bold">Browse Categories</h6>
         <ul class="list-group">
             <li class="list-group-item bg-gray-500">

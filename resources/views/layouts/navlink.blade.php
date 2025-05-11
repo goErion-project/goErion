@@ -107,9 +107,12 @@
                         </button>
                         @auth
                         <ul class="dropdown-menu rounded p-1">
-                            <li>
-                                <a class="dropdown-item bg-secondary-subtle rounded hover:bg-yellow-500 fw-bold"
+                            <li class="nav-item text-center @isroute('profile.cart') active @endisroute">
+                                <a class="dropdown-item bg-secondary-subtle rounded hover:bg-yellow-500 fw-bold
+                                {{ \App\Marketplace\Cart::getCart() ->numberOfItems() == 0 ? 'bg-secondary' : 'bg-warning' }}"
                                    href="{{ route('profile.cart') }}">
+                                    <i class="fas fa-shopping-cart mr-2"></i>
+                                    ({{ session('cart_items') !== null ? count(session('cart_items')) : 0 }})
                                     Items
                                 </a>
                             </li>
@@ -151,10 +154,15 @@
                         </button>
                         @auth
                         <ul class="dropdown-menu rounded p-1">
-                            <li>
+                            <li class="nav-item @isroute('profile.notifications') active @endisroute">
                                 <a class="dropdown-item bg-secondary-subtle rounded fw-bold mb-2 hover:bg-yellow-500"
                                    href="{{ route('profile.notifications') }}">
                                     Notification
+{{--                                    <li class="nav-item @isroute('profile.notifications') active @endisroute">--}}
+{{--                                        <a href="{{route('profile.notifications')}}" class="nav-link">--}}
+{{--                                            <span @if(auth()->user()->unreadNotifications()->count() > 0) class="text-warning" @endif><i class="fa fa-bell"></i> {{auth()->user()->unreadNotifications()->count()}}</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
                                 </a>
                             </li>
 

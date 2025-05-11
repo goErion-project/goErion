@@ -28,7 +28,7 @@
                     @php $i = 1; @endphp
                     @foreach($product -> images() -> orderBy('first', 'desc') -> get() as $image)
                         <div id="slide-{{ $i++ }}">
-                            <img src="{{ asset('storage/' . $image -> image) }}">
+                            <img src="{{ asset('storage/' . $image -> image) }}" alt="">
                         </div>
                     @endforeach
                 </div>
@@ -216,6 +216,7 @@
                                                     @endif
                                                 @endauth
                                             </div>
+                                        </div>
                                 </td>
                             </tr>
 

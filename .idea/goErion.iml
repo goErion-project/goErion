@@ -27,6 +27,11 @@
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Database/Factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Database/Seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Database/Factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Database/Seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />

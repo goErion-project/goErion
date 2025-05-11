@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\UserController;
 Route::get('index',[AdminController::class,'index'])
     ->name('admin.index');
 
-// Category routes
+// Category Routes
 Route::get('categories', [AdminController::class,'categories'])
     -> name('admin.categories');
 Route::post('category/new', [AdminController::class,'newCategory'])
@@ -21,13 +21,13 @@ Route::get('category/{id}', [AdminController::class,'editCategoryShow'])
 Route::post('category/{id}', [AdminController::class,'editCategory'])
     -> name('admin.categories.edit');
 
-// Mass message routes
+// Mass message Routes
 Route::get('message', [AdminController::class,'massMessage'])
     -> name('admin.messages.mass');
 Route::post('message/send', [AdminController::class,'sendMessage'])
     -> name('admin.messages.send');
 
-// User routes
+// User Routes
 Route::get('users',[UserController::class,'users'])
     ->name('admin.users');
 Route::post('users/query',[UserController::class,'usersPost'])
