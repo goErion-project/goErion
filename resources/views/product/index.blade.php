@@ -9,4 +9,4 @@
     <p>No description available.</p>
 @endif
 
-@stop
+@endsection

@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
+        <div class="card col-md-12 p-2 mb-3">
             @include('includes.flash.error')
             <h2 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Checkout ({{ $numberOfItems }})</h2>
 
-            <table class="table table-hover table-striped">
+            <table class="table table-hover table-striped table-dark text-gray-300 fw-bold">
                 <thead>
                 <tr>
                     <th>Product</th>
@@ -55,7 +55,7 @@
                                 @if(\App\Models\Message::messageEncrypted($item -> message))
                                     <textarea class="form-control"  readonly rows="5">{{ $item -> message }}</textarea>
                                 @else
-                                    <p class="text-muted">
+                                    <p class="text-gray-300">
                                         {{ $item -> message }}
                                     </p>
 
@@ -71,13 +71,13 @@
             </table>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
             <a href="{{ route('profile.cart') }}" class="btn btn-lg btn-danger">
                 <i class="fas fa-chevron-left mr-2"></i>
                 Back to cart
             </a>
         </div>
-        <div class="col-md-8 text-right">
+        <div class="col-md-4 text-right">
             <h3 class="text-right d-inline-block mr-2">Total: @include('includes.currency', ['usdValue' => $totalSum])</h3>
         </div>
         {{--<div class="col-md-6 mt-3 justify-content-center text-center">--}}
@@ -92,7 +92,7 @@
         <div class="col-md-12 mt-3 justify-content-end text-right">
             <form action="{{ route('profile.cart.make.purchases') }}">
                 {{--<input type="hidden" name="cointype" value="btc">--}}
-                <button type="submit"  class="btn btn-mblue btn-lg">
+                <button type="submit"  class="btn btn-primary btn-lg">
                     <i class="fas fa-shopping-cart mr-2"></i>
                     Purchase
                 </button>

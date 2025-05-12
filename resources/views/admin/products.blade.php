@@ -17,7 +17,7 @@
             @include('includes.flash.success')
             @include('includes.flash.invalid')
             <form action="{{route('admin.products.query')}}" method="post" class="">
-                {{csrf_field()}}
+                @csrf
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <div class="form-group">
@@ -134,4 +134,4 @@
     </div>
 
 
-@stop
+@endsection

@@ -11,27 +11,27 @@
                 Clear
             </a>
         </div>
-        <div class="col-md-12">
+        <div class="card col-md-8 p-2">
             @include('includes.flash.error')
             @include('includes.flash.success')
-            <div class="form-row bg-dark text-white text-center rounded py-2">
-                <div class="col-md-2 justify-content-center">
+            <div class="nav nav-navbar form-row bg-gray-400 text-gray-800 text-center rounded py-2">
+                <div class="card col-md-2 justify-content-center py-2 ms-3 bg-gray-600 text-gray-200 mb-3">
                     Product name
                 </div>
-                <div class="col-md-1 justify-content-center">
+                <div class="card col-md-1 justify-content-center py-2 mb-3 bg-gray-600 text-gray-200 ms-3">
                     {{ \App\Marketplace\Utility\CurrencyConverter::getSymbol(\App\Marketplace\Utility\CurrencyConverter::getLocalCurrency()) }} per item
                 </div>
-                <div class="col-md-1">
+                <div class="card col-md-1 justify-content-center py-2 mb-3 bg-gray-600 text-gray-200 ms-3">
                     Coin
                 </div>
-                <div class="col-md-1 justify-content-center">
+                <div class="card col-md-1 justify-content-center py-2 mb-3 bg-gray-600 text-gray-200 ms-3">
                     Amount
                 </div>
-                <div class="col-md-2 justify-content-center">
+                <div class="card col-md-2 justify-content-center py-2 mb-3 bg-gray-600 text-gray-200 ms-3">
                     Delivery/Payment
                 </div>
 
-                <div class="col-md-3 justify-content-center">
+                <div class="card col-md-2 justify-content-center py-2 mb-3 bg-gray-600 text-gray-200 ms-3">
                     Message
                 </div>
             </div>
@@ -39,27 +39,27 @@
         </div>
         @if(!empty($items))
             @foreach($items as $productId => $item)
-                <div class="col-md-12  my-1 py-2">
+                <div class="card col-md-8  my-1 py-2">
                     <form action="{{ route('profile.cart.add', \App\Models\Product::find($productId)) }}" method="POST">
-                        {{ csrf_field() }}
-                        <div class="form-row bg-light">
-                            <div class="col-md-2">
+                        @csrf
+                        <div class="card form-row bg-gray-400 p-2">
+                            <div class="card col-md-2 bg-gray-600 text-gray-200 p-2 fw-bold ms-3">
                                 <a href="{{ route('product.show', $item -> offer -> product) }}">
-                                    <h4>{{ $item -> offer -> product -> name }}</h4>
+                                    <h4 class="m-2 text-gray-200 fw-bold">{{ $item -> offer -> product -> name }}</h4>
                                 </a>
-                                by
-                                <a class="badge badge-info" href="{{ route('vendor.show', $item -> offer -> product -> user) }}">
+                                by:
+                                <a class="badge badge-info fs-2" href="{{ route('vendor.show', $item -> offer -> product -> user) }}">
                                     {{ $item -> vendor -> user -> username }}
                                 </a>
                             </div>
-                            <div class="col-md-1 d-flex align-items-center">
+                            <div class="col-md-1 d-flex align-items-center card bg-gray-600 m-3 ">
                                 <h5 class="text-center w-100">
                             <span class="badge badge-info">
                                 @include('includes.currency', ['usdValue' => $item -> offer -> price])
                             </span>
                                 </h5>
                             </div>
-                            <div class="col-md-1  d-flex align-items-center justify-content-center">
+                            <div class="col-md-1  d-flex align-items-center justify-content-center card bg-gray-600 mb-3 ms-3">
                                 @if(count($item -> offer -> product -> getCoins()) > 1)
                                     <select name="coin" id="coin" class="form-control form-control-sm">
                                         @foreach($item -> offer -> product -> getCoins() as $coin)
@@ -73,7 +73,7 @@
 
 
                             </div>
-                            <div class="col-md-1 d-flex align-items-center">
+                            <div class="col-md-1 d-flex align-items-center card bg-gray-600 mb-3 ms-3">
                                 <input type="number" class="form-control form-control-sm" name="amount" id="amount" min="1" max="{{ $item -> offer -> product -> quantity }}" placeholder="Quantity" value="{{ $item -> quantity }}"/>
                             </div>
                             <div class="col-md-2 text-center">
@@ -84,7 +84,7 @@
                                         @endforeach
                                     </select>
                                 @else
-                                    <span class="badge badge-info">Digital delivery</span>
+                                    <span class="badge badge-info card py-2 bg-gray-600 mb-2">Digital delivery</span>
                                 @endif
                                 <br>
                                 @if(count($item -> offer -> product -> getTypes()) > 1)
@@ -99,8 +99,9 @@
                                 @endif
                             </div>
 
-                            <div class="col-md-3 d-flex align-items-stretch">
-                                <textarea name="message" id="message" rows="3" placeholder="Message will be encrypted with vendor's PGP key. Click on edit to save message!" style="resize: 0" class="form-control form-control-sm">{{ $item -> message }}</textarea><br>
+                            <div class="col-md-3 d-flex align-items-stretch mb-2">
+                                <textarea name="message" id="message" rows="3" placeholder="Message will be encrypted with vendor's PGP key. Click on edit to save message!"
+                                 style="resize: 0" class="form-control form-control-sm">{{ $item -> message }}</textarea><br>
                             </div>
                             <div class="col-md-2 d-flex align-items-center justify-content-around">
                                 <button type="submit" class="btn btn-outline-primary">
@@ -122,13 +123,13 @@
             </div>
         @endif
 
-        <div class="col-md-12 py-2 justify-content-end">
+        <div class="card col-md-8 py-2 bg-gray-400 justify-content-end mt-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 class="m-0">Total sum: @include('includes.currency', ['usdValue' => $totalSum])</h4>
+                    <h4 class="m-0 text-gray-800 fw-bold">Total sum: @include('includes.currency', ['usdValue' => $totalSum])</h4>
                 </div>
                 <div class="col-md-6 text-right">
-                    <a href="{{ route('profile.cart.checkout') }}" class="btn ml-auto btn-lg btn-mblue">
+                    <a href="{{ route('profile.cart.checkout') }}" class="btn ml-auto btn-lg btn-primary">
                         <i class="fas fa-cart-arrow-down mr-2"></i>
                         Checkout
                     </a>

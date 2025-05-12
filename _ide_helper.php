@@ -21100,7 +21100,7 @@ namespace  {
     class Broadcast extends \Illuminate\Support\Facades\Broadcast {}
     class Bus extends \Illuminate\Support\Facades\Bus {}
     class Cache extends \Illuminate\Support\Facades\Cache {}
-    class Config extends \Illuminate\Support\Facades\Config {}
+    class config extends \Illuminate\Support\Facades\Config {}
     class Cookie extends \Illuminate\Support\Facades\Cookie {}
     class Crypt extends \Illuminate\Support\Facades\Crypt {}
     class DB extends \Illuminate\Support\Facades\DB {}

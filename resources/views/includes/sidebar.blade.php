@@ -49,11 +49,7 @@
         </li>
         </ul>
     </div>
-    {{-- <form action="{{route('auth.signout.post')}}" method="post">
-        @csrf
-        <button class="btn btn-dark text-white border-danger border d-flex ms-auto" type="submit">Logout</button>
-    </form> --}}
-    <!-- Detailed Search Form -->
+    
     <div class="m-2 card shadow bg-gray-300 p-3">
         <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Quick Search</h6>
         <form action="{{ url('/search') }}" method="GET">

@@ -37,4 +37,4 @@
         <div class="alert alert-warning">There is no available feedback for this product, yet.</div>
     @endif
 
-@stop
+@endsection

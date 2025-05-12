@@ -9,7 +9,7 @@
     <h3 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Message to everyone</h3>
     <hr>
     <form action="{{ route('admin.messages.send') }}" method="POST">
-        {{ csrf_field() }}
+        @csrf
         <div class="form-row">
             <div class="col-md-12 mb-2">
                 <label for="message">
