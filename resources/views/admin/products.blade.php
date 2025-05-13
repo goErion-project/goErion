@@ -76,7 +76,7 @@
                 </thead>
                 <tbody>
                 <form action="{{route('admin.product.delete')}}" method="post">
-                    {{csrf_field()}}
+                    @csrf
 
                     @if($products->count() == 0 )
                         <tr>

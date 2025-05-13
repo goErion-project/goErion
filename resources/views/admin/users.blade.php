@@ -12,7 +12,7 @@
     <div class="row mt-2">
         <div class="col">
             <form action="{{route('admin.users.query')}}" method="post" class="">
-                {{csrf_field()}}
+                @csrf
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">

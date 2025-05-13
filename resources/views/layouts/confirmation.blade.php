@@ -18,4 +18,4 @@
         @endslot
 
     @endcomponent
-@stop
+@endsection

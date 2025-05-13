@@ -50,7 +50,7 @@
                 <div class="col-md-12 text-center">
 
                     <form action="{{ route('profile.cart.add', $product) }}"  method="POST">
-                        {{ csrf_field() }}
+                        @csrf
 
                         <table class="table border-0 text-left table-borderless">
                             <tbody>
@@ -303,4 +303,4 @@
     </ul>
 
     @yield('product-content')
-@stop
+@endsection

@@ -35,7 +35,7 @@ class ProductSent
      *
      * @var
      */
-    public $product;
+    public mixed $product;
 
     /**
      * Complete instance of a purchase

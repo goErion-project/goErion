@@ -18,4 +18,4 @@
         <button class="btn btn-outline-success">Validate PGP</button>
 
     </form>
-@stop
+@endsection

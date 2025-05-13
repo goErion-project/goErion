@@ -17,6 +17,7 @@ namespace App\Marketplace\Utility;
  * @method array getblockchaininfo()
  * @method string getnewlabeladdress(string $label)
  * @method getreceivedbyaddress()
+ * @method sendmany(string $string, array $addressesAmounts, int $param)
  */
 class RPCWrapper
 {

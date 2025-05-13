@@ -12,13 +12,13 @@
     @vendor
     {{-- Vendor Display --}}
 
-    @include('includes.profile.vendor.experience')
+        @include('includes.profile.vendor.experience')
 
-    @include('includes.profile.vendor.editprofile')
+        @include('includes.profile.vendor.editprofile')
 
-    @include('includes.profile.vendor.addproduct')
+        @include('includes.profile.vendor.addproduct')
 
-    @include('includes.profile.vendor.products')
+        @include('includes.profile.vendor.products')
 
     @else
         {{-- Non vendor display --}}
@@ -31,6 +31,6 @@
             <a href="{{ route('profile.vendor.become') }}" class="btn btn-outline-success btn-md">Become vendor</a>
         </div>
 
-        @endvendor
+  @endvendor
 
-        @endsection
+@endsection

@@ -39,7 +39,7 @@ class NewMessageRequest extends FormRequest
     /**
      * @throws ContainerExceptionInterface
      * @throws RequestException
-     * @throws NotFoundExceptionInterface
+     * @throws NotFoundExceptionInterface|\Random\RandomException
      */
     public function persist(Conversation $conversation): void
     {

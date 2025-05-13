@@ -9,4 +9,4 @@
             @include('includes.profile.ticket')
         </div>
     </div>
-@stop
+@endsection

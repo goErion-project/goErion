@@ -157,6 +157,7 @@ class Escrow extends Payment
             $marketplaceAddresses = config('coins.market_addresses.' . $this -> coinLabel());
             if (!empty($marketplaceAddresses)) {
                 $randomMarketAddress = $marketplaceAddresses[array_rand($marketplaceAddresses)];
+                /** @var $hasReferral */
                 $receiversAmounts[$randomMarketAddress] = $feeCaluclator->getFee($hasReferral);
             }
 

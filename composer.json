@@ -35,7 +35,8 @@
         "predis/predis": "^2.3",
         "singpolyma/openpgp-php": "^0.7.0",
         "symfony/intl": "^7.2",
-        "webpatser/laravel-uuid": "^4.0"
+        "webpatser/laravel-uuid": "^4.0",
+        "ext-pdo": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",
@@ -54,10 +55,7 @@
             "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        },
-        "exclude-from-classmap": [
-            "Modules/*/vendor/"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -95,7 +93,7 @@
     "extra": {
         "laravel": {
             "dont-discover": []
-        }   
+        }
     },
     "config": {
         "optimize-autoloader": true,

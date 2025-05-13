@@ -97,13 +97,13 @@ class daemonRPC
      *
      * Execute command via jsonRPCClient
      *
-     * @param  string  $method  RPC method to call
-     * @param  string  $params  Parameters to pass  (optional)
+     * @param string $method RPC method to call
+     * @param null $params Parameters to pass  (optional)
      *
      * @return string  Call result
-     *
+     * @throws RuntimeException
      */
-    protected function _run($method, $params = null)
+    protected function _run(string $method, $params = null): string
     {
         return $this->client->_run($method, $params);
     }
@@ -112,15 +112,14 @@ class daemonRPC
      *
      * Look up how many blocks are in the longest chain known to the node
      *
-     * @param  none
-     *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "count": 993163,
      *   "status": "OK"
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function getblockcount()
+    public function getblockcount(): object|string
     {
         return $this->_run('getblockcount');
     }
@@ -129,12 +128,13 @@ class daemonRPC
      *
      * Look up a block's hash by its height
      *
-     * @param  number  $height   Height of block to look up
+     * @param number $height Height of block to look up
      *
      * @return string  Example: 'e22cf75f39ae720e8b71b3d120a5ac03f0db50bba6379e2850975b4859190bc6'
      *
+     * @throws RuntimeException
      */
-    public function on_getblockhash($height)
+    public function on_getblockhash($height): string
     {
         $params = array($height);
 
@@ -145,8 +145,8 @@ class daemonRPC
      *
      * Construct a block template that can be mined upon
      *
-     * @param  string  $wallet_address  Address of wallet to receive coinbase transactions if block is successfully mined
-     * @param  int     $reserve_size    Reserve size
+     * @param string $wallet_address Address of wallet to receive coinbase transactions if block is successfully mined
+     * @param int $reserve_size Reserve size
      *
      * @return object  Example: {
      *   "blocktemplate_blob": "01029af88cb70568b84a11dc9406ace9e635918ca03b008f7728b9726b327c1b482a98d81ed83000000000018bd03c01ffcfcf3c0493d7cec7020278dfc296544f139394e5e045fcda1ba2cca5b69b39c9ddc90b7e0de859fdebdc80e8eda1ba01029c5d518ce3cc4de26364059eadc8220a3f52edabdaf025a9bff4eec8b6b50e3d8080dd9da417021e642d07a8c33fbe497054cfea9c760ab4068d31532ff0fbb543a7856a9b78ee80c0f9decfae01023ef3a7182cb0c260732e7828606052a0645d3686d7a03ce3da091dbb2b75e5955f01ad2af83bce0d823bf3dbbed01ab219250eb36098c62cbb6aa2976936848bae53023c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001f12d7c87346d6b84e17680082d9b4a1d84e36dd01bd2c7f3b3893478a8d88fb3",
@@ -157,8 +157,9 @@ class daemonRPC
      *   "status": "OK"
      * }
      *
+     * @throws RuntimeException
      */
-    public function getblocktemplate($wallet_address, $reserve_size)
+    public function getblocktemplate(string $wallet_address, int $reserve_size): object
     {
         $params = array('wallet_address' => $wallet_address, 'reserve_size' => $reserve_size);
 
@@ -169,12 +170,13 @@ class daemonRPC
      *
      * Submit a mined block to the network
      *
-     * @param  string  $block  Block blob
+     * @param string $block Block blob
      *
-     * @return // TODO: example
+     * @return string // TODO: example
      *
+     * @throws RuntimeException
      */
-    public function submitblock($block)
+    public function submitblock(string $block): string
     {
         return $this->_run('submitblock', $block);
     }
@@ -183,9 +185,7 @@ class daemonRPC
      *
      * Look up the block header of the latest block in the longest chain known to the node
      *
-     * @param  none
-     *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "block_header": {
      *     "depth": 0,
      *     "difficulty": 746963928,
@@ -200,10 +200,11 @@ class daemonRPC
      *     "timestamp": 1457589942
      *   },
      *   "status": "OK"
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function getlastblockheader()
+    public function getlastblockheader(): object|string
     {
         return $this->_run('getlastblockheader');
     }
@@ -212,9 +213,9 @@ class daemonRPC
      *
      * Look up a block header from a block hash
      *
-     * @param  string  $hash  The block's SHA256 hash
+     * @param string $hash The block's SHA256 hash
      *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "block_header": {
      *     "depth": 78376,
      *     "difficulty": 815625611,
@@ -229,10 +230,11 @@ class daemonRPC
      *     "timestamp": 1452793716
      *   },
      *   "status": "OK"
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function getblockheaderbyhash($hash)
+    public function getblockheaderbyhash(string $hash): object|string
     {
         $params = array('hash' => $hash);
 
@@ -243,9 +245,9 @@ class daemonRPC
      *
      * Look up a block header by height
      *
-     * @param  int     $height  Height of block
+     * @param int $height Height of block
      *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "block_header": {
      *     "depth": 78376,
      *     "difficulty": 815625611,
@@ -262,8 +264,9 @@ class daemonRPC
      *   "status": "OK"
      * }
      *
+     * @throws RuntimeException
      */
-    public function getblockheaderbyheight($height)
+    public function getblockheaderbyheight(int $height): object|string
     {
         return $this->_run('getblockheaderbyheight', $height);
     }
@@ -272,9 +275,9 @@ class daemonRPC
      *
      * Look up block information by SHA256 hash
      *
-     * @param  string  $hash  SHA256 hash of block
+     * @param string $hash SHA256 hash of block
      *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "blob": "...",
      *   "block_header": {
      *     "depth": 12,
@@ -293,8 +296,9 @@ class daemonRPC
      *   "status": "OK"
      * }
      *
+     * @throws RuntimeException
      */
-    public function getblock_by_hash($hash)
+    public function getblock_by_hash(string $hash): object|string
     {
         $params = array('hash' => $hash);
 
@@ -305,9 +309,9 @@ class daemonRPC
      *
      * Look up block information by height
      *
-     * @param  int     $height  Height of block
+     * @param int $height Height of block
      *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "blob": "...",
      *   "block_header": {
      *     "depth": 80694,
@@ -324,10 +328,11 @@ class daemonRPC
      *   },
      *   "json": "...",
      *   "status": "OK"
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function getblock_by_height($height)
+    public function getblock_by_height(int $height): object|string
     {
         $params = array('height' => $height);
 
@@ -338,10 +343,8 @@ class daemonRPC
      *
      * Look up incoming and outgoing connections to your node
      *
-     * @param  none
-     *
-     * @return object  Example: {
-     *   "connections": [{
+     * @return object|string Example: {
+     *   "connections":
      *     "avg_download": 0,
      *     "avg_upload": 0,
      *     "current_download": 0,
@@ -358,14 +361,15 @@ class daemonRPC
      *     "send_count": 176893,
      *     "send_idle_time": 1457726610,
      *     "state": "state_normal"
-     *   },{
-     *   ..
-     *   }],
-     *   "status": "OK"
+     *   {
+     *
+     *
+     *   "Status": "OK"
      * }
      *
+     * @throws RuntimeException
      */
-    public function get_connections()
+    public function get_connections(): object|string
     {
         return $this->_run('get_connections');
     }
@@ -374,9 +378,7 @@ class daemonRPC
      *
      * Look up general information about the state of your node and the network
      *
-     * @param  none
-     *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "alt_blocks_count": 5,
      *   "difficulty": 972165250,
      *   "grey_peerlist_size": 2280,
@@ -391,10 +393,11 @@ class daemonRPC
      *   "tx_count": 564287,
      *   "tx_pool_size": 45,
      *   "white_peerlist_size": 529
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function get_info()
+    public function get_info(): object|string
     {
         return $this->_run('get_info');
     }
@@ -403,9 +406,7 @@ class daemonRPC
      *
      * Look up information regarding hard fork voting and readiness
      *
-     * @param  none
-     *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "alt_blocks_count": 0,
      *   "block_size_limit": 600000,
      *   "block_size_median": 85,
@@ -431,10 +432,11 @@ class daemonRPC
      *   "untrusted": ?,
      *   "was_bootstrap_ever_used: ?,
    *   "white_peerlist_size": 5
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function hardfork_info()
+    public function hardfork_info(): object|string
     {
         return $this->_run('hard_fork_info');
     }
@@ -443,14 +445,15 @@ class daemonRPC
      *
      * Ban another node by IP
      *
-     * @param  array  $bans  Array of IP addresses to ban
+     * @param array $bans Array of IP addresses to ban
      *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "status": "OK"
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function set_bans($bans)
+    public function set_bans(array $bans): object|string
     {
         if (is_string($bans)) {
             $bans = array($bans);
@@ -463,21 +466,20 @@ class daemonRPC
     /**
      *
      * Alias of set_bans
-     * }
      *
+     *
+     * @throws RuntimeException
      */
-    public function setbans($bans)
+    public function setbans($bans): object|string
     {
         return $this->set_bans($params);
     }
 
     /**
      *
-     * Get list of banned IPs
+     * Get a list of banned IPs
      *
-     * @param  none
-     *
-     * @return object  Example: {
+     * @return object|string Example: {
      *   "bans": [{
      *     "ip": 838969536,
      *     "seconds": 1457748792
@@ -485,8 +487,9 @@ class daemonRPC
      *   "status": "OK"
      * }
      *
+     * @throws RuntimeException
      */
-    public function get_bans()
+    public function get_bans(): object|string
     {
         return $this->_run('get_bans');
     }
@@ -495,8 +498,9 @@ class daemonRPC
      *
      * Alias of get_bans
      *
+     * @throws RuntimeException
      */
-    public function getbans()
+    public function getbans(): object|string
     {
         return $this->get_bans();
     }

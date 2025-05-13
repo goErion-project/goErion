@@ -118,7 +118,7 @@ class Product extends Model
             $array['user'] = $this->user->username;
         }
 
-        // Handle physical product specific fields
+        // Handle physical product-specific fields
         if ($this->isPhysical() && $this->relationLoaded('physical') && $this->physical) {
             $array['from_country_full'] = $this->physical->shipsFrom();
             $array['from_country_code'] = $this->physical->country_from;
@@ -244,6 +244,7 @@ class Product extends Model
     {
         if ($this->isPhysical())
             return $this->physical;
+//        dd($this->digital);
         return $this->digital;
     }
 
@@ -463,7 +464,7 @@ class Product extends Model
      */
     public function setCoins(array $coins): void
     {
-        $this -> coins = implode(',', $coins);
+        $this -> coins = implode('', $coins);
     }
 
 

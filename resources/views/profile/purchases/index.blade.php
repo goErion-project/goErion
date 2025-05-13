@@ -93,4 +93,4 @@
     </table>
 
     {{ $purchases -> links('includes.paginate') }}
-@stop
+@endsection

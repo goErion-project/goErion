@@ -31,4 +31,4 @@
     @include('vendor.feedback.stats')
     @include('vendor.feedback.detailed')
 
-@stop
+@endsection

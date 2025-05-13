@@ -11,7 +11,7 @@
             <h3>Edit category - <em>{{ $category -> name }}</em></h3>
             <hr>
             <form action="{{ route('admin.categories.edit', $category -> id) }}"  method="POST">
-                {{ csrf_field() }}
+                @csrf
                 <label for="name">Category name</label>
                 <input name="name" id="name" placeholder="Category name" value="{{ $category -> name }}" class="form-control mb-3 @error('name', $errors) is-invalid @enderror"/>
                 @error('name', $errors)
@@ -42,4 +42,4 @@
     </div>
 
 
-@stop
+@endsection

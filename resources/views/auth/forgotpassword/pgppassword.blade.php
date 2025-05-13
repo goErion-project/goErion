@@ -14,7 +14,7 @@
                 <p>Please enter your username</p>
 
                 <form method="post" action="/forgotpassword/pgp">
-                    {{ csrf_field() }}
+                    @csrf
 
                     <div class="form-group ">
                         <input type="text" class="form-control @if($errors->has('username')) is-invalid @endif" placeholder="Username" name="username" id="username">
@@ -36,4 +36,4 @@
             </div>
         </div>
     </div>
-@stop
+@endsection

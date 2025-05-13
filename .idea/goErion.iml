@@ -7,31 +7,14 @@
       <sourceFolder url="file://$MODULE_DIR$/database/seeders" isTestSource="false" packagePrefix="Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" packagePrefix="Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules" isTestSource="false" packagePrefix="Modules\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/app" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\Database\Factories\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts/Tests\Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Tests/tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts/Tests\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/app" isTestSource="false" packagePrefix="Modules\FeaturedProducts\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/app" isTestSource="false" packagePrefix="Modules\FinalizeEarly\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts" isTestSource="false" packagePrefix="Modules\FeaturedProducts\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts\Tests\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/database/factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/database/seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly" isTestSource="false" packagePrefix="Modules\FinalizeEarly\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/database/seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
       <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Database/Factories" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Factories\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/Database/Seeders" isTestSource="false" packagePrefix="Modules\FeaturedProducts\Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Database/Factories" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Factories\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Database/Seeders" isTestSource="false" packagePrefix="Modules\FinalizeEarly\Database\Seeders\" />
-      <sourceFolder url="file://$MODULE_DIR$/Modules/FinalizeEarly/Modules/FinalizeEarly/Tests" isTestSource="true" packagePrefix="Modules\FinalizeEarly\Tests\" />
+      <sourceFolder url="file://$MODULE_DIR$/Modules/FeaturedProducts/Modules/FeaturedProducts/tests" isTestSource="true" packagePrefix="Modules\FeaturedProducts\Tests\" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/laravel-ide-helper" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/barryvdh/reflection-docblock" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/brianium/paratest" />

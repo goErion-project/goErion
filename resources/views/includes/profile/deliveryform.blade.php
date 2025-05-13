@@ -45,7 +45,7 @@
     <h3 class="mt-3">Add delivery option</h3>
     <hr>
     <form method="POST" action="{{ route('profile.vendor.product.delivery.new', $physicalProduct -> product) }}">
-        {{ csrf_field() }}
+        @csrf
         <div class="form-row">
             <div class="col-md-4 my-2">
                 <input type="text" maxlength="10" class="form-control @error('name', $errors) is-invalid @enderror" value="{{ old('name') }}" name="name" placeholder="Name">
@@ -96,7 +96,7 @@
     <h3 class="mt-3">Shipping countries</h3>
     <hr>
     <form method="POST" action="{{ route('profile.vendor.product.delivery.options', $physicalProduct) }}">
-        {{ csrf_field() }}
+        @csrf
         <div class="form-row">
             <div class="col-md-4 my-2">
                 <label for="countries_option">Ships to</label>
@@ -160,4 +160,4 @@
         </div>
     </form>
 
-@stop
+@endsection

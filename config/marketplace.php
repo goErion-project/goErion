@@ -4,7 +4,7 @@ return [
 
 
     /**
-     * Size of the RSA Key pair used for protecting messages between users
+     * Size of the RSA Key pair used for protecting messages between users'
      * Size in bits (recommended size is 4096)
      */
     'rsa_key_length' => 4096,
@@ -95,7 +95,7 @@ return [
         'http://marketplace.test/',
     ],
     /**
-     * For how long should front page queries be cached (in minutes)
+     * For how long should front page queries be cached (in minutes)?
      */
     'front_page_cache' => [
         'top_vendors' => 0,

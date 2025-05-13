@@ -5,7 +5,7 @@
             <td colspan="2" class="">
                 <h4>Leave feedback</h4>
                 <form action="{{ route('profile.purchases.feedback.new', $purchase) }}" method="POST">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="form-row">
                         <div class="col-md-3 text-left">
                             <label for="quality_rate">Quality:</label>

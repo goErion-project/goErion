@@ -23,18 +23,18 @@ return [
     ],
 
     /**
-     * If service is enabled marketplace address is required
+     * If service is enabled, marketplace address is required
      */
     'marketplace_address' => env('BITMESSAGE_ADDRESS',''),
 
     /**
-     * Time in minutes for how long are confirmation code valid
+     * Time in minutes for how long is confirmation code valid
      */
     'confirmation_valid_time' => 3,
 
     /**
      * How frequent can users request new confirmation code
-     * Time in seconds
+     * Time in seconds?
      */
     'confirmation_msg_frequency' => 60
 

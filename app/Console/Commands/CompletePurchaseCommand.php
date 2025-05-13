@@ -40,11 +40,11 @@ class CompletePurchaseCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         if (!FinalizeEarlyPayment::isEnabled()){
             $this->warn('Finalize Early module not available');
-            return;
+//            return;
         }
         $procedure = FinalizeEarlyPayment::getProcedure();
         $procedure->commandHandle($this);

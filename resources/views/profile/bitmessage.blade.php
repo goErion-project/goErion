@@ -27,7 +27,7 @@
     @include('includes.flash.success')
     @include('includes.flash.invalid')
     <form action="{{route('profile.bitmessage.sendcode')}}" method="post">
-        {{csrf_field()}}
+        @csrf
         <div class="form-group">
             <label for="address">Bitmessage address:</label>
             <input type="text" name="address" id="" class="form-control" id="address" value="@if(session()->has('bitmessage_confirmation')) {{session()->get('bitmessage_confirmation')['address']}} @endif">
@@ -46,7 +46,7 @@
         <div class="row">
             <div class="col-md-6">
                 <form action="{{route('profile.bitmessage.confirmcode')}}" method="post">
-                    {{csrf_field()}}
+                    @csrf
                     <div class="form-group">
                         <label for="code">Confirmation code</label>
                         <input type="text" name="code" id="" class="form-control">
@@ -60,4 +60,4 @@
     @endif
 
 
-@stop
+@endsection

@@ -3,14 +3,18 @@ vim: ts=4 noet ai */
 
 namespace App\Marketplace\Utility\MoneroRPC;
 
+use AllowDynamicProperties;
+use Error;
+use Exception;
+
 /**
  * Streamable SHA-3 for PHP 5.2+, with no lib/ext dependencies!
  *
- * Copyright © 2018  Desktopd Developers
+ * Copyright © 2018 Desktopd Developers
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
+ * the Free Software Foundation, either version 3 of the License or
  * (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -28,15 +32,16 @@ namespace App\Marketplace\Utility\MoneroRPC;
 
 /**
  * SHA-3 (FIPS-202) for PHP strings (byte arrays) (PHP 5.2.1+)
- * PHP 7.0 computes SHA-3 about 4 times faster than PHP 5.2 - 5.6 (on x86_64)
+ * PHP 7.0 computes SHA-3 about 4 times faster than PHP 5.2-5.6 (on x86_64)
  *
  * Based on the reference implementations, which are under CC-0
  * Reference: http://keccak.noekeon.org/
  *
  * This uses PHP's native byte strings. Supports 32-bit as well as 64-bit
  * systems. Also for LE vs. BE systems.
+ * @property int $blockSize
  */
-class SHA3
+#[AllowDynamicProperties] class SHA3
 {
     const SHA3_224 = 1;
     const SHA3_256 = 2;
@@ -49,7 +54,8 @@ class SHA3
     const KECCAK_256 = 7;
 
 
-    public static function init($type = null) {
+    public static function init($type = null): SHA3
+    {
         switch ($type) {
             case self::SHA3_224:
                 return new self (1152, 448, 0x06, 28);
@@ -73,8 +79,10 @@ class SHA3
 
     /**
      * Feed input to SHA-3 "sponge"
+     * @throws Exception
      */
-    public function absorb($data) {
+    public function absorb($data): static
+    {
         if (self::PHASE_INPUT != $this->phase) {
             throw new Exception ('No more input accepted');
         }
@@ -100,8 +108,10 @@ class SHA3
 
     /**
      * Get hash output
+     * @throws Exception
      */
-    public function squeeze($length = null) {
+    public function squeeze($length = null): string
+    {
         $outputLength = $this->outputLength; // fixed length output
         if ($length && 0 < $outputLength && $outputLength != $length) {
             throw new Exception ('Invalid length');
@@ -144,13 +154,13 @@ class SHA3
     const PHASE_OUTPUT = 3;
     const PHASE_DONE = 4;
 
-    private $phase = self::PHASE_INIT;
-    private $state; // byte array (string)
-    private $rateInBytes; // positive integer
+    private int $phase = self::PHASE_INIT;
+    private string $state; // byte array (string)
+    private int|float $rateInBytes; // positive integer
     private $suffix; // 8-bit unsigned integer
-    private $inputBuffer = ''; // byte array (string): max length = rateInBytes
-    private $outputLength = 0;
-    private $outputBuffer = '';
+    private string $inputBuffer = ''; // byte array (string): max length = rateInBytes
+    private mixed $outputLength = 0;
+    private string $outputBuffer = '';
 
 
     public function __construct($rate, $capacity, $suffix, $length = 0) {
@@ -171,7 +181,8 @@ class SHA3
         return;
     }
 
-    protected function finalizeInput() {
+    protected function finalizeInput(): void
+    {
         $this->phase = self::PHASE_OUTPUT;
 
         $input = $this->inputBuffer;
@@ -197,7 +208,8 @@ class SHA3
         $this->state = self::keccakF1600Permute($this->state);
     }
 
-    protected function getOutputBytes($outputLength) {
+    protected function getOutputBytes($outputLength): string
+    {
         // Squeeze
         $output = '';
         while (0 < $outputLength) {
@@ -215,7 +227,8 @@ class SHA3
     /**
      * 1600-bit state version of Keccak's permutation
      */
-    protected static function keccakF1600Permute($state) {
+    protected static function keccakF1600Permute($state): string
+    {
         $lanes = str_split($state, 8);
         $R = 1;
         $values = "\1\2\4\10\20\40\100\200";
@@ -285,14 +298,16 @@ class SHA3
         return implode($lanes);
     }
 
-    protected static function rotL64_64($n, $offset) {
+    protected static function rotL64_64($n, $offset): int
+    {
         return ($n << $offset) & ($n >> (64 - $offset));
     }
 
     /**
      * 64-bit bitwise left rotation (Little endian)
      */
-    protected static function rotL64($n, $offset) {
+    protected static function rotL64($n, $offset): string
+    {
 
         //$n = (binary) $n;
         //$offset = ((int) $offset) % 64;

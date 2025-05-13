@@ -31,4 +31,4 @@
         @include('includes.purchases.components.dispute')
     </div>
 
-@stop
+@endsection

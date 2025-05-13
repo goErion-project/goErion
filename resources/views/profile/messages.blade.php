@@ -51,7 +51,7 @@
                 <h3 class="mb-3">New conversation</h3>
                 <hr>
                 <form action="{{ route('profile.messages.conversation.new') }}" method="POST" class="my-2">
-                    {{ csrf_field() }}
+                    @csrf
                     <input type="text" id="username" name="username" placeholder="Username of the receiver..."
                            class="form-control my-2 w-100" value="{{$new_conversation_other_party}}">
                     <textarea name="message" class="form-control my-2" rows="5"
@@ -67,7 +67,7 @@
                     <textarea class="form-control" rows="5" name="message"
                               placeholder="Place you message here, encrypted messages are welcome!"></textarea>
                         <button type="submit" class="btn btn-primary ml-auto mt-2 d-block">Send message</button>
-                        {{ csrf_field() }}
+                        @csrf
                     </form>
                 @endif
 
@@ -101,4 +101,4 @@
 
 
 
-@stop
+@endsection

@@ -37,7 +37,7 @@ class AddBitmessageService extends Command
      *
      * @var bool
      */
-    private $parametersValid = false;
+    private bool $parametersValid = false;
 
     /**
      * Create a new command instance.
@@ -54,7 +54,7 @@ class AddBitmessageService extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         $this->line(CommandSignature::get());
         $this->info('Starting configuration of Bitmessage service');
@@ -89,14 +89,16 @@ class AddBitmessageService extends Command
         }
     }
 
-    private function getParameters(){
+    private function getParameters(): void
+    {
         $this->host = $this->ask('Enter Bitmessage host (localhost if hosted on same server)');
         $this->port = $this->ask('Enter Bitmessage port (Default port is 8442)');
         $this->user = $this->ask('Enter Bitmessage user');
         $this->password = $this->ask('Enter Bitmessage password');
     }
 
-    public function parametersValidCheck(){
+    public function parametersValidCheck(): bool
+    {
         $headers = ['Parameter', 'Value'];
         $data = [
             ['host', $this->host],
@@ -109,7 +111,8 @@ class AddBitmessageService extends Command
         return $this->confirm('Does this look right ?');
     }
 
-    private function enableService(){
+    private function enableService(): void
+    {
         self::changeEnv('BITMESSAGE_ENABLED','true');
         self::changeEnv('BITMESSAGE_HOST',$this->host);
         self::changeEnv('BITMESSAGE_PORT',$this->port);
@@ -118,7 +121,7 @@ class AddBitmessageService extends Command
 
     }
 
-    private static function changeEnv($key,$value)
+    private static function changeEnv($key,$value): void
     {
         $path = base_path('.env');
 

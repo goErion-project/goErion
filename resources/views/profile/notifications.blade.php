@@ -10,7 +10,7 @@
     <hr>
     <p>List of your notifications. You can delete them any time</p>
     <form action="{{route('profile.notifications.delete')}}" method="post">
-        {{csrf_field()}}
+        @csrf
         <div class="form-group">
             <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Delete notifications
             </button>
@@ -45,4 +45,4 @@
         {{$notifications->links()}}
     </div>
 
-@stop
+@endsection

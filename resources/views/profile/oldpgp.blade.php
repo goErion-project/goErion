@@ -19,4 +19,4 @@
     @endif
 
 
-@stop
+@endsection

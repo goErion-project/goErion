@@ -6,7 +6,7 @@
             </div>
             <div class="card-body">
                 <form action="{{route('search')}}" method="post">
-                    {{csrf_field()}}
+                    @csrf
                     <div class="form-group">
                         <label for="search">Search terms:</label>
                         <input type="text" name="search" id="search" class="form-control" value="{{app('request')->input('query')}}">

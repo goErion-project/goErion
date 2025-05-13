@@ -7,7 +7,7 @@
             <h5 class="mb-1">Resolve dispute</h5>
             <form action="{{ route('profile.purchases.disputes.resolve', $purchase) }}" class="form-inline"
                   method="POST">
-                {{ csrf_field() }}
+                @csrf
                 <label for="winner" class="mr-2">Dispute winner:</label>
                 <select name="winner" id="winner" class="form-control mr-2">
                     <option value="{{ $purchase -> buyer -> id }}">{{ $purchase -> buyer -> username }} -

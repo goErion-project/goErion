@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Message;
+use App\Models\Message;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -36,8 +36,9 @@ class GenerateKeys extends Command
      * Execute the console command.
      *
      * @return mixed
+     * @throws \SodiumException
      */
-    public function handle()
+    public function handle(): mixed
     {
         Message::generateMarketKeypair();
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Profile;
 
-use Arr;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Arr;
 
 /**
  * @property mixed $profilebg

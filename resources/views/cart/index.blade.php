@@ -101,7 +101,7 @@
 
                             <div class="col-md-3 d-flex align-items-stretch mb-2">
                                 <textarea name="message" id="message" rows="3" placeholder="Message will be encrypted with vendor's PGP key. Click on edit to save message!"
-                                 style="resize: 0" class="form-control form-control-sm">{{ $item -> message }}</textarea><br>
+                                 style="resize: none" class="form-control form-control-sm">{{ $item -> message }}</textarea><br>
                             </div>
                             <div class="col-md-2 d-flex align-items-center justify-content-around">
                                 <button type="submit" class="btn btn-outline-primary">
@@ -139,4 +139,4 @@
         </div>
     </div>
 
-@stop
+@endsection

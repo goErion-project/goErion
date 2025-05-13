@@ -141,7 +141,8 @@ class ed25519
         return $x;
     }
 
-    public function edwards($P, $Q) {
+    public function edwards($P, $Q): array
+    {
         if ($this->gmp) {
             list($x1, $y1) = $P;
             list($x2, $y2) = $Q;
@@ -165,7 +166,8 @@ class ed25519
         }
     }
 
-    public function scalarmult($P, $e) {
+    public function scalarmult($P, $e): array
+    {
         if ($this->gmp) {
             if ($e == 0) {
                 return array(0, 1);
@@ -189,7 +191,8 @@ class ed25519
         return $Q;
     }
 
-    public function scalarloop($P, $e) {
+    public function scalarloop($P, $e): array
+    {
         if ($this->gmp) {
             $temp = array();
             $loopE = $e;
@@ -229,7 +232,8 @@ class ed25519
         return $Q;
     }
 
-    public function bitsToString($bits) {
+    public function bitsToString($bits): string
+    {
         $string = '';
         for ($i = 0; $i < $this->b / 8; $i++) {
             $sum = 0;
@@ -243,7 +247,8 @@ class ed25519
         return $string;
     }
 
-    public function dec2bin_i($decimal_i) {
+    public function dec2bin_i($decimal_i): string
+    {
         if ($this->gmp) {
             $binary_i = '';
             do {
@@ -261,13 +266,15 @@ class ed25519
         return ($binary_i);
     }
 
-    public function encodeint($y) {
+    public function encodeint($y): string
+    {
         $bits = substr(str_pad(strrev($this->dec2bin_i($y)), $this->b, '0', STR_PAD_RIGHT), 0, $this->b);
 
         return $this->bitsToString($bits);
     }
 
-    public function encodepoint($P) {
+    public function encodepoint($P): string
+    {
         list($x, $y) = $P;
         $bits = substr(str_pad(strrev($this->dec2bin_i($y)), $this->b - 1, '0', STR_PAD_RIGHT), 0, $this->b - 1);
         $bits .= (substr($x, -1) % 2 == 1 ? '1' : '0');
@@ -275,7 +282,8 @@ class ed25519
         return $this->bitsToString($bits);
     }
 
-    public function bit($h, $i) {
+    public function bit($h, $i): int
+    {
         if ($this->gmp) {
             return (ord($h[(int)gmp_div($i, 8, 0)]) >> substr($i, -3) % 8) & 1;
         } else {
@@ -290,7 +298,8 @@ class ed25519
      *
      * @return string
      */
-    public function publickey($sk) {
+    public function publickey(string $sk): string
+    {
         if ($this->gmp) {
             $h = $this->H($sk);
             $sum = 0;
@@ -332,7 +341,8 @@ class ed25519
         return $sum;
     }
 
-    public function signature($m, $sk, $pk) {
+    public function signature($m, $sk, $pk): string
+    {
         if ($this->gmp) {
             $h = $this->H($sk);
             $a = gmp_pow(2, (gmp_sub($this->b, 2)));
@@ -358,7 +368,8 @@ class ed25519
         return $encR . $this->encodeint($S);
     }
 
-    public function isoncurve($P) {
+    public function isoncurve($P): bool
+    {
         if ($this->gmp) {
             list($x, $y) = $P;
             $x2 = gmp_pow($x, 2);
@@ -400,7 +411,8 @@ class ed25519
       return P
 
      */
-    public function decodepoint($s) {
+    public function decodepoint($s): array
+    {
         if ($this->gmp) {
             $y = 0;
             for ($i = 0; $i < $this->b - 1; $i++) {
@@ -432,7 +444,11 @@ class ed25519
         return $P;
     }
 
-    public function checkvalid($s, $m, $pk) {
+    /**
+     * @throws \Exception
+     */
+    public function checkvalid($s, $m, $pk): bool
+    {
         if (strlen($s) != $this->b / 4) {
             throw new \Exception('Signature length is wrong');
         }
@@ -453,7 +469,8 @@ class ed25519
 
     // The code below is by the Monero-Integrations team
 
-    public function scalarmult_base($e) {
+    public function scalarmult_base($e): array
+    {
         if ($this->gmp) {
             if ($e == 0) {
                 return array(0, 1);

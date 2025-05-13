@@ -19,4 +19,4 @@
         <div class="alert alert-warning">Your wishlist of products is empty!</div>
     @endif
 
-@stop
+@endsection

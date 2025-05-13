@@ -29,7 +29,7 @@
     <h3 class="mt-3">Add offer</h3>
     <hr>
     <form method="POST" action="{{ route('profile.vendor.product.offers.add', $basicProduct) }}">
-        {{ csrf_field() }}
+        @csrf
         <div class="form-row">
             <div class="col">
                 <input type="number" step=".01" min="0.01" class="form-control @error('price', $errors) is-invalid @enderror" name="price" value="{{ old('min_quantity') }}" placeholder="Price in {{ \App\Marketplace\Utility\CurrencyConverter::getLocalSymbol() }}">
@@ -62,4 +62,4 @@
             <a href="{{ route('profile.vendor.product.' . ( session('product_type') == 'physical' ? 'delivery' : 'digital' ) ) }}" class="btn btn-outline-primary"><i class="fas fa-chevron-down mr-2"></i>  Next</a>
         @endif
     </div>
-@stop
+@endsection

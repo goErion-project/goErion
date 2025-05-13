@@ -15,6 +15,7 @@
       <w>caluclator</w>
       <w>cancelation</w>
       <w>categ</w>
+      <w>cointype</w>
       <w>confirmcanceled</w>
       <w>confirmclone</w>
       <w>confirmcode</w>
@@ -33,7 +34,14 @@
       <w>frontpagedisplay</w>
       <w>getaddress</w>
       <w>getbalance</w>
+      <w>getblock</w>
+      <w>getblockcount</w>
+      <w>getblockhash</w>
+      <w>getblockheaderbyhash</w>
+      <w>getblockheaderbyheight</w>
+      <w>getblocktemplate</w>
       <w>getheight</w>
+      <w>getlastblockheader</w>
       <w>hashid</w>
       <w>jcubes</w>
       <w>jsonrpc</w>
@@ -52,8 +60,10 @@
       <w>newaccount</w>
       <w>newimage</w>
       <w>newmessage</w>
+      <w>notifiy</w>
       <w>offcanvas</w>
       <w>orlder</w>
+      <w>pgkan</w>
       <w>piconero</w>
       <w>pofile</w>
       <w>pramas</w>
@@ -66,6 +76,7 @@
       <w>sendcode</w>
       <w>senderconversations</w>
       <w>sendmessage</w>
+      <w>sendtoaddress</w>
       <w>setview</w>
       <w>shiping</w>
       <w>shippings</w>
@@ -73,6 +84,7 @@
       <w>starrynight</w>
       <w>stringinfied</w>
       <w>strtoupper</w>
+      <w>submitblock</w>
       <w>substract</w>
       <w>tacoshi</w>
       <w>topnavbar</w>

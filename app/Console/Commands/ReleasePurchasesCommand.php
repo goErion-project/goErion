@@ -38,7 +38,7 @@ class ReleasePurchasesCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         // load default from config if there is no option
         $daysOldPurchases = $this->argument('days')!=null ? intval($this->argument('days')) : config('marketplace.days_old_purchases');

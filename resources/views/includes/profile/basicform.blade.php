@@ -2,7 +2,7 @@
 
 @section('form-content')
     <form method="POST" action="{{ route('profile.vendor.product.add.post', optional($basicProduct) -> exists ? $basicProduct : null) }}">
-        {{ csrf_field() }}
+        @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Product's name:</label>
@@ -135,4 +135,4 @@
             </div>
         </div>
     </form>
-@stop
+@endsection

@@ -10,4 +10,4 @@
         You are banned until {{ $until }}.
     </div>
 
-@stop
+@endsection

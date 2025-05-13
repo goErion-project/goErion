@@ -1,7 +1,7 @@
 <h3 class="mb-2">Open new Support Ticket</h3>
 
 <form action="{{ route('profile.tickets.new') }}" method="POST">
-    {{ csrf_field()  }}
+    @csrf
     <div class="form-group">
         <label for="title">Ticket title</label>
         <input type="text" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Enter ticket title">

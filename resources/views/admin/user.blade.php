@@ -15,7 +15,7 @@
     @include('includes.flash.invalid')
     <div class="card mt-3">
         <form action="{{route('admin.user.edit.info',$user->id)}}" method="post">
-            {{csrf_field()}}
+            @csrf
             <div class="card-header">
                 Basic information
             </div>
@@ -64,7 +64,7 @@
     <div class="card mt-3">
         <form action="{{route('admin.user.edit.group',$user->id)}}" method="post">
 
-            {{csrf_field()}}
+            @csrf
             <div class="card-header">
                 User Groups
             </div>
@@ -236,4 +236,4 @@
     @endif
 
 
-@stop
+@endsection

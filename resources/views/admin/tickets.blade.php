@@ -12,7 +12,7 @@
     <div class="row mt-1 mb-3">
         <div class="col">
             <form action="{{route('admin.tickets.remove')}}" method="post">
-                {{csrf_field()}}
+                @csrf
                 <button type="submit" class="btn btn-outline-info" name="type" value="solved">Remove solved tickets</button>
                 <button type="submit" class="btn btn-outline-info" name="type" value="all">Remove all tickets</button>
 
@@ -71,4 +71,4 @@
 
 
 
-@stop
+@endsection

@@ -4,7 +4,7 @@
     <h3>Add digital content</h3>
     <hr>
     <form method="POST" action="{{ route('profile.vendor.product.digital.post', $digitalProduct) }}">
-        {{ csrf_field() }}
+        @csrf
 
         <div class="form-group">
             <label for="product_content">Product's content:</label>
@@ -55,4 +55,4 @@
             </div>
         </div>
     </form>
-@stop
+@endsection

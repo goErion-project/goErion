@@ -43,15 +43,15 @@
         </li>
         <li class="d-inline gap-2 p-2">
             <form class="d-inline" action="{{route('auth.signout.post')}}" method="post">
-                @csrf               
+                @csrf
                 <button class="btn btn-outline-dark px-5 py-2" type="submit">Logout</button>
             </form>
         </li>
         </ul>
     </div>
-    
+@endauth
     <div class="m-2 card shadow bg-gray-300 p-3">
-        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Quick Search</h6>
+        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Quick Search</h3>
         <form action="{{ url('/search') }}" method="GET">
             <!-- Search Terms -->
             <div class="form-group mb-2">
@@ -100,7 +100,7 @@
                     <option value="physical" {{ request('type') == 'physical' ? 'selected' : '' }}>Physical</option>
                     <option value="digital" {{ request('type') == 'digital' ? 'selected' : '' }}>Digital</option>
                 </select>
-            </div>                 
+            </div>
 
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary btn-sm w-100">Search</button>
@@ -109,8 +109,8 @@
 
     <!-- Browse Categories -->
     <div class="m-2 card shadow bg-gray-300 p-3">
-        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Browse Categories</h6>
-        <ul class="list-group">           
+        <h3 class="card text-center hs-4 bg-gray-500 fw-bold py-3 rounded-2 mb-4">Browse Categories</h3>
+        <ul class="list-group">
             @foreach($categories as $category)
                 <li class="card bg-gray-300 border-sm mb-2 py-2 ps-3">
                     <a href="{{ url('/search?category=' . $category->id) }}" class="text-decoration-none text-dark fw-bold">
@@ -121,4 +121,4 @@
             @endforeach
         </ul>
     </div>
-@endauth
+{{--@endauth--}}

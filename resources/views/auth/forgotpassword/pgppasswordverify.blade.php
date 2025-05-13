@@ -16,7 +16,7 @@
                 </div>
 
                 <form method="POST" action="{{ route('auth.resetpgp') }}">
-                    {{ csrf_field() }}
+                    @csrf
 
                     <div class="form-group" style="display:flex">
 
@@ -52,4 +52,4 @@
 
         </div>
     </div>
-@stop
+@endsection

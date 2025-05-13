@@ -1275,7 +1275,7 @@ class walletRPC
      */
     public function get_transfers(array $input_types = ['all'], int $account_index = 0, string $subaddr_indices = '', int $min_height = 0, int $max_height = 4206931337): object|string
     {
-        if (is_string($input_types)) { // If user is using old method
+        if (is_string($input_types)) { // If a user is using old method
             $params = array('subaddr_indices' => $subaddr_indices, 'min_height' => $min_height, 'max_height' => $max_height);
             if (is_bool($account_index)) { // If the user passed e.g., get_transfers('in', true)
                 $params['account_index'] = 0;

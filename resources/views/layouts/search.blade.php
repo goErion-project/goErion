@@ -14,9 +14,8 @@
                             {{ $category->name }}
                         </a>
                     </li>
-                    
-                @endforeach            
-            </ul>           
+                @endforeach
+            </ul>
             <input class="form-control" type="text" placeholder="Search" id="search"
                    name="Search" value="{{app('request')->input('query')}}">
             <button class="btn btn-warning px-4" type="button">

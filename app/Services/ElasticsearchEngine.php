@@ -2,15 +2,23 @@
 
 namespace App\Services;
 
+use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\ClientBuilder;
+use Elastic\Elasticsearch\Exception\AuthenticationException;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Elastic\Elasticsearch\Exception\MissingParameterException;
+use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Laravel\Scout\Builder;
 use Laravel\Scout\Engines\Engine;
 use Illuminate\Support\Collection;
 
 class ElasticsearchEngine extends Engine
 {
-    protected $client;
+    protected Client $client;
 
+    /**
+     * @throws AuthenticationException
+     */
     public function __construct()
     {
         $this->client = ClientBuilder::create()
@@ -18,7 +26,12 @@ class ElasticsearchEngine extends Engine
             ->build();
     }
 
-    public function update($models)
+    /**
+     * @throws ServerResponseException
+     * @throws ClientResponseException
+     * @throws MissingParameterException
+     */
+    public function update($models): void
     {
         foreach ($models as $model) {
             $this->client->index([
@@ -29,7 +42,12 @@ class ElasticsearchEngine extends Engine
         }
     }
 
-    public function delete($models)
+    /**
+     * @throws ClientResponseException
+     * @throws ServerResponseException
+     * @throws MissingParameterException
+     */
+    public function delete($models): void
     {
         foreach ($models as $model) {
             $this->client->delete([
@@ -39,6 +57,10 @@ class ElasticsearchEngine extends Engine
         }
     }
 
+    /**
+     * @throws ServerResponseException
+     * @throws ClientResponseException
+     */
     public function search(Builder $builder)
     {
        // If the query is empty, return all results
@@ -69,7 +91,7 @@ class ElasticsearchEngine extends Engine
     return $response['hits']['hits'];
     }
 
-    public function map(Builder $builder, $results, $model)
+    public function map(Builder $builder, $results, $model): \Illuminate\Database\Eloquent\Collection|Collection
     {
         return collect($results)->map(function ($hit) use ($model) {
             $instance = $model->newInstance([], true);
@@ -83,12 +105,16 @@ class ElasticsearchEngine extends Engine
         return collect($results)->pluck('_id')->values();
     }
 
-    public function lazyMap(Builder $builder, $results, $model)
+    public function lazyMap(Builder $builder, $results, $model): \Illuminate\Database\Eloquent\Collection|Collection
     {
         return $this->map($builder, $results, $model);
     }
 
-    public function paginate(Builder $builder, $perPage, $page)
+    /**
+     * @throws ClientResponseException
+     * @throws ServerResponseException
+     */
+    public function paginate(Builder $builder, $perPage, $page): array
     {
         $from = ($page - 1) * $perPage;
 
@@ -116,7 +142,12 @@ class ElasticsearchEngine extends Engine
         return $results['hits']['total']['value'];
     }
 
-    public function flush($model)
+    /**
+     * @throws ClientResponseException
+     * @throws ServerResponseException
+     * @throws MissingParameterException
+     */
+    public function flush($model): void
     {
         $this->client->deleteByQuery([
             'index' => env('ELASTICSEARCH_INDEX'),
@@ -128,7 +159,12 @@ class ElasticsearchEngine extends Engine
         ]);
     }
 
-    public function createIndex($name, array $options = [])
+    /**
+     * @throws ClientResponseException
+     * @throws ServerResponseException
+     * @throws MissingParameterException
+     */
+    public function createIndex($name, array $options = []): void
     {
         $this->client->indices()->create([
             'index' => $name,
@@ -136,7 +172,12 @@ class ElasticsearchEngine extends Engine
         ]);
     }
 
-    public function deleteIndex($name)
+    /**
+     * @throws ServerResponseException
+     * @throws ClientResponseException
+     * @throws MissingParameterException
+     */
+    public function deleteIndex($name): void
     {
         $this->client->indices()->delete([
             'index' => $name,

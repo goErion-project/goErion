@@ -14,4 +14,4 @@
 
     <textarea rows="10" readonly class="form-control">{{ $purchase -> message }}</textarea>
 
-@stop
+@endsection

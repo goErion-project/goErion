@@ -24,6 +24,7 @@
                                     Basic information
                                 </h3>
                             </a>
+                    </a>
             </div>
 
             @yield('product-basic-form')
@@ -39,7 +40,7 @@
                                     <i class="fas fa-money-check-alt"></i>
                                     Price and offers
                                 </h3>
-                            </a>
+                            </a> </a>
             </div>
 
             @yield('product-offers-form')
@@ -60,7 +61,7 @@
                                         <i class="fas fa-truck"></i>
                                         Delivery options
                                     </h3>
-                                </a>
+                                </a> </a>
                 </div>
 
                 @yield('product-delivery-form')
@@ -77,7 +78,7 @@
                                         <i class="fas fa-desktop"></i>
                                         Digital options
                                     </h3>
-                                </a>
+                                </a> </a>
                 </div>
 
                 @yield('product-digital-form')
@@ -94,7 +95,7 @@
                                     <i class="fas fa-images"></i>
                                     Images
                                 </h3>
-                            </a>
+                            </a> </a>
             </div>
 
             @yield('product-images-form')

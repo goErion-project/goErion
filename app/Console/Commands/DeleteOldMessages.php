@@ -37,12 +37,11 @@ class DeleteOldMessages extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         // load default from config if there is no option
         $daysOldMessages = $this->argument('days') != null ? intval($this->argument('days')) : config('marketplace.days_old_messages');
         $this->info($daysOldMessages);
-        return;
 
 
         $numberOfMessages = Message::where('created_at', '<' ,Carbon::now()->subDays($daysOldMessages))->delete();

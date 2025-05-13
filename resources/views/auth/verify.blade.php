@@ -16,7 +16,7 @@
                 <p class="text-muted">Decrypt this message and get validation string.</p>
             </div>
             <form method="POST" action="{{ route('auth.verify.post') }}" class="form-inline">
-                {{ csrf_field() }}
+                @csrf
                 <label for="validation_string">Validation string:</label>
                 <input type="text" class="form-control mx-2" required name="validation_string" id="validation_string"/>
                 <button class="btn btn-outline-success">Login</button>
@@ -29,4 +29,4 @@
     </div>
 
 
-@stop
+@endsection

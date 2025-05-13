@@ -20,25 +20,25 @@
         </tr>
         </thead>
         <tbody>
-{{--        @foreach($depositAddresses as $depositAddress)--}}
+        @foreach($depositAddresses as $depositAddress)
             <tr>
                 <td>
-                    <span class="badge badge-info">{{-- strtoupper($depositAddress -> coin) --}}</span>
+                    <span class="badge badge-info">{{ strtoupper($depositAddress -> coin) }}</span>
                 </td>
                 <td>
-                    <input type="text" readonly class="form-control" value="{{-- $depositAddress -> address --}}"/>
+                    <input type="text" readonly class="form-control" value="{{ $depositAddress -> address }}"/>
                 </td>
                 <td class="text-right">
-                    <span class="badge badge-primary">{{-- $depositAddress -> target --}}</span>
+                    <span class="badge badge-primary">{{ $depositAddress -> target }}</span>
                 </td>
                 <td class="text-right">
-{{--                    @if($depositAddress -> isEnough())--}}
+                    @if($depositAddress -> isEnough())
                         <span class="badge badge-success text-gray-800">Enough funds</span>
-{{--                    @endif--}}
-                    <span class="badge badge-info">{{-- $depositAddress -> balance --}}</span>
+                    @endif
+                    <span class="badge badge-info">{{ $depositAddress -> balance }}</span>
                 </td>
             </tr>
-{{--        @endforeach--}}
+        @endforeach
         </tbody>
 
     </table>
@@ -51,4 +51,4 @@
     </form>
 
 
-@stop
+@endsection

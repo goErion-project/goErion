@@ -6,7 +6,7 @@
 
     <div class="modal fade in show position-static d-block" tabindex="-1" role="dialog">
         <form action="{{route('profile.vendor.product.clone.post',$product)}}" method="post">
-            {{csrf_field()}}
+            @csrf
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

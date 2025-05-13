@@ -37,7 +37,7 @@ class CancelPurchasesCommand extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(): mixed
     {
         $daysOldPurchases = $this->argument('days')!=null ? intval($this->argument('days')) : config('marketplace.days_old_purchases');
 
@@ -48,7 +48,7 @@ class CancelPurchasesCommand extends Command
             // Foreach purchase cancel
             foreach ($cancelingPurchases as $purchaseToCancel) {
                 try{
-                    // if there is no funds
+                    // if there are no funds
                     if($purchaseToCancel->getBalance() == 0)
                         $purchaseToCancel->cancel();
                     else

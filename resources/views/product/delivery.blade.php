@@ -2,9 +2,9 @@
 
 @section('product-content')
     <p>Ships {{ $product -> specificProduct() -> shipsTo() }}: <em>{{ $product -> specificProduct() -> countriesLong() }}</em></p>
-    <p>Ships from <strong>
-        {{ $product -> specificProduct() -> shipsFrom() }}</p>
-    </strong>
+    <p>Ships from
+        <strong>
+                 {{ $product -> specificProduct() -> shipsFrom() }}</p>
     <table class="table table-hover table-striped">
         <thead>
         <tr>
@@ -20,7 +20,7 @@
                 <td>{{ $shipping -> name }}</td>
                 <td>{{ $shipping -> duration }}</td>
                 <td>@include('includes.currency', ['usdValue' => $shipping -> dollars ])</td>
-                <td>{{ $shipping -> from_quantity }} to {{ $shipping -> to_quantity }} {{ str_plural($product -> mesure) }}</td>
+                <td>{{ $shipping -> from_quantity }} to {{ $shipping -> to_quantity }} {{ \Illuminate\Support\Str::plural($product -> mesure) }}</td>
             </tr>
         @endforeach
         </tbody>

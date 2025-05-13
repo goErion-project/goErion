@@ -22,7 +22,7 @@
                     <input type="password" name="password" class="form-control" >
                 </div>
                 <div class="form-group text-center">
-                    <button class="btn  btn-outline-success" type="submit">Decrypt messages</button>
+                    <button class="btn  btn-outline-success mt-3" type="submit">Decrypt messages</button>
                 </div>
             </form>
         </div>
@@ -32,4 +32,4 @@
 
 
 
-@stop
+@endsection

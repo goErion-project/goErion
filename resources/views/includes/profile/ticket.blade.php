@@ -2,7 +2,7 @@
 <hr>
 @if(!$ticket -> solved)
     <form method="POST" action="{{ route('profile.tickets.message.new', $ticket) }}">
-        {{ csrf_field() }}
+        @csrf
 
         <div class="form-group">
             <label for="text"><h4>New ticket message:</h4></label>
