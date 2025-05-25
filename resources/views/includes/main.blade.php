@@ -97,4 +97,3 @@
             @endforeach
         </div>
     </div>
-</div>

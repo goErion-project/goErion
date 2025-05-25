@@ -52,7 +52,7 @@ class ChangeUserGroupRequest extends FormRequest
         }
 
         $user -> setPermissions($permissions);
-        $this->updateAdministraotr($user);
+        $this->updateAdministrator($user);
         $this->updateVendor($user);
         if ($user->vendor != null){
             $this->updateFinalizeEarly($user);
@@ -68,7 +68,7 @@ class ChangeUserGroupRequest extends FormRequest
      *  If an administrator flag is not present, and user is administrator remove him admin
      *
      */
-    public function updateAdministraotr(User $user): void
+    public function updateAdministrator(User $user): void
     {
 
         // User is not admin, should change
