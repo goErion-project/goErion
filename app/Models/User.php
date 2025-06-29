@@ -593,7 +593,7 @@ class User extends Authenticatable
 
 
         $newBan -> user_id = $this -> id;
-        $newBan -> until = Carbon::now()->addDays($days);
+        $newBan -> until = Carbon::now()->addDays((int) $days);
         $newBan -> save();
     }
 
