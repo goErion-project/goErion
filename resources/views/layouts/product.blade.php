@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('title','Product - ' . $product -> name )
+{{-- <x-slot name='title'>{{$product->name}}</x-slot> --}}
 
 @section('content')
 

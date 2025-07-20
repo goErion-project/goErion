@@ -1,6 +1,12 @@
 <div>
     @include('includes.banners')
 </div>
+    <div class="row">
+    </div>
+    @isModuleEnabled('FeaturedProducts')
+    @include('featuredproducts::frontpagedisplay')
+    @endisModuleEnabled
+
 <!-- New Products Section -->
 <div class="row mt-1 mb-4">
     <div class="col">
@@ -20,11 +26,6 @@
         </div>
     @endif
 </div>
-    <div class="row">
-    </div>
-    @isModuleEnabled('FeaturedProducts')
-    @include('featuredproducts::frontpagedisplay')
-    @endisModuleEnabled
 
     <div class="row mt-4">
 

@@ -7,6 +7,7 @@
 
     @hasSection('title')
         <title>{{ config('app.name') }} - @yield('title')</title>
+        {{-- <title>{{ config('app.name')}}-{{$title}}</title> --}}
     @else
         <title>{{ config('app.name') }}</title>
     @endif

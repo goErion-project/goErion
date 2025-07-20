@@ -4,6 +4,7 @@
         <div class="d-flex align-items-center">
             <a class="navbar-brand fs-2 fw-extrabold text-brown-900 ps-2 ps-lg-4 fs-3xl" href="{{ route('home') }}"
                style="letter-spacing: 1px;">
+                <img src="{{ asset('/img/link_200dp_575F25_FILL0_wght400_GRAD0_opsz48.png') }}" alt="logo" style="height: 50px; width: 50px">
                 {{ config('app.name') }}
             </a>
         </div>
@@ -55,7 +56,7 @@
                                 </div>
                             </div>
                         </a>
-                    </li>                   
+                    </li>
                 @else
                     <li class="nav-item d-flex gap-2 pe-5">
                         <a class="btn btn-outline-dark" href="{{route('auth.signin')}}">Sign In</a>

@@ -6,7 +6,7 @@
     <h1 class="mb-3 card rounded p-4 bg-gray-800 fw-bold text-gray-300 text-center">Bitmessage</h1>
     <hr>
     <p class="my-3">Service to forward all your notifications from marketplace to your Bitmessage address</p>
-    <p>Service staus: @if($enabled) <span class="badge badge-success">Enabled</span> @else <span class="badge badge-danger">Disabled</span> @endif</p>
+    <p>Service status: @if($enabled) <span class="badge badge-success">Enabled</span> @else <span class="badge badge-danger">Disabled</span> @endif</p>
 
 
     @if($user->bitmessage_address !== null)

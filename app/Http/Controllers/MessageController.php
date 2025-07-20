@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
+use Random\RandomException;
 
 /**
  * Extends profile controller because needs all middleware
@@ -115,7 +116,7 @@ class MessageController extends ProfileController
      * @return RedirectResponse
      * @throws AuthorizationException
      * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
+     * @throws NotFoundExceptionInterface|RandomException
      */
     public function newMessage(NewMessageRequest $request, Conversation $conversation): RedirectResponse
     {
